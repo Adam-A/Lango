@@ -6,6 +6,17 @@ const APIrequest = require('request');
 const APIkey = "AIzaSyD5oG-6TYOgYT4gq-y5vg-YcNy14mCtjuc";  // ADD API KEY HERE
 const url = "https://translation.googleapis.com/language/translate/v2?key=" + APIkey;
 const port = 51490;
+const sqlite3 = require("sqlite3").verbose();  // use sqlite
+const fs = require("fs"); // file system
+const dbFileName = "Flashcards.db";
+// makes the object that represents the database in our code
+const db = new sqlite3.Database(dbFileName);  // object, not database.
+// Initialize table.
+// If the table already exists, causes an error.
+// Fix the error by removing or renaming Flashcards.db
+const cmdStr = 'CREATE TABLE flashcards (user INT, english TEXT, japanese TEXT, seen INT, correct INT)'
+db.run(cmdStr,tableCreationCallback);
+
 
 // An object containing the data expressing the query to the
 // translate API.
@@ -15,6 +26,18 @@ let requestObject = {
     "target": "ja",
     "q": ["Hello!"]
 };
+
+// Always use the callback for database operations and print out any
+// error messages you get.
+// This database stuff is hard to debug, give yourself a fighting chance.
+function tableCreationCallback(err) {
+    if (err) {
+	console.log("Table creation error",err);
+    } else {
+	console.log("Database created");
+	db.close();
+    }
+}
 
 console.log("English phrase: ", requestObject.q[0]);
 

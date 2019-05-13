@@ -53,8 +53,7 @@ function queryHandler(req, res, next) {
         requestObject.q = [qObj.english];
         myFunc(res);
         // res.json({"palindrome": qObj.word + backwards});
-    }
-    else {
+    } else {
         next();
     }
 }

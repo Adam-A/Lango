@@ -87,5 +87,4 @@ const app = express();
 app.use(express.static('public'));  // can I find a static file?
 app.get('/translate', queryHandler );   // if not, is it a valid query?
 app.use( fileNotFound );            // otherwise not found
-
 app.listen(port, function (){console.log('Listening on port ') + port;} );

@@ -45,14 +45,9 @@ function translateQueryHandler(req, res, next) {
     let url = req.url;
     let qObj = req.query;
     console.log(qObj);
-    /*if (qObj.animal != undefined) {
-        res.json( {"beast" : qObj.animal} );
-        //res.send(qObj.animal)
-    }*/
     if (qObj.english != undefined) {
         requestObject.q = [qObj.english];
         translateAPI(res);
-        //res.json({"palindrome": qObj.word + backwards});
     } else {
         next();
     }

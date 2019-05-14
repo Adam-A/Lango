@@ -41,24 +41,47 @@ function tableCreationCallback(err) {
 
 console.log("English phrase: ", requestObject.q[0]);
 
-function queryHandler(req, res, next) {
+function translateQueryHandler(req, res, next) {
     let url = req.url;
     let qObj = req.query;
     console.log(qObj);
-    if (qObj.animal != undefined) {
+    /*if (qObj.animal != undefined) {
         res.json( {"beast" : qObj.animal} );
-        // res.send(qObj.animal)
-    }
-    else if (qObj.english != undefined) {
+        //res.send(qObj.animal)
+    }*/
+    if (qObj.english != undefined) {
         requestObject.q = [qObj.english];
-        myFunc(res);
-        // res.json({"palindrome": qObj.word + backwards});
+        translateAPI(res);
+        //res.json({"palindrome": qObj.word + backwards});
     } else {
         next();
     }
 }
 
-function myFunc (res) {
+function storeQueryHandler(req,res, next) {
+    let url = req.url;
+    let qObj = req.query;
+    console.log(qObj);
+    if (qObj.english != '' && qObj.japanese != ''){
+	//Setting default values (right now ID is 0, but we will change that later)
+	let sqliteQuery = `INSERT INTO flashcards VALUES (0, "${qObj.english}", "${qObj.japanese}",0,0);`
+	db.run(sqliteQuery, function(err) {
+	    if (err) {
+		return console.log(err.message);
+	    }
+	    dumpDB();
+	    return res.send();
+	    
+	});
+    }
+}
+
+function dumpDB() {
+    db.all ( 'SELECT * FROM flashcards', dataCallback);
+    function dataCallback( err, data ) {console.log(data)}
+}
+
+function translateAPI (res) {
     APIrequest(
         { // HTTP header stuff
             url: url,
@@ -107,6 +130,7 @@ function fileNotFound(req, res) {
 // put together the server pipeline
 const app = express();
 app.use(express.static('public'));  // can I find a static file?
-app.get('/translate', queryHandler );   // if not, is it a valid query?
+app.get('/translate', translateQueryHandler );   // if not, is it a valid query?
+app.get('/store', storeQueryHandler ); 
 app.use( fileNotFound );            // otherwise not found
 app.listen(port, function (){console.log('Listening on port ') + port;} );

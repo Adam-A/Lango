@@ -60,13 +60,13 @@ function storeQueryHandler(req,res, next) {
     if (qObj.source != '' && qObj.target != ''){
 	//Setting default values (right now ID is 0, but we will change that later)
 	let sqliteQuery = `INSERT INTO flashcards VALUES (0, "${qObj.source}", "${qObj.target}",0,0);`
-	db.run(sqliteQuery, function(err) {
+	db.run(sqliteQuery, function(err, res) {
 	    if (err) {
 		return console.log(err.message);
 	    }
-	    dumpDB();
-	    return res.send();
-	    
+	    if (res){
+		dumpDB();
+	    }
 	});
     }
     

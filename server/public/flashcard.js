@@ -8,9 +8,10 @@ function onSubmitClick() {
 
 function onSaveClick(){
   if (currentResponse != undefined) {
-    let url = `store?english=${currentResponse.english}&korean=${currentResponse.japanese}`;
+    let url = `store?english=test&japanese=test`;
     makeAjaxRequest(url);
   }
+
 }
 function createAjaxRequest(method, url) {
   let xhr = new XMLHttpRequest();

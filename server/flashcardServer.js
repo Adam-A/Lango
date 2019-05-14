@@ -14,7 +14,7 @@ const db = new sqlite3.Database(dbFileName);  // object, not database.
 // Initialize table.
 // If the table already exists, causes an error.
 // Fix the error by removing or renaming Flashcards.db
-const cmdStr = 'CREATE TABLE flashcards (user INT, english TEXT, japanese TEXT, seen INT, correct INT)'
+const cmdStr = 'CREATE TABLE flashcards (user INT, source TEXT, target TEXT, seen INT, correct INT)'
 db.run(cmdStr,tableCreationCallback);
 
 
@@ -45,8 +45,8 @@ function translateQueryHandler(req, res, next) {
     let url = req.url;
     let qObj = req.query;
     console.log(qObj);
-    if (qObj.english != undefined) {
-        requestObject.q = [qObj.english];
+    if (qObj.source != undefined) {
+        requestObject.q = [qObj.source];
         translateAPI(res);
     } else {
         next();
@@ -57,9 +57,9 @@ function storeQueryHandler(req,res, next) {
     let url = req.url;
     let qObj = req.query;
     console.log(qObj);
-    if (qObj.english != '' && qObj.japanese != ''){
+    if (qObj.source != '' && qObj.target != ''){
 	//Setting default values (right now ID is 0, but we will change that later)
-	let sqliteQuery = `INSERT INTO flashcards VALUES (0, "${qObj.english}", "${qObj.japanese}",0,0);`
+	let sqliteQuery = `INSERT INTO flashcards VALUES (0, "${qObj.source}", "${qObj.target}",0,0);`
 	db.run(sqliteQuery, function(err) {
 	    if (err) {
 		return console.log(err.message);
@@ -102,14 +102,14 @@ function translateAPI (res) {
                 console.log(APIresHead.error);
             }
             else {
-                console.log("In Japanese: ",
+                console.log("In source language: ",
                     APIresBody.data.translations[0].translatedText);
                 console.log("\n\nJSON was:");
                 console.log(JSON.stringify(APIresBody, undefined, 2));
                 // print it out as a string, nicely formatted
                 res.json({
-                    "english" : requestObject.q[0], // Or wherever you have your english phrase contained
-                    "japanese" : APIresBody.data.translations[0].translatedText
+                    "source" : requestObject.q[0], // Or wherever you have your english phrase contained
+                    "target" : APIresBody.data.translations[0].translatedText
                 });
             }
         }

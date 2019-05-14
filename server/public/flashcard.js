@@ -2,14 +2,14 @@ let currentResponse = undefined
 
 function onSubmitClick() {
   let inputText = document.getElementById("word").value;
-  let url = "translate?english=" + inputText;
+  let url = "translate?source=" + inputText;
   makeAjaxRequest(url);
 }
 
 function onSaveClick(){
     if (currentResponse != undefined) {
 	console.log(currentResponse)
-      let url = `store?english=${currentResponse.english}&japanese=${currentResponse.japanese}`;
+      let url = `store?source=${currentResponse.target}&target=${currentResponse.target}`;
       makeAjaxRequest(url);
   }
 }
@@ -33,7 +33,7 @@ function makeAjaxRequest(url) {
     currentResponse = JSON.parse(responseStr)
     // Then call the function that displays
     // the returned JSON text on the page.
-    displayTranslation(object.japanese);
+    displayTranslation(object.target);
   };
 
   xhr.onerror = function() {

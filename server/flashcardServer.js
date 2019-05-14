@@ -69,6 +69,7 @@ function storeQueryHandler(req,res, next) {
 	    
 	});
     }
+    
 }
 
 function dumpDB() {
@@ -107,8 +108,8 @@ function translateAPI (res) {
                 console.log(JSON.stringify(APIresBody, undefined, 2));
                 // print it out as a string, nicely formatted
                 res.json({
-                    "English" : requestObject.q[0], // Or wherever you have your english phrase contained
-                    "Japanese" : APIresBody.data.translations[0].translatedText
+                    "english" : requestObject.q[0], // Or wherever you have your english phrase contained
+                    "japanese" : APIresBody.data.translations[0].translatedText
                 });
             }
         }

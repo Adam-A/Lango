@@ -7,11 +7,11 @@ function onSubmitClick() {
 }
 
 function onSaveClick(){
-  if (currentResponse != undefined) {
-    let url = `store?english=test&japanese=test`;
-    makeAjaxRequest(url);
+    if (currentResponse != undefined) {
+	console.log(currentResponse)
+      let url = `store?english=${currentResponse.english}&japanese=${currentResponse.japanese}`;
+      makeAjaxRequest(url);
   }
-
 }
 function createAjaxRequest(method, url) {
   let xhr = new XMLHttpRequest();
@@ -30,10 +30,10 @@ function makeAjaxRequest(url) {
     // Get JSON string and turn into object.
     let responseStr = xhr.responseText;
     let object = JSON.parse(responseStr);
-    currentResponse = object;
+    currentResponse = JSON.parse(responseStr)
     // Then call the function that displays
     // the returned JSON text on the page.
-    displayTranslation(object.Japanese);
+    displayTranslation(object.japanese);
   };
 
   xhr.onerror = function() {

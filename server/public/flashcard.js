@@ -1,9 +1,14 @@
-function onButtonClick() {
+function onSubmitClick() {
   let inputText = document.getElementById("word").value;
   let url = "translate?english=" + inputText;
   makeAjaxRequest(url);
 }
 
+function onSaveClick(){
+  let inputText = document.getElementById("word").value;
+  let url = "store?english=" + inputText;
+  makeAjaxRequest(url);
+}
 function createAjaxRequest(method, url) {
   let xhr = new XMLHttpRequest();
   xhr.open(method, url, true);

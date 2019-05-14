@@ -66,6 +66,7 @@ function storeQueryHandler(req,res, next) {
 	    }
 	    if (res){
 		dumpDB();
+		res.json({"msg":"saved"});
 	    }
 	});
     }

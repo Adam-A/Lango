@@ -1,3 +1,5 @@
+let currentResponse = undefined
+
 function onSubmitClick() {
   let inputText = document.getElementById("word").value;
   let url = "translate?english=" + inputText;
@@ -5,9 +7,10 @@ function onSubmitClick() {
 }
 
 function onSaveClick(){
-  let inputText = document.getElementById("word").value;
-  let url = "store?english=" + inputText;
-  makeAjaxRequest(url);
+  if (currentResponse != undefined) {
+    let url = `store?english=${currentResponse.english}&korean=${currentResponse.japanese}`;
+    makeAjaxRequest(url);
+  }
 }
 function createAjaxRequest(method, url) {
   let xhr = new XMLHttpRequest();
@@ -26,7 +29,7 @@ function makeAjaxRequest(url) {
     // Get JSON string and turn into object.
     let responseStr = xhr.responseText;
     let object = JSON.parse(responseStr);
-
+    currentResponse = object;
     // Then call the function that displays
     // the returned JSON text on the page.
     displayTranslation(object.Japanese);

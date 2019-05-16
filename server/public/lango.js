@@ -2,11 +2,18 @@
 
 // An element to go into the DOM
 
-var lango = React.createElement(
+var header = React.createElement(
     "h1",
-    { id: "logo" },
-    "Lango!"
+    { id: "header", className: "header"},
+    "Header!"
 );
+
+var footer = React.createElement(
+    "h1",
+    { id: "footer", className: "footer"},
+    "Footer!"
+);
+
 
 // A component - function that returns some elements
 function FirstCard() {
@@ -16,7 +23,20 @@ function FirstCard() {
 	React.createElement(
 	    "p",
 	    null,
-	    "Hello, world!"
+	    "Hello, world! "
+	)
+    );
+}
+
+// A component - function that returns some elements
+function SecondCard() {
+    return React.createElement(
+	"div",
+	{ className: "textCard" },
+	React.createElement(
+	    "p",
+	    null,
+	    "Hello, world! "
 	)
     );
 }
@@ -30,15 +50,24 @@ function FirstInputCard() {
     );
 }
 
+
+var middle = React.createElement(
+    "div",
+    {className: "middle"},
+    React.createElement(FirstInputCard, null),
+    React.createElement(FirstCard, null)
+
+);
+
 // An element with some contents, including a variable
 // that has to be evaluated to get an element, and some
 // functions that have to be run to get elements.
 var main = React.createElement(
     "main",
-    null,
-    lango,
-    React.createElement(FirstInputCard, null),
-    React.createElement(FirstCard, null)
+    {className : "main"},
+    header,
+    middle,
+    footer
 );
 
 ReactDOM.render(main, document.getElementById('root'));

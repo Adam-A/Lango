@@ -2,9 +2,11 @@
 
 const express = require('express');
 const http = require('http');
+
 const APIrequest = require('request');
 const APIkey = "AIzaSyD5oG-6TYOgYT4gq-y5vg-YcNy14mCtjuc";  // ADD API KEY HERE
 const url = "https://translation.googleapis.com/language/translate/v2?key=" + APIkey;
+
 const port = 51490;
 const sqlite3 = require("sqlite3").verbose();  // use sqlite
 const fs = require("fs"); // file system
@@ -42,7 +44,6 @@ function tableCreationCallback(err) {
 console.log("English phrase: ", requestObject.q[0]);
 
 function translateQueryHandler(req, res, next) {
-    let url = req.url;
     let qObj = req.query;
     console.log(qObj);
     if (qObj.source != undefined) {
@@ -57,19 +58,17 @@ function storeQueryHandler(req,res, next) {
     let url = req.url;
     let qObj = req.query;
     console.log(qObj);
-    if (qObj.source != '' && qObj.target != ''){
+    if (qObj.source != '' && qObj.target != '') {
 	//Setting default values (right now ID is 0, but we will change that later)
-	let sqliteQuery = `INSERT INTO flashcards VALUES (0, "${qObj.source}", "${qObj.target}",0,0);`
-	db.run(sqliteQuery, function(err) {
-	    if (err) {
-		return console.log(err.message);
-	    }
-	    dumpDB();
-	    res.json({"msg":"saved"});
-	    
-	});
+	let sqliteQuery = `INSERT INTO flashcards VALUES (0, "${qObj.source}", "${qObj.target}",0,0)`;
+        db.run(sqliteQuery, function(err) {
+            if (err) {
+                return console.log(err.message);
+            }
+            dumpDB();
+            res.json({"msg":"saved"});
+        });
     }
-    
 }
 
 function dumpDB() {
@@ -129,5 +128,5 @@ app.use(express.static('public'));  // can I find a static file?
 app.get('/translate', translateQueryHandler );   // if not, is it a valid query?
 app.get('/store', storeQueryHandler ); 
 app.use( fileNotFound );            // otherwise not found
-app.listen(port, function (){console.log('Listening on port ') + port;} );
+app.listen(port, function () { console.log('Listening on port ') + port; } );
 //db.close()

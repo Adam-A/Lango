@@ -68,6 +68,8 @@ function storeQueryHandler(req,res, next) {
             dumpDB();
             res.json({"msg":"saved"});
         });
+    } else {
+        next();
     }
 }
 

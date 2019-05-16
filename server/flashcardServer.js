@@ -8,8 +8,8 @@ const APIkey = "AIzaSyD5oG-6TYOgYT4gq-y5vg-YcNy14mCtjuc";  // ADD API KEY HERE
 const url = "https://translation.googleapis.com/language/translate/v2?key=" + APIkey;
 
 const port = 51490;
-const sqlite3 = require("sqlite3").verbose();  // use sqlite
-const fs = require("fs"); // file system
+const sqlite3 = require('sqlite3').verbose();  // use sqlite
+const fs = require('fs'); // file system
 const dbFileName = "Flashcards.db";
 // makes the object that represents the database in our code
 const db = new sqlite3.Database(dbFileName);  // object, not database.
@@ -42,6 +42,11 @@ function tableCreationCallback(err) {
 }
 
 console.log("English phrase: ", requestObject.q[0]);
+
+// Serve homepage with the lango app page by default.
+function initialHandler(req, res) {
+    res.sendFile(__dirname + '/public/lango.html');
+}
 
 function translateQueryHandler(req, res, next) {
     let qObj = req.query;
@@ -127,8 +132,9 @@ function fileNotFound(req, res) {
 // put together the server pipeline
 const app = express();
 app.use(express.static('public'));  // can I find a static file?
+app.get('/', initialHandler); // Serve the index page.
 app.get('/translate', translateQueryHandler );   // if not, is it a valid query?
 app.get('/store', storeQueryHandler ); 
 app.use( fileNotFound );            // otherwise not found
-app.listen(port, function () { console.log('Listening on port ') + port; } );
+app.listen(port, function () { console.log('Listening on port ' + port); } );
 //db.close()

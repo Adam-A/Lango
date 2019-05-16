@@ -19,7 +19,6 @@ body {
     .header {
         display: flex;
         width: 100%;
-
     }
 
     .footer {
@@ -52,8 +51,45 @@ body {
     
 }
 
-@media (min-width: 481px) and (max-width: 790px){
+@media (min-width: 481px) and (max-width: 790px) {
+    .main {
+        display: flex;
+        flex-direction: column;
+    }
 
+    .header {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .header-button {
+
+    }
+
+    .header-logo {
+
+    }
+
+    .middle {
+
+    }
+
+    div.textCard {
+
+    }
+
+    /* don't get weird blue border when I type */
+    textarea:focus {
+        outline: none;
+    }
+
+    textarea {
+        border: none;
+    }
+
+    .footer {
+
+    }
 }
 
 @media (min-width: 791px) { 

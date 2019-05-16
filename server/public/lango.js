@@ -1,34 +1,5 @@
 'use strict';
 
-let sourceText = "";
-let targetText = "";
-
-
-/* const e = React.createElement;
-
-class LikeButton extends React.Component {
-    constructor(props) {
-	super(props);
-	this.state = { liked: false };
-    }
-
-    render() {
-	if (this.state.liked) {
-	    return 'You liked this.';
-	}
-
-	return e(
-	    'button',
-	    { onClick: () => this.setState({ liked: true }) },
-	    'Like'
-	);
-    }
-}
-*/
-
-//const domContainer = document.querySelector('#like_button_container');
-//ReactDOM.render(e(LikeButton), domContainer);
-
 // An element to go into the DOM
 
 var lango = React.createElement(

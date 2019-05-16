@@ -23,7 +23,7 @@ function FirstCard() {
 	React.createElement(
 	    "p",
 	    null,
-	    "Hello, world! "
+	    "English"
 	)
     );
 }
@@ -36,7 +36,7 @@ function SecondCard() {
 	React.createElement(
 	    "p",
 	    null,
-	    "Hello, world! "
+	    "Translation"
 	)
     );
 }
@@ -46,16 +46,18 @@ function FirstInputCard() {
     return React.createElement(
 	"div",
 	{ className: "textCard" },
-	React.createElement("textarea", { onKeyPress: checkReturn })
+	React.createElement("textarea", { onKeyDown: checkReturn })
     );
 }
+
 
 
 var middle = React.createElement(
     "div",
     {className: "middle"},
     React.createElement(FirstInputCard, null),
-    React.createElement(FirstCard, null)
+    React.createElement(FirstCard, null),
+    React.createElement(SecondCard, null)
 
 );
 
@@ -75,5 +77,7 @@ ReactDOM.render(main, document.getElementById('root'));
 // onKeyPress function for the textarea element
 // When the charCode is 13, the user has hit the return key
 function checkReturn(event) {
-    console.log(event.charCode);
+    if (event.keyCode == 13) {
+        console.log(event.target.value);
+    }
 }

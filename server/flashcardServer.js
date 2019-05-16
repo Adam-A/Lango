@@ -23,7 +23,7 @@ db.run(cmdStr,tableCreationCallback);
 // Below, gets stringified and put into the body of an HTTP PUT request.
 let requestObject = {
     "source": "en",
-    "target": "ja",
+    "target": "ko",
     "q": ["Hello!"]
 };
 
@@ -35,7 +35,7 @@ function tableCreationCallback(err) {
 	console.log("Table creation error",err);
     } else {
 	console.log("Database created");
-	db.close();
+	//db.close();
     }
 }
 
@@ -60,14 +60,13 @@ function storeQueryHandler(req,res, next) {
     if (qObj.source != '' && qObj.target != ''){
 	//Setting default values (right now ID is 0, but we will change that later)
 	let sqliteQuery = `INSERT INTO flashcards VALUES (0, "${qObj.source}", "${qObj.target}",0,0);`
-	db.run(sqliteQuery, function(err, res) {
+	db.run(sqliteQuery, function(err) {
 	    if (err) {
 		return console.log(err.message);
 	    }
-	    if (res){
-		dumpDB();
-		res.json({"msg":"saved"});
-	    }
+	    dumpDB();
+	    res.json({"msg":"saved"});
+	    
 	});
     }
     
@@ -131,3 +130,4 @@ app.get('/translate', translateQueryHandler );   // if not, is it a valid query?
 app.get('/store', storeQueryHandler ); 
 app.use( fileNotFound );            // otherwise not found
 app.listen(port, function (){console.log('Listening on port ') + port;} );
+//db.close()

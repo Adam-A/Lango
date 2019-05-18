@@ -76,6 +76,7 @@ function storeQueryHandler(req,res, next) {
     } else {
         next();
     }
+    
 }
 
 function dumpDB() {

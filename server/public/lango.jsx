@@ -1,9 +1,6 @@
 'use strict';
 // An element to go into the DOM
 
-let sourceText = "";
-let targetText = "";
-
 function Card(props) {
     return <div className="textCard">
     	   {props.children}
@@ -14,36 +11,50 @@ function Card(props) {
 function Txt(props) {
 	 if (props.phrase == undefined) {
 	    return <p>Text missing</p>;
-	    }
-	 else return <p>{props.phrase}</p>;
-     }
+	} else return <p>{props.phrase}</p>;
+}
+
+
+
+function StartReviewButton() {
+    return (
+        <button >Start Review</button>
+    );
+}
 
 class CreateCardMain extends React.Component {
 
   constructor(props) {
       super(props);
-      this.state = { opinion: "korean"}
+      this.sourceText = "";
+      this.targetText = "";
+      this.state = { opinion: "Korean"}
       this.checkReturn = this.checkReturn.bind(this);
+      this.saveCard = this.saveCard.bind(this);
       }
 
   render() {return (
       <main>
-    
+          
         <div className = "header">
+        <button className = "startReviewButton" >Start</button>
             <h1 className = "headerText">Lango!</h1>
         </div>
+        <div className = "middle">
+            <Card>
+                <textarea className = "inputEng" id="inputEng" placeholder = "English" onKeyPress={this.checkReturn} />
+            </Card>
 
-        <Card>
- 	        <textarea className = "inputEng" id="inputEng" placeholder = "English" onKeyPress={this.checkReturn} />
-        </Card>
+            <Card>
+                <Txt phrase={this.state.opinion} /> 
+            </Card>
+            <div>
+            <button className = "saveButton" onClick = {this.saveCard}>Save</button>
+            </div>
+        </div>
 
-        <Card>
- 	        <Txt phrase={this.state.opinion} /> 
-        </Card>
-
-      
         <div className = "footer">
-            <h1 className = "footerText">Test</h1>
+            <h1 className = "footerText">UserName</h1>
         </div>
 
       </main>
@@ -52,14 +63,20 @@ class CreateCardMain extends React.Component {
 
     // onKeyPress function for the textarea element
     // When the charCode is 13, the user has hit the return key
+    saveCard() {
+        if (this.sourceText  && this.targetText ) {
+            let url = `store?source=${this.sourceText}&target=${this.targetText}`;
+            this.makeStoreAjaxRequest(url);
+        } else {
+            //Let user know that they can't save non existant things!
+        }
+    }
      checkReturn(event) {
 	 if (event.charCode == 13) {
-        let sourceText = document.getElementById("inputEng").value;
+        this.sourceText = document.getElementById("inputEng").value;
         document.getElementById("inputEng").value = '';
-        let url = "translate?source=" + sourceText;
+        let url = "translate?source=" + this.sourceText;
         this.makeTranslationAjaxRequest(url)
-      
-        /*we will do translation shit here*/
 
 	    }
 	 }
@@ -83,7 +100,7 @@ class CreateCardMain extends React.Component {
           //Then call the function that displays
           //the returned JSON text on the page.
           this.setState({opinion: object.target});
-          targetText = object.target;
+          this.targetText = object.target;
         }.bind(this);
       
         xhr.onerror = function() {
@@ -103,6 +120,7 @@ class CreateCardMain extends React.Component {
           xhr.onload = function() {
           //Get JSON string and turn into object.
           let responseStr = xhr.responseText;
+          console.log(responseStr);
           let object = JSON.parse(responseStr);
           //Then call the function that displays
           //the returned JSON text on the page.

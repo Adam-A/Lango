@@ -9,9 +9,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var sourceText = "";
-var targetText = "";
-
 function Card(props) {
     return React.createElement(
         "div",
@@ -106,8 +103,62 @@ var CreateCardMain = function (_React$Component) {
                 makeTranslationAjaxRequest(url);
 
                 /*we will do translation shit here*/
-                this.setState({ opinion: targetText });
             }
+        }
+    }, {
+        key: "createAjaxRequest",
+        value: function createAjaxRequest(method, url) {
+            var xhr = new XMLHttpRequest();
+            xhr.open(method, url, true);
+            return xhr;
+        }
+    }, {
+        key: "makeTranslationAjaxRequest",
+        value: function makeTranslationAjaxRequest(url) {
+            var xhr = createAjaxRequest('GET', url);
+            if (!xhr) {
+                alert('Ajax not supported');
+                return;
+            }
+
+            xhr.onload = function () {
+                //Get JSON string and turn into object.
+                var responseStr = xhr.responseText;
+                var object = JSON.parse(responseStr);
+                //Then call the function that displays
+                //the returned JSON text on the page.
+                this.setState({ opinion: object.target });
+            };
+
+            xhr.onerror = function () {
+                alert('Error: could not make the request.');
+            };
+
+            xhr.send();
+        }
+    }, {
+        key: "makeStoreAjaxRequest",
+        value: function makeStoreAjaxRequest(url) {
+            var xhr = createAjaxRequest('GET', url);
+            if (!xhr) {
+                alert('Ajax not supported');
+                return;
+            }
+
+            xhr.onload = function () {
+                //Get JSON string and turn into object.
+                var responseStr = xhr.responseText;
+                var object = JSON.parse(responseStr);
+                //Then call the function that displays
+                //the returned JSON text on the page.
+                console.log(object);
+            };
+
+            xhr.onerror = function () {
+                alert('Error: could not make the request.');
+            };
+
+            xhr.send();
         }
     }]);
 
@@ -116,55 +167,3 @@ var CreateCardMain = function (_React$Component) {
 
 
 ReactDOM.render(React.createElement(CreateCardMain, null), document.getElementById('root'));
-
-function createAjaxRequest(method, url) {
-    var xhr = new XMLHttpRequest();
-    xhr.open(method, url, true);
-    return xhr;
-}
-
-function makeTranslationAjaxRequest(url) {
-    var xhr = createAjaxRequest('GET', url);
-    if (!xhr) {
-        alert('Ajax not supported');
-        return;
-    }
-
-    xhr.onload = function () {
-        //Get JSON string and turn into object.
-        var responseStr = xhr.responseText;
-        var object = JSON.parse(responseStr);
-        //Then call the function that displays
-        //the returned JSON text on the page.
-        targetText = object.target;
-    };
-
-    xhr.onerror = function () {
-        alert('Error: could not make the request.');
-    };
-
-    xhr.send();
-}
-
-function makeStoreAjaxRequest(url) {
-    var xhr = createAjaxRequest('GET', url);
-    if (!xhr) {
-        alert('Ajax not supported');
-        return;
-    }
-
-    xhr.onload = function () {
-        //Get JSON string and turn into object.
-        var responseStr = xhr.responseText;
-        var object = JSON.parse(responseStr);
-        //Then call the function that displays
-        //the returned JSON text on the page.
-        console.log(object);
-    };
-
-    xhr.onerror = function () {
-        alert('Error: could not make the request.');
-    };
-
-    xhr.send();
-}

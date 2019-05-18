@@ -1,9 +1,5 @@
 'use strict';
 // An element to go into the DOM
-
-let sourceText = "";
-let targetText = "";
-
 function Card(props) {
     return <div className="textCard">
     	   {props.children}
@@ -66,10 +62,62 @@ class CreateCardMain extends React.Component {
         makeTranslationAjaxRequest(url)
       
         /*we will do translation shit here*/
-	    this.setState({opinion: targetText} );
+
 	    }
 	 }
 
+      createAjaxRequest(method, url) {
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, url, true);
+        return xhr;
+      }
+      
+       makeTranslationAjaxRequest(url) {
+        let xhr = createAjaxRequest('GET', url);
+        if (!xhr) {
+          alert('Ajax not supported');
+          return;
+        }
+      
+          xhr.onload = function() {
+          //Get JSON string and turn into object.
+          let responseStr = xhr.responseText;
+          let object = JSON.parse(responseStr);
+          //Then call the function that displays
+          //the returned JSON text on the page.
+          this.setState({opinion: object.target} );
+        };
+      
+        xhr.onerror = function() {
+          alert('Error: could not make the request.');
+        };
+      
+        xhr.send();
+      }
+      
+       makeStoreAjaxRequest(url) {
+          let xhr = createAjaxRequest('GET', url);
+          if (!xhr) {
+          alert('Ajax not supported');
+          return;
+          }
+      
+          xhr.onload = function() {
+          //Get JSON string and turn into object.
+          let responseStr = xhr.responseText;
+          let object = JSON.parse(responseStr);
+          //Then call the function that displays
+          //the returned JSON text on the page.
+          console.log(object);
+          };
+      
+          xhr.onerror = function() {
+          alert('Error: could not make the request.');
+          };
+      
+          xhr.send();
+      }
+     
 
   } // end of class
 
@@ -80,55 +128,3 @@ ReactDOM.render(
 );
 
 
-function createAjaxRequest(method, url) {
-    let xhr = new XMLHttpRequest();
-    xhr.open(method, url, true);
-    return xhr;
-  }
-  
-  function makeTranslationAjaxRequest(url) {
-    let xhr = createAjaxRequest('GET', url);
-    if (!xhr) {
-      alert('Ajax not supported');
-      return;
-    }
-  
-      xhr.onload = function() {
-      //Get JSON string and turn into object.
-      let responseStr = xhr.responseText;
-      let object = JSON.parse(responseStr);
-      //Then call the function that displays
-      //the returned JSON text on the page.
-      displayTranslation(object.target);
-      targetText = object.target;
-    };
-  
-    xhr.onerror = function() {
-      alert('Error: could not make the request.');
-    };
-  
-    xhr.send();
-  }
-  
-  function makeStoreAjaxRequest(url) {
-      let xhr = createAjaxRequest('GET', url);
-      if (!xhr) {
-      alert('Ajax not supported');
-      return;
-      }
-  
-      xhr.onload = function() {
-      //Get JSON string and turn into object.
-      let responseStr = xhr.responseText;
-      let object = JSON.parse(responseStr);
-      //Then call the function that displays
-      //the returned JSON text on the page.
-      console.log(object);
-      };
-  
-      xhr.onerror = function() {
-      alert('Error: could not make the request.');
-      };
-  
-      xhr.send();
-  }

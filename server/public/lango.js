@@ -136,7 +136,6 @@ function makeTranslationAjaxRequest(url) {
         var object = JSON.parse(responseStr);
         //Then call the function that displays
         //the returned JSON text on the page.
-        displayTranslation(object.target);
         targetText = object.target;
     };
 

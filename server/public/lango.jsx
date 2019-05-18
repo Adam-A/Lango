@@ -1,5 +1,9 @@
 'use strict';
 // An element to go into the DOM
+
+let sourceText = "";
+let targetText = "";
+
 function Card(props) {
     return <div className="textCard">
     	   {props.children}
@@ -13,11 +17,6 @@ function Txt(props) {
 	    }
 	 else return <p>{props.phrase}</p>;
      }
-
-function Button(){
-    return <button onClick={makeStoreAjaxRequest}> Save</button>;
-}
-
 
 class CreateCardMain extends React.Component {
 
@@ -42,7 +41,6 @@ class CreateCardMain extends React.Component {
  	        <Txt phrase={this.state.opinion} /> 
         </Card>
 
-        <Button className = "saveButton"></Button>
       
         <div className = "footer">
             <h1 className = "footerText">Test</h1>
@@ -56,16 +54,15 @@ class CreateCardMain extends React.Component {
     // When the charCode is 13, the user has hit the return key
      checkReturn(event) {
 	 if (event.charCode == 13) {
-        let newPhrase = document.getElementById("inputEng").value;
+        let sourceText = document.getElementById("inputEng").value;
         document.getElementById("inputEng").value = '';
-        let url = "translate?source=" + newPhrase;
-        makeTranslationAjaxRequest(url)
+        let url = "translate?source=" + sourceText;
+        this.makeTranslationAjaxRequest(url)
       
         /*we will do translation shit here*/
 
 	    }
 	 }
-
       createAjaxRequest(method, url) {
         let xhr = new XMLHttpRequest();
         xhr.open(method, url, true);
@@ -73,7 +70,7 @@ class CreateCardMain extends React.Component {
       }
       
        makeTranslationAjaxRequest(url) {
-        let xhr = createAjaxRequest('GET', url);
+        let xhr = this.createAjaxRequest('GET', url);
         if (!xhr) {
           alert('Ajax not supported');
           return;
@@ -85,8 +82,9 @@ class CreateCardMain extends React.Component {
           let object = JSON.parse(responseStr);
           //Then call the function that displays
           //the returned JSON text on the page.
-          this.setState({opinion: object.target} );
-        };
+          this.setState({opinion: object.target});
+          targetText = object.target;
+        }.bind(this);
       
         xhr.onerror = function() {
           alert('Error: could not make the request.');
@@ -96,7 +94,7 @@ class CreateCardMain extends React.Component {
       }
       
        makeStoreAjaxRequest(url) {
-          let xhr = createAjaxRequest('GET', url);
+          let xhr = this.createAjaxRequest('GET', url);
           if (!xhr) {
           alert('Ajax not supported');
           return;

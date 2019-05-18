@@ -60,14 +60,14 @@ var CreateCardMain = function (_React$Component) {
         value: function render() {
             return React.createElement(
                 "main",
-                null,
+                { className: "main" },
                 React.createElement(
                     "div",
                     { className: "header" },
                     React.createElement(
                         "button",
                         { className: "startReviewButton" },
-                        "Start"
+                        "Start Review"
                     ),
                     React.createElement(
                         "h1",
@@ -100,7 +100,7 @@ var CreateCardMain = function (_React$Component) {
                 ),
                 React.createElement(
                     "div",
-                    { className: "footer" },
+                    { className: "footer", id: "footer" },
                     React.createElement(
                         "h1",
                         { className: "footerText" },
@@ -155,8 +155,10 @@ var CreateCardMain = function (_React$Component) {
                 var object = JSON.parse(responseStr);
                 //Then call the function that displays
                 //the returned JSON text on the page.
-                this.setState({ opinion: object.target });
-                this.targetText = object.target;
+                if (object.target) {
+                    this.setState({ opinion: object.target });
+                    this.targetText = object.target;
+                }
             }.bind(this);
 
             xhr.onerror = function () {

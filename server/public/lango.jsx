@@ -34,10 +34,10 @@ class CreateCardMain extends React.Component {
       }
 
   render() {return (
-      <main>
+      <main className = "main">
           
         <div className = "header">
-        <button className = "startReviewButton" >Start</button>
+        <button className = "startReviewButton" >Start Review</button>
             <h1 className = "headerText">Lango!</h1>
         </div>
         <div className = "middle">
@@ -53,12 +53,13 @@ class CreateCardMain extends React.Component {
             </div>
         </div>
 
-        <div className = "footer">
-            <h1 className = "footerText">UserName</h1>
+        <div className = "footer" id = "footer">
+        <h1 className = "footerText" >UserName</h1>
         </div>
 
       </main>
-      );
+
+    );
     } // end of render function 
 
     // onKeyPress function for the textarea element
@@ -99,8 +100,10 @@ class CreateCardMain extends React.Component {
           let object = JSON.parse(responseStr);
           //Then call the function that displays
           //the returned JSON text on the page.
-          this.setState({opinion: object.target});
-          this.targetText = object.target;
+          if (object.target) {
+            this.setState({opinion: object.target});
+            this.targetText = object.target;
+          }
         }.bind(this);
       
         xhr.onerror = function() {

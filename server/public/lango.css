@@ -185,8 +185,8 @@ body {
     }
 
     .saveContainer {
-        margin-left: 70%;
-        padding-bottom: 25%;
+        margin-left: 77%;
+        padding-bottom: 20%;
     }
 
     .saveButton {
@@ -212,8 +212,8 @@ body {
 
     .footer {
         font-size: 25px;
-        padding-top: 5%;
-        padding-bottom: 5%;
+        padding-top: 2%;
+        padding-bottom: 2%;
         background: #5F6C99;
         display: flex;
         justify-content: center;
@@ -221,7 +221,112 @@ body {
     }
 }
 
-@media (min-width: 791px) { 
+@media (min-width: 791px) {
+    .main {
+        display: flex;
+        flex-direction: column;
+        font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    }
 
+    .header {
+        display: flex;
+        flex-direction: row;
+        padding-left: 5%;
+        padding-right: 5%;
+        padding-top: 5%;
+        padding-bottom: 5%;
+    }
+
+    .startReviewButton {
+        width: 21%;
+        font-size: 25px;
+        border-radius: 0.6em;
+        background-color: #606B9B;
+        color: white;
+        margin-right: 10em;
+    }
+
+    .headerText {
+        font-family: Raleway, Raleway Black, sans-serif;
+        font-weight: bolder;
+        font-size: 70px;
+        color: #606B9B;
+    }
+
+    .middle {
+        padding: 5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .inputEng {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .translatedText {
+        padding-right: 1em;
+        padding-left: 1em;
+    }
+
+    div.textCard {
+        font-size: 30px;
+        background-color: #ffffff;
+        border-style: solid;
+        border-width: 2px;
+        border-color: gray;
+        padding: 15% 12% 15% 12%;
+        margin-right: 5%;
+        margin-bottom: 5%;
+        color: gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cardContainer {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .saveContainer {
+        margin-left: 80%;
+    }
+
+    .saveButton {
+        border-radius: 10px;
+        background-color: #74C6AB; /* Green */
+        border: none;
+        color: white;
+        padding: 6% 25% 6% 25%;
+        text-align: center;
+        font-size: 25px;
+    }
+
+    /* don't get weird blue border when I type */
+    textarea:focus {
+
+        outline: none;
+    }
+
+    textarea {
+        border: none;
+
+    }
+
+    .footer {
+        font-size: 25px;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        background: #5F6C99;
+        display: flex;
+        justify-content: center;
+        color: white;
+        width: 100%;
+    }
 }
 

@@ -106,6 +106,8 @@ class CreateCardMain extends React.Component {
           if (object.target) {
             this.setState({opinion: object.target});
             this.targetText = object.target;
+          } else {
+            //error
           }
         }.bind(this);
       

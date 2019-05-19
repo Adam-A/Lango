@@ -26,7 +26,7 @@ function Txt(props) {
         );
     } else return React.createElement(
         "p",
-        null,
+        { className: "translatedText" },
         props.phrase
     );
 }
@@ -79,18 +79,22 @@ var CreateCardMain = function (_React$Component) {
                     "div",
                     { className: "middle" },
                     React.createElement(
-                        Card,
-                        null,
-                        React.createElement("textarea", { className: "inputEng", id: "inputEng", placeholder: "English", onKeyPress: this.checkReturn })
-                    ),
-                    React.createElement(
-                        Card,
-                        null,
-                        React.createElement(Txt, { phrase: this.state.opinion })
+                        "div",
+                        { className: "cardContainer" },
+                        React.createElement(
+                            Card,
+                            null,
+                            React.createElement("textarea", { className: "inputEng", id: "inputEng", placeholder: "English", onKeyPress: this.checkReturn })
+                        ),
+                        React.createElement(
+                            Card,
+                            null,
+                            React.createElement(Txt, { phrase: this.state.opinion })
+                        )
                     ),
                     React.createElement(
                         "div",
-                        null,
+                        { className: "saveContainer" },
                         React.createElement(
                             "button",
                             { className: "saveButton", onClick: this.saveCard },

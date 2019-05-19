@@ -11,7 +11,7 @@ function Card(props) {
 function Txt(props) {
 	 if (props.phrase == undefined) {
 	    return <p>Text missing</p>;
-	} else return <p>{props.phrase}</p>;
+	} else return <p className="translatedText">{props.phrase}</p>;
 }
 
 
@@ -41,14 +41,17 @@ class CreateCardMain extends React.Component {
             <h1 className = "headerText">Lango!</h1>
         </div>
         <div className = "middle">
+            <div className="cardContainer">
             <Card>
                 <textarea className = "inputEng" id="inputEng" placeholder = "English" onKeyPress={this.checkReturn} />
             </Card>
 
             <Card>
-                <Txt phrase={this.state.opinion} /> 
+                <Txt phrase={this.state.opinion} />
             </Card>
-            <div>
+            </div>
+
+            <div className="saveContainer">
             <button className = "saveButton" onClick = {this.saveCard}>Save</button>
             </div>
         </div>

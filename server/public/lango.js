@@ -124,6 +124,7 @@ var CreateCardMain = function (_React$Component) {
                 var url = "store?source=" + this.sourceText + "&target=" + this.targetText;
                 this.makeStoreAjaxRequest(url);
             } else {
+                document.getElementById("inputEng").placeholder = "Can't store empty inputs!";
                 //Let user know that they can't save non existant things!
             }
         }
@@ -190,6 +191,7 @@ var CreateCardMain = function (_React$Component) {
                 //Then call the function that displays
                 //the returned JSON text on the page.
                 console.log(object);
+                document.getElementById("inputEng").placeholder = object.msg;
             };
 
             xhr.onerror = function () {

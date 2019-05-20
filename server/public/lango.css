@@ -51,6 +51,7 @@ body {
     .saveButton {
         border-radius: 10px;
         float: right;
+        word-wrap: break-word;
         background-color: #74C6AB; /* Green */
         border: none;
         color: white;
@@ -60,7 +61,12 @@ body {
     }
 
     .inputEng {
+        font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+        color: gray;
+        font-size: 15px;
+        word-wrap: break-word;
         text-align: center; 
+        max-width: 200px;
         display:flex;
         justify-content: center;
 
@@ -153,12 +159,17 @@ body {
     }
 
     .inputEng {
+        font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+        color: gray;
+        font-size: 14px;
         text-align: center;
+        word-wrap: break-word;
         display:flex;
         justify-content: center;
     }
 
     .translatedText {
+        word-wrap: break-word;
         padding-right: 2em;
         padding-left: 2em;
     }
@@ -261,12 +272,17 @@ body {
     }
 
     .inputEng {
+        word-wrap: break-word;
+        font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+        color: gray;
+        font-size: 21px;
         text-align: center;
         display: flex;
         justify-content: center;
     }
 
     .translatedText {
+        word-wrap: break-word;
         padding-right: 1em;
         padding-left: 1em;
     }
@@ -309,11 +325,13 @@ body {
 
     /* don't get weird blue border when I type */
     textarea:focus {
-
         outline: none;
     }
 
     textarea {
+        font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+        color: gray;
+        font-size: 30px;
         border: none;
 
     }

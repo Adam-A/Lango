@@ -158,7 +158,8 @@ body {
         font-family: Raleway, sans-serif;
         color: white;
         font-size: 12vw;
-        
+        font-weight: 700;
+
     }
 
     .signInSubtitle {
@@ -353,7 +354,8 @@ body {
         font-family: Raleway, sans-serif;
         color: white;
         font-size: 12vw;
-        
+        font-weight: 700;
+
     }
 
     .signInSubtitle {
@@ -546,6 +548,7 @@ body {
         padding-bottom: 8%;
         text-align: left;
         font-family: Raleway, sans-serif;
+        font-weight: 700;
         color: white;
         font-size: 5vw;
         

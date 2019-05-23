@@ -148,7 +148,40 @@ class CreateCardMain extends React.Component {
   } // end of class
 
 
+  class CreateLoginMain extends React.Component {
+    render() {return (
+        <main className = "signInMain">
+          
+            <div className ="signInTitleDiv">
+                <div className = "signInContentTitle">
+                <p className = "signInTitle">Welcome to Lango!</p>
+                <p className = "signInSubtitle">Customize your vocabulary</p>
+                </div>
+    
+            </div>
+            <div className = "signInLoginDiv">
+                <button className = "loginButton">
+                <img className = "buttonImage" src = "assets/google.jpg"></img>
+                <p className = "buttonText">Log in with Google</p>
+                </button>
+            </div>
+
+        
+
+      </main>
+    )
+    }
+}
+
+if (true) {
+    ReactDOM.render(
+        <CreateLoginMain/>,
+        document.getElementById('root')
+    );
+} else {
 ReactDOM.render(
     <CreateCardMain />,
     document.getElementById('root')
 );
+
+}

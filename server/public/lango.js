@@ -206,4 +206,62 @@ var CreateCardMain = function (_React$Component) {
 }(React.Component); // end of class
 
 
-ReactDOM.render(React.createElement(CreateCardMain, null), document.getElementById('root'));
+var CreateLoginMain = function (_React$Component2) {
+    _inherits(CreateLoginMain, _React$Component2);
+
+    function CreateLoginMain() {
+        _classCallCheck(this, CreateLoginMain);
+
+        return _possibleConstructorReturn(this, (CreateLoginMain.__proto__ || Object.getPrototypeOf(CreateLoginMain)).apply(this, arguments));
+    }
+
+    _createClass(CreateLoginMain, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "main",
+                { className: "signInMain" },
+                React.createElement(
+                    "div",
+                    { className: "signInTitleDiv" },
+                    React.createElement(
+                        "div",
+                        { className: "signInContentTitle" },
+                        React.createElement(
+                            "p",
+                            { className: "signInTitle" },
+                            "Welcome to Lango!"
+                        ),
+                        React.createElement(
+                            "p",
+                            { className: "signInSubtitle" },
+                            "Customize your vocabulary"
+                        )
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "signInLoginDiv" },
+                    React.createElement(
+                        "button",
+                        { className: "loginButton" },
+                        React.createElement("img", { className: "buttonImage", src: "assets/google.jpg" }),
+                        React.createElement(
+                            "p",
+                            { className: "buttonText" },
+                            "Log in with Google"
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return CreateLoginMain;
+}(React.Component);
+
+if (true) {
+    ReactDOM.render(React.createElement(CreateLoginMain, null), document.getElementById('root'));
+} else {
+    ReactDOM.render(React.createElement(CreateCardMain, null), document.getElementById('root'));
+}

@@ -69,7 +69,7 @@ console.log("English phrase: ", requestObject.q[0]);
 
 // Serve homepage with the lango app page by default.
 function initialHandler(req, res) {
-    res.sendFile(__dirname + '/public/lango.html');
+    res.sendFile(__dirname + '/auth/lango.html');
 }
 
 function isAuthenticated(req, res, next) {
@@ -79,7 +79,7 @@ function isAuthenticated(req, res, next) {
     }
     else {
         // Go to login page.
-        res.redirect('/public/login.html');
+        res.redirect('login.html');
     }
 }
 
@@ -248,7 +248,7 @@ app.get('/auth/redirect',
     // ...with a cookie in it for the Browser!
     function (req, res) {
         console.log('Logged in and using cookies!')
-        res.redirect('/user/lango.html');
+        res.redirect('lango.html');
     });
 
 // Serve files inside user directory only if user is authenticated.

@@ -79,7 +79,7 @@ function isAuthenticated(req, res, next) {
     }
     else {
         // Go to login page.
-        res.redirect('login.html');
+        res.redirect('/login.html');
     }
 }
 

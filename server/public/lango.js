@@ -260,8 +260,4 @@ var CreateLoginMain = function (_React$Component2) {
     return CreateLoginMain;
 }(React.Component);
 
-if (true) {
-    ReactDOM.render(React.createElement(CreateLoginMain, null), document.getElementById('root'));
-} else {
-    ReactDOM.render(React.createElement(CreateCardMain, null), document.getElementById('root'));
-}
+ReactDOM.render(React.createElement(CreateCardMain, null), document.getElementById('root'));

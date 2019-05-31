@@ -168,15 +168,7 @@ class CreateCardMain extends React.Component {
     }
 }
 
-if (true) {
-    ReactDOM.render(
-        <CreateLoginMain/>,
-        document.getElementById('root')
-    );
-} else {
 ReactDOM.render(
-    <CreateCardMain />,
+    <CreateCardMain/>,
     document.getElementById('root')
 );
-
-}

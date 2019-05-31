@@ -151,13 +151,11 @@ class CreateCardMain extends React.Component {
   class CreateLoginMain extends React.Component {
     render() {return (
         <main className = "signInMain">
-          
             <div className ="signInTitleDiv">
                 <div className = "signInContentTitle">
                 <p className = "signInTitle">Welcome to Lango!</p>
                 <p className = "signInSubtitle">Customize your vocabulary</p>
                 </div>
-    
             </div>
             <div className = "signInLoginDiv">
                 <button className = "loginButton">
@@ -165,9 +163,6 @@ class CreateCardMain extends React.Component {
                 <p className = "buttonText">Log in with Google</p>
                 </button>
             </div>
-
-        
-
       </main>
     )
     }

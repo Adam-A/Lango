@@ -14,6 +14,8 @@ function Txt(props) {
 	} else return <p className="translatedText">{props.phrase}</p>;
 }
 
+
+
 function StartReviewButton() {
     return (
         <button >Start Review</button>
@@ -26,7 +28,7 @@ class CreateCardMain extends React.Component {
       super(props);
       this.sourceText = "";
       this.targetText = "";
-      this.state = { opinion: "Korean"};
+      this.state = { opinion: "Korean"}
       this.checkReturn = this.checkReturn.bind(this);
       this.saveCard = this.saveCard.bind(this);
       }
@@ -149,13 +151,11 @@ class CreateCardMain extends React.Component {
   class CreateLoginMain extends React.Component {
     render() {return (
         <main className = "signInMain">
-          
             <div className ="signInTitleDiv">
                 <div className = "signInContentTitle">
                 <p className = "signInTitle">Welcome to Lango!</p>
                 <p className = "signInSubtitle">Customize your vocabulary</p>
                 </div>
-    
             </div>
             <div className = "signInLoginDiv">
                 <button className = "loginButton">
@@ -163,23 +163,12 @@ class CreateCardMain extends React.Component {
                 <p className = "buttonText">Log in with Google</p>
                 </button>
             </div>
-
-        
-
       </main>
     )
     }
 }
 
-if (true) {
-    ReactDOM.render(
-        <CreateLoginMain/>,
-        document.getElementById('root')
-    );
-} else {
 ReactDOM.render(
-    <CreateCardMain />,
+    <CreateCardMain/>,
     document.getElementById('root')
 );
-
-}

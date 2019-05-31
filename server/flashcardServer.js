@@ -69,7 +69,7 @@ console.log("English phrase: ", requestObject.q[0]);
 
 // Serve homepage with the lango app page by default.
 function initialHandler(req, res) {
-    res.sendFile(__dirname + '/auth/lango.html');
+    res.sendFile(__dirname + '/user/lango.html');
 }
 
 function isAuthenticated(req, res, next) {
@@ -227,7 +227,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static('public'));  // can I find a static file?
+app.get('/*',express.static('public'));  // can I find a static file?
 
 // Starts login by redirecting to Google. login.html redirects to here (no AJAX involved).
 // The object { scope: ['profile'] } says to ask Google for their user profile information.
@@ -248,7 +248,7 @@ app.get('/auth/redirect',
     // ...with a cookie in it for the Browser!
     function (req, res) {
         console.log('Logged in and using cookies!')
-        res.redirect('lango.html');
+        res.redirect('/user/lango.html');
     });
 
 // Serve files inside user directory only if user is authenticated.

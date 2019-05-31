@@ -40,8 +40,8 @@ let requestObject = {
 // Object sent to google telling them that the domain is registered to them.
 // Google sends key packed into redirect response that redirects to server162.site:51490/auth/redirect
 const googleLoginData = {
-    clientID: '156209788548-79arqd8oce76quhmqes81918gf3hj675.apps.googleusercontent.com',
-    clientSecret: 'ZN6Ex82f95_bmIb8E9IIs5S_',
+    clientID: '695831622286-b9htqlrt0c1n001m13uj59tvru4nm4on.apps.googleusercontent.com',
+    clientSecret: '54-saBVCpICdiGcGfGK8OZT0',
     callbackURL: '/auth/redirect'
 };
 

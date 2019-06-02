@@ -175,6 +175,14 @@ function fileNotFound(req, res) {
 // is called (in /auth/redirect/), once we actually have the profile data from Google.
 function gotProfile(accessToken, refreshToken, profile, done) {
     console.log("Google profile",profile);
+    
+    let sqliteQuery = `INSERT INTO profiles VALUES ("${profile.id}", "${profile.displayName}")`;
+        db.run(sqliteQuery, function(err) {
+            if (err) {
+                return console.log(err.message);
+            }
+            dumpDB();
+        });
     // here is a good place to check if user is in DB,
     // and to store him in DB if not already there.
     // Second arg to "done" will be passed into serializeUser,

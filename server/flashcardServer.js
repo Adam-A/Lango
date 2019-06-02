@@ -219,7 +219,9 @@ passport.deserializeUser((dbRowID, done) => {
     db.all(`SELECT * FROM profiles WHERE id = "${dbRowID}"`, function(err,res)
     {
         
-        userData = {id: dbRowID, user: res.user};
+        userData.id = dbRowID;
+        userData.user = res.user;
+        console.log("RES USER" + res.user);
     })
     // here is a good place to look up user data in database using
     // dbRowID. Put whatever you want into an object. It ends up

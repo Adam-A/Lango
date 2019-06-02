@@ -25,7 +25,10 @@ const db = new sqlite3.Database(dbFileName);  // object, not database.
 // Initialize table.
 // If the table already exists, causes an error.
 // Fix the error by removing or renaming Flashcards.db
-const cmdStr = 'CREATE TABLE flashcards (id TEXT, username TEXT, source TEXT, target TEXT, seen INT, correct INT)'
+let cmdStr = 'CREATE TABLE flashcards (id TEXT, source TEXT, target TEXT, seen INT, correct INT)'
+db.run(cmdStr,tableCreationCallback);
+
+cmdStr = 'CREATE TABLE profiles (id TEXT, user TEXT)'
 db.run(cmdStr,tableCreationCallback);
 
 
@@ -247,7 +250,6 @@ app.get('/auth/redirect',
     // will come back here to send back the response
     // ...with a cookie in it for the Browser!
     function (req, res) {
-        console.log("TEST " + res)
         console.log('Logged in and using cookies!')
         res.redirect('/user/lango.html');
     });

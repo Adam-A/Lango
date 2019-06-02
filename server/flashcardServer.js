@@ -75,7 +75,6 @@ function initialHandler(req, res) {
 
 function isAuthenticated(req, res, next) {
     if (req.user) {
-        console.log(`Authenticated user ${req.userData.id} on session ${req.userData.id}.`);
         next();
     }
     else {

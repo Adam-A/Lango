@@ -121,7 +121,7 @@ var CreateCardMain = function (_React$Component) {
         key: "saveCard",
         value: function saveCard() {
             if (this.sourceText && this.targetText) {
-                var url = "store?source=" + this.sourceText + "&target=" + this.targetText;
+                var url = "user/store?source=" + this.sourceText + "&target=" + this.targetText;
                 this.makeStoreAjaxRequest(url);
             } else {
                 document.getElementById("inputEng").placeholder = "Can't store empty inputs!";
@@ -134,7 +134,7 @@ var CreateCardMain = function (_React$Component) {
             if (event.charCode == 13) {
                 this.sourceText = document.getElementById("inputEng").value;
                 document.getElementById("inputEng").value = '';
-                var url = "translate?source=" + this.sourceText;
+                var url = "user/translate?source=" + this.sourceText;
                 this.makeTranslationAjaxRequest(url);
             }
         }
@@ -204,60 +204,5 @@ var CreateCardMain = function (_React$Component) {
 
     return CreateCardMain;
 }(React.Component); // end of class
-
-
-var CreateLoginMain = function (_React$Component2) {
-    _inherits(CreateLoginMain, _React$Component2);
-
-    function CreateLoginMain() {
-        _classCallCheck(this, CreateLoginMain);
-
-        return _possibleConstructorReturn(this, (CreateLoginMain.__proto__ || Object.getPrototypeOf(CreateLoginMain)).apply(this, arguments));
-    }
-
-    _createClass(CreateLoginMain, [{
-        key: "render",
-        value: function render() {
-            return React.createElement(
-                "main",
-                { className: "signInMain" },
-                React.createElement(
-                    "div",
-                    { className: "signInTitleDiv" },
-                    React.createElement(
-                        "div",
-                        { className: "signInContentTitle" },
-                        React.createElement(
-                            "p",
-                            { className: "signInTitle" },
-                            "Welcome to Lango!"
-                        ),
-                        React.createElement(
-                            "p",
-                            { className: "signInSubtitle" },
-                            "Customize your vocabulary"
-                        )
-                    )
-                ),
-                React.createElement(
-                    "div",
-                    { className: "signInLoginDiv" },
-                    React.createElement(
-                        "button",
-                        { className: "loginButton" },
-                        React.createElement("img", { className: "buttonImage", src: "assets/google.jpg" }),
-                        React.createElement(
-                            "p",
-                            { className: "buttonText" },
-                            "Log in with Google"
-                        )
-                    )
-                )
-            );
-        }
-    }]);
-
-    return CreateLoginMain;
-}(React.Component);
 
 ReactDOM.render(React.createElement(CreateCardMain, null), document.getElementById('root'));

@@ -214,8 +214,8 @@ passport.deserializeUser((dbRowID, done) => {
     console.log("deserializeUser. Input is:", dbRowID);
 
 
-   
-    db.all(`SELECT ${dbRowID} FROM profiles`, function(err,res)
+
+    db.all(`SELECT id FROM profiles WHERE id = ${dbRowID}`, function(err,res)
     {
         console.log(res)
     })

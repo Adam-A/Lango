@@ -215,9 +215,8 @@ passport.deserializeUser((dbRowID, done) => {
 
 
 
-    db.all(`SELECT id FROM profiles WHERE id = "${dbRowID}"`, function(err,res)
+    db.all(`SELECT ROW FROM profiles WHERE id = "${dbRowID}"`, function(err,res)
     {
-        dumpDB();
         console.log(res);
     })
     // here is a good place to look up user data in database using

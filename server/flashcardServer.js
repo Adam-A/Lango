@@ -25,7 +25,7 @@ const db = new sqlite3.Database(dbFileName);  // object, not database.
 // Initialize table.
 // If the table already exists, causes an error.
 // Fix the error by removing or renaming Flashcards.db
-const cmdStr = 'CREATE TABLE flashcards (user INT, source TEXT, target TEXT, seen INT, correct INT)'
+const cmdStr = 'CREATE TABLE flashcards (id TEXT, username TEXT, source TEXT, target TEXT, seen INT, correct INT)'
 db.run(cmdStr,tableCreationCallback);
 
 
@@ -44,6 +44,7 @@ const googleLoginData = {
     clientSecret: '54-saBVCpICdiGcGfGK8OZT0',
     callbackURL: '/auth/redirect'
 };
+
 
 // Strategy configuration.
 // Tell passport we will be using login with Google, and
@@ -74,7 +75,7 @@ function initialHandler(req, res) {
 
 function isAuthenticated(req, res, next) {
     if (req.user) {
-        console.log(`Authenticated user ${req.user} on session ${req.session}.`);
+        console.log(`Authenticated user ${req.userData.id} on session ${req.userData.id}.`);
         next();
     }
     else {
@@ -100,7 +101,7 @@ function storeQueryHandler(req,res, next) {
     console.log(qObj);
     if (qObj.source != '' && qObj.target != '') {
 	//Setting default values (right now ID is 0, but we will change that later)
-	let sqliteQuery = `INSERT INTO flashcards VALUES (0, "${qObj.source}", "${qObj.target}",0,0)`;
+	let sqliteQuery = `INSERT INTO flashcards VALUES ("0", "${qObj.source}", "${qObj.target}",0,0)`;
         db.run(sqliteQuery, function(err) {
             if (err) {
                 return console.log(err.message);
@@ -178,7 +179,6 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     // should be key to get user out of database.
 
     let dbRowID = profile.id;  // temporary! Should be the real unique
-    console.log("Profile ID:" + dbRowID)
     // key for db Row for this user in DB table.
     // Note: cannot be zero, has to be something that evaluates to
     // True.
@@ -204,7 +204,7 @@ passport.deserializeUser((dbRowID, done) => {
     // here is a good place to look up user data in database using
     // dbRowID. Put whatever you want into an object. It ends up
     // as the property "user" of the "req" object.
-    let userData = {userData: "data from db row goes here"};
+    let userData = {userData: dbRowID};
     done(null, userData);
 });
 

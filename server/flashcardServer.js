@@ -176,7 +176,7 @@ function fileNotFound(req, res) {
 function gotProfile(accessToken, refreshToken, profile, done) {
     console.log("Google profile",profile);
     
-    let sqliteQuery = `INSERT INTO profiles VALUES (${profile.id}, ${profile.displayName})`;
+    let sqliteQuery = `INSERT INTO profiles VALUES ("${profile.id}", "${profile.displayName}")`;
         db.run(sqliteQuery, function(err) {
             if (err) {
                 return console.log(err.message);

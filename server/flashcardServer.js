@@ -257,8 +257,8 @@ app.get('/user/*', isAuthenticated, express.static('.'));
 app.get('/', initialHandler);
 
 // query handlers.
-app.get('user/translate', translateQueryHandler );   // if not, is it a valid query?
-app.get('user/store', storeQueryHandler ); 
+app.get('/user/translate', translateQueryHandler );   // if not, is it a valid query?
+app.get('/user/store', storeQueryHandler ); 
 
 app.use( fileNotFound );            // otherwise not found
 app.listen(port, function () { console.log('Listening on port ' + port); } );

@@ -118,6 +118,7 @@ function storeQueryHandler(req,res, next) {
 }
 
 function dumpDB() {
+    db.all ( 'SELECT * FROM profiles', dataCallback);
     db.all ( 'SELECT * FROM flashcards', dataCallback);
     function dataCallback( err, data ) {console.log(data)}
 }

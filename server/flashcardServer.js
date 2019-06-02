@@ -69,7 +69,7 @@ console.log("English phrase: ", requestObject.q[0]);
 
 // Serve homepage with the lango app page by default.
 function initialHandler(req, res) {
-    res.sendFile(__dirname + '/user/lango.html');
+    res.redirect('/user/lango.html');
 }
 
 function isAuthenticated(req, res, next) {
@@ -254,7 +254,7 @@ app.get('/auth/redirect',
 // Serve files inside user directory only if user is authenticated.
 app.get('/user/*', isAuthenticated, express.static('.'));
 
-// app.get('/', initialHandler); // Serve the index page.
+app.get('/', initialHandler);
 
 // query handlers.
 app.get('/translate', translateQueryHandler );   // if not, is it a valid query?

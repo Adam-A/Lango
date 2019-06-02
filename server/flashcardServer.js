@@ -215,13 +215,10 @@ passport.deserializeUser((dbRowID, done) => {
 
 
    
-    let sqliteQuery =  `SELECT ("${dbRowID}") FROM profiles`;
-    db.run(sqliteQuery, function(err, res) {
-        if (err) {
-            return console.log(err.message);
-        }
-        console.log("TEST" + res) 
-    });
+    db.all(`SELECT ("${dbRowID}") FROM profiles`, function(err,res)
+    {
+        console.log(res)
+    })
     // here is a good place to look up user data in database using
     // dbRowID. Put whatever you want into an object. It ends up
     // as the property "user" of the "req" object.

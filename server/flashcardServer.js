@@ -268,7 +268,7 @@ app.get('/auth/redirect',
     // will come back here to send back the response
     // ...with a cookie in it for the Browser!
     function (req, res) {
-        console.log(req);
+        console.log(req.userData);
         console.log('Logged in and using cookies!');
         res.redirect('/user/lango.html');
     });

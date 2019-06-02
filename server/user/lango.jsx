@@ -69,7 +69,7 @@ class CreateCardMain extends React.Component {
     // When the charCode is 13, the user has hit the return key
     saveCard() {
         if (this.sourceText  && this.targetText ) {
-            let url = `user/store?source=${this.sourceText}&target=${this.targetText}`;
+            let url = `store?source=${this.sourceText}&target=${this.targetText}`;
             this.makeStoreAjaxRequest(url);
         } else {
             document.getElementById("inputEng").placeholder = "Can't store empty inputs!";
@@ -80,7 +80,7 @@ class CreateCardMain extends React.Component {
 	 if (event.charCode == 13) {
         this.sourceText = document.getElementById("inputEng").value;
         document.getElementById("inputEng").value = '';
-        let url = "user/translate?source=" + this.sourceText;
+        let url = "translate?source=" + this.sourceText;
         this.makeTranslationAjaxRequest(url)
 
 	    }

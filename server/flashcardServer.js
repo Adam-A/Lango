@@ -28,7 +28,7 @@ const db = new sqlite3.Database(dbFileName);  // object, not database.
 let cmdStr = 'CREATE TABLE flashcards (id TEXT, source TEXT, target TEXT, seen INT, correct INT)'
 db.run(cmdStr,tableCreationCallback);
 
-cmdStr = 'CREATE TABLE profiles (id TEXT UNIQUE, user TEXT)'
+cmdStr = 'CREATE TABLE profiles (id TEXT UNIQUE, username TEXT)'
 db.run(cmdStr,tableCreationCallback);
 
 
@@ -175,7 +175,7 @@ function fileNotFound(req, res) {
 // function called during login, the second time passport.authenticate
 // is called (in /auth/redirect/), once we actually have the profile data from Google.
 function gotProfile(accessToken, refreshToken, profile, done) {
-    console.log("Google profile",profile);
+    //console.log("Google profile",profile);
     
     let sqliteQuery = `INSERT INTO profiles VALUES ("${profile.id}", "${profile.displayName}")`;
         db.run(sqliteQuery, function(err) {
@@ -211,23 +211,25 @@ passport.serializeUser((dbRowID, done) => {
 // Whatever we pass in the "done" callback becomes req.user
 // and can be used by subsequent middleware.
 passport.deserializeUser((dbRowID, done) => {
-    console.log("deserializeUser. Input is:", dbRowID);
+    //console.log("deserializeUser. Input is:", dbRowID);
 
 
 
-    let userData = {}
-    db.all(`SELECT * FROM profiles WHERE id = "${dbRowID}"`, function(err,res)
-    {
-        
-        userData.id = dbRowID;
-        userData.user = res.user;
-        console.log("RES USER" + res.user);
+   
+    db.get(`SELECT * FROM profiles WHERE id = "${dbRowID}"`, function(err,res)
+	{
+	    if (err) {
+		return console.log(err.message);
+	    }
+            //console.log("PRINTING USER DATA");
+	    //console.log(res.user + " " + res.id);
+	    
+	    let userData = {id: res.id, username : res.username}
+	   done(null, userData);
     })
     // here is a good place to look up user data in database using
     // dbRowID. Put whatever you want into an object. It ends up
     // as the property "user" of the "req" object.
-
-    done(null, userData);
 });
 
 
@@ -259,7 +261,7 @@ app.get('/auth/google',
 
 // After successful login, redirect to here and run three handler functions one after another.
 app.get('/auth/redirect',
-    function (req, res, next) {
+	function (req, res, next) {
         console.log("at auth/redirect");
         next();
     },
@@ -269,9 +271,9 @@ app.get('/auth/redirect',
     // set up the cookie, call serialize, whose "done"
     // will come back here to send back the response
     // ...with a cookie in it for the Browser!
-    function (req, res) {
-        console.log(req.user)
-        console.log(req.id)
+	function (req, res) {
+	    
+            console.log(req.user);
         console.log('Logged in and using cookies!');
         res.redirect('/user/lango.html');
     });

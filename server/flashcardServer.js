@@ -215,14 +215,16 @@ passport.deserializeUser((dbRowID, done) => {
 
 
 
+    let userData = {}
     db.all(`SELECT * FROM profiles WHERE id = "${dbRowID}"`, function(err,res)
     {
-        console.log(res);
+        
+        userData = {id: dbRowID, user: res.user};
     })
     // here is a good place to look up user data in database using
     // dbRowID. Put whatever you want into an object. It ends up
     // as the property "user" of the "req" object.
-    let userData = {id: dbRowID};
+
     done(null, userData);
 });
 
@@ -266,8 +268,8 @@ app.get('/auth/redirect',
     // will come back here to send back the response
     // ...with a cookie in it for the Browser!
     function (req, res) {
-
-        console.log('Logged in and using cookies!')
+        console.log(req);
+        console.log('Logged in and using cookies!');
         res.redirect('/user/lango.html');
     });
 

@@ -212,6 +212,16 @@ passport.serializeUser((dbRowID, done) => {
 // and can be used by subsequent middleware.
 passport.deserializeUser((dbRowID, done) => {
     console.log("deserializeUser. Input is:", dbRowID);
+
+
+   
+    let sqliteQuery =  `SELECT ("${dbRowID}") FROM profiles`;
+    db.run(sqliteQuery, function(err, res) {
+        if (err) {
+            return console.log(err.message);
+        }
+        console.log("TEST" + res) 
+    });
     // here is a good place to look up user data in database using
     // dbRowID. Put whatever you want into an object. It ends up
     // as the property "user" of the "req" object.
@@ -259,6 +269,7 @@ app.get('/auth/redirect',
     // will come back here to send back the response
     // ...with a cookie in it for the Browser!
     function (req, res) {
+
         console.log('Logged in and using cookies!')
         res.redirect('/user/lango.html');
     });

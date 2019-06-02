@@ -177,7 +177,8 @@ function gotProfile(accessToken, refreshToken, profile, done) {
     // Second arg to "done" will be passed into serializeUser,
     // should be key to get user out of database.
 
-    let dbRowID = 1;  // temporary! Should be the real unique
+    let dbRowID = profile.id;  // temporary! Should be the real unique
+    console.log("Profile ID:" + dbRowID)
     // key for db Row for this user in DB table.
     // Note: cannot be zero, has to be something that evaluates to
     // True.

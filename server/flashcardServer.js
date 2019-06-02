@@ -28,7 +28,7 @@ const db = new sqlite3.Database(dbFileName);  // object, not database.
 let cmdStr = 'CREATE TABLE flashcards (id TEXT, source TEXT, target TEXT, seen INT, correct INT)'
 db.run(cmdStr,tableCreationCallback);
 
-cmdStr = 'CREATE TABLE profiles (id TEXT, user TEXT)'
+cmdStr = 'CREATE TABLE profiles (id TEXT UNIQUE, user TEXT)'
 db.run(cmdStr,tableCreationCallback);
 
 

@@ -204,7 +204,7 @@ passport.deserializeUser((dbRowID, done) => {
     // here is a good place to look up user data in database using
     // dbRowID. Put whatever you want into an object. It ends up
     // as the property "user" of the "req" object.
-    let userData = {userData: dbRowID};
+    let userData = {id: dbRowID};
     done(null, userData);
 });
 

@@ -156,16 +156,53 @@ class ReviewCardMain extends React.Component {
     } // end of render
 } // end of class
 
-function ToggleCardView(props) {
-    if (true) {
-        return <CreateCardMain/>;
+class ToggleCardView extends React.Component {
+/*
+    constructor(props) {
+        super(props);
+        this.handleStartReviewClick = this.handleStartReviewClick().bind(this);
+        this.handleAddCardClick = this.handleAddCardClick().bind(this);
+        this.state = {isReviewing: false};
     }
-    else {
-        return <ReviewCardMain/>;
+
+    handleStartReviewClick() {
+        this.setState({isReviewing: true});
     }
+
+    handleAddCardClick() {
+        this.setState({isReviewing: false});
+    }
+*/
+
+    render() {
+        const isReviewing = true;
+        let currentView;
+        if (isReviewing) {
+            currentView = <AddView />;
+        }
+        else {
+            currentView = <ReviewView />;
+        }
+
+        return (
+            currentView
+        );
+    } // end of render
+} // end of class
+
+function AddView() {
+    return (
+        <CreateCardMain />
+    );
+}
+
+function ReviewView() {
+    return (
+        <ReviewCardMain />
+    );
 }
 
 ReactDOM.render(
-    <ToggleCardView/>,
+    <ToggleCardView />,
     document.getElementById('root')
 );

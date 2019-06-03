@@ -58,6 +58,7 @@ var CreateCardMain = function (_React$Component) {
     _createClass(CreateCardMain, [{
         key: "render",
         value: function render() {
+            var handleStartReviewClick = this.props.handleStartReviewClick;
             return React.createElement(
                 "main",
                 { className: "main" },
@@ -66,7 +67,9 @@ var CreateCardMain = function (_React$Component) {
                     { className: "header" },
                     React.createElement(
                         "button",
-                        { className: "startReviewButton" },
+                        { className: "startReviewButton", onClick: function onClick() {
+                                return handleStartReviewClick();
+                            } },
                         "Start Review"
                     ),
                     React.createElement(
@@ -217,10 +220,17 @@ var ReviewCardMain = function (_React$Component2) {
     _createClass(ReviewCardMain, [{
         key: "render",
         value: function render() {
+            var handleStartReviewClick = this.props.handleStartReviewClick;
             return React.createElement(
-                "p",
+                "div",
                 null,
-                "test: just loaded ReviewCardMain"
+                React.createElement(
+                    "button",
+                    { onClick: function onClick() {
+                            return handleStartReviewClick();
+                        } },
+                    "Did it work?"
+                )
             );
         } // end of render
 
@@ -232,39 +242,38 @@ var ReviewCardMain = function (_React$Component2) {
 var ToggleCardView = function (_React$Component3) {
     _inherits(ToggleCardView, _React$Component3);
 
-    function ToggleCardView() {
+    function ToggleCardView(props) {
         _classCallCheck(this, ToggleCardView);
 
-        return _possibleConstructorReturn(this, (ToggleCardView.__proto__ || Object.getPrototypeOf(ToggleCardView)).apply(this, arguments));
+        var _this3 = _possibleConstructorReturn(this, (ToggleCardView.__proto__ || Object.getPrototypeOf(ToggleCardView)).call(this, props));
+
+        var handleStartReviewClick = _this3.handleStartReviewClick.bind(_this3);
+        // this.handleAddCardClick = this.handleAddCardClick().bind(this);
+        _this3.state = { isReviewing: true };
+        return _this3;
     }
 
     _createClass(ToggleCardView, [{
-        key: "render",
-
+        key: "handleStartReviewClick",
+        value: function handleStartReviewClick() {
+            this.setState({ isReviewing: !this.state.isReviewing });
+        }
         /*
-            constructor(props) {
-                super(props);
-                this.handleStartReviewClick = this.handleStartReviewClick().bind(this);
-                this.handleAddCardClick = this.handleAddCardClick().bind(this);
-                this.state = {isReviewing: false};
-            }
-        
-            handleStartReviewClick() {
-                this.setState({isReviewing: true});
-            }
-        
             handleAddCardClick() {
                 this.setState({isReviewing: false});
             }
         */
 
+    }, {
+        key: "render",
         value: function render() {
-            var isReviewing = true;
+            var handleStartReviewClick = this.handleStartReviewClick;
+            var isReviewing = this.state.isReviewing;
             var currentView = void 0;
             if (isReviewing) {
-                currentView = React.createElement(AddView, null);
+                currentView = React.createElement(ReviewCardMain, { handleStartReviewClick: handleStartReviewClick.bind(this) });
             } else {
-                currentView = React.createElement(ReviewView, null);
+                currentView = React.createElement(CreateCardMain, { handleStartReviewClick: handleStartReviewClick.bind(this) });
             }
 
             return currentView;
@@ -275,12 +284,5 @@ var ToggleCardView = function (_React$Component3) {
     return ToggleCardView;
 }(React.Component); // end of class
 
-function AddView() {
-    return React.createElement(CreateCardMain, null);
-}
-
-function ReviewView() {
-    return React.createElement(ReviewCardMain, null);
-}
 
 ReactDOM.render(React.createElement(ToggleCardView, null), document.getElementById('root'));

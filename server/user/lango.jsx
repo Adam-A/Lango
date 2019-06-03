@@ -1,5 +1,6 @@
 'use strict';
 // An element to go into the DOM
+import React from 'react';
 
 function Card(props) {
     return <div className="textCard">
@@ -7,6 +8,9 @@ function Card(props) {
 	</div>;
 	}
 	
+function DisplayCard(props) {
+    return <div className={"textCard"}>Test</div>;
+}
 
 function Txt(props) {
 	 if (props.phrase == undefined) {
@@ -90,7 +94,7 @@ class CreateCardMain extends React.Component {
         xhr.open(method, url, true);
         return xhr;
       }
-      
+
        makeTranslationAjaxRequest(url) {
         let xhr = this.createAjaxRequest('GET', url);
         if (!xhr) {
@@ -147,7 +151,49 @@ class CreateCardMain extends React.Component {
 
   } // end of class
 
+class ReviewCardMain extends React.Component {
+    render() {return (
+        <main className = "main">
+
+            <div className = "header">
+                <button className = "addCardButton" >Add</button>
+                <h1 className = "headerText">Lango!</h1>
+            </div>
+            <div className = "middle">
+                <div className="cardContainer">
+                    <DisplayCard>
+                    </DisplayCard>
+
+                    <DisplayCard>
+                    </DisplayCard>
+                </div>
+
+                <div className="nextContainer">
+                    <button className = "nextButton" /* onClick = */ >Next</button>
+                </div>
+            </div>
+
+            <div className = "footer" id = "footer">
+                <h1 className = "footerText" >UserName</h1>
+            </div>
+
+        </main>
+
+    );
+    } // end of render function
+}
+
+function ToggleCardsView(props) {
+    const isCreating = props.view;
+    if (isCreating) {
+        return <CreateCardMain/>;
+    }
+    else {
+        return <ReviewCardMain/>;
+    }
+}
+
 ReactDOM.render(
-    <CreateCardMain/>,
+    <ToggleCardsView view={true}/>,
     document.getElementById('root')
 );

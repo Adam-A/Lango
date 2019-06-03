@@ -6,9 +6,10 @@ body {
 
 @media (max-width: 480px) {
     .header {
-        padding-top: 6%;
+        padding-top: 9%;
         display: flex;
-        width: 100%;
+        width: 100vw;
+        height: 6vh;
         justify-content: space-around;
     }
 
@@ -22,16 +23,17 @@ body {
     }
 
     .main {
+        width: 100vw;
+        height: 100vh;
         font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     }
 
-
-
     .middle {
-        padding-top: 16%;
-        padding-left: 5%;
-        padding-right: 5%;
+        margin-top: 10%;
+        flex: 1;
         display: flex;
+        align-items: center;
+        justify-content: center;
         flex-direction: column;
         justify-content: space-between;
     }
@@ -42,22 +44,25 @@ body {
         background-color: #5F6C99; 
         border: none;
         color: white;
-        padding: 6px 10px;
+        padding: .75em;
         text-align: center;
         display: inline-block;
         font-size: 14px;
     }
 
     .saveButton {
+        
         border-radius: 10px;
         float: right;
         word-wrap: break-word;
-        background-color: #74C6AB; /* Green */
+        background-color: #74C6AB; 
         border: none;
         color: white;
-        padding: 10px 30px;
+        margin-top: 10%;
+        margin-left: 30vw;
+        padding: .5em 1.5em;
         text-align: center;
-        font-size: 17px;
+        font-size: 1.2em;
     }
 
     .inputEng {
@@ -72,16 +77,20 @@ body {
 
     }
 
+    .saveContainer {
+        margin-left: 20%;
+
+    }
+
     div.textCard {
-       
-        padding: 25%;
-        margin: 4%;
+        width: 45vh;
+        height: 30vh;
+        margin-top: 10%;
         background-color: #ffffff;
         border-style: solid;
         border-width: 2px;
         border-color: gray;
         color: gray;
-        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -97,109 +106,27 @@ body {
         
     }
 
-
-   
-
     .footer {
-        margin-top: 3%;
-        padding-top: 5%;
-        padding-bottom: 5%;
+        margin-top: 10%;
+        padding-top: 4%;
+        padding-bottom: 6%;
         background: #5F6C99;
         display: flex;
         justify-content: center;
-        width: 100%;
+        width: 100vw;
+        height: 1vh;
     }
 
     .footerText {
-        font-size: 17px;
+        font-size: 1.2em;
         color: white;
     }
-
-    .signInMain {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    
-    }
-
-    .signInTitleDiv{
-        box-shadow: 0px -84px 121px 64px rgba(0,0,0,0.75);
-        background-image: linear-gradient(-180deg, #606B9B , #B191D4);
-        flex: 1;
-        position: relative;
-        text-align: center;
-  
-    }
-
-    .signInLoginDiv{
-        flex: .4;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-  
-    }
-
-    .signInContentTitle {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%) 
-    }
-
-    .signInTitle {
-        padding-left: 11%;
-        padding-right: 11%;
-        padding-bottom: 8%;
-        text-align: left;
-        font-family: Raleway, sans-serif;
-        color: white;
-        font-size: 12vw;
-        font-weight: 700;
-
-    }
-
-    .signInSubtitle {
-        color: #70C7A9;
-        font-family: 'Open Sans'; 
-        font-weight: 300;
-        font-size: 6.5vw;
-    }
-
-    .loginButton {
-        display: inline-flex;
-    
-        background: #70C7A9;
-        padding: 1%;
-        margin-left: 10%;
-        margin-right: 10%;
-        border: 0;
-        flex-direction: row;
-    }
-    .buttonImage {
-        padding: 1%;
-        max-height: 20%;
-        max-width: 20%;
-    }
-
-    .buttonText {
-        margin-top: 4.5%;
-        margin-left: 8%;
-        text-align: center;
-        font-family: Arial, Helvetica Neue , Helvetica, sans-serif;
-        color: white;
-        font-size: 5.5vw;
-    }
-
-
-    
 }
 
 @media (min-width: 481px) and (max-width: 790px) {
     .main {
+        height: 100vh;
+        width: 100vw;
         display: flex;
         flex-direction: column;
         font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
@@ -231,7 +158,7 @@ body {
     }
 
     .middle {
-        padding: 5%;
+        
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -258,25 +185,31 @@ body {
         border-style: solid;
         border-width: 2px;
         border-color: gray;
-        padding: 10%;
-        margin-right: 5%;
+        margin-left: 1em;
+        margin-right: 1em;
+        
         margin-bottom: 10%;
         color: gray;
         display: flex;
         justify-content: center;
         align-items: center;
+        height: 35vh;
+        width: 50vw;
     }
 
     .cardContainer {
+        flex: 1;
+        align-items: center;
+        justify-content: center;
         display: flex;
         flex-direction: row;
-        width: 100%;
-        justify-content: center;
+
     }
 
     .saveContainer {
         margin-left: 77%;
-        padding-bottom: 20%;
+      
+
     }
 
     .saveButton {
@@ -301,9 +234,12 @@ body {
     }
 
     .footer {
+        width: 100vw;
+        height: 3vh;
         font-size: 25px;
-        padding-top: 2%;
-        padding-bottom: 2%;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        margin-top: 20%;
         background: #5F6C99;
         display: flex;
         justify-content: center;
@@ -311,99 +247,24 @@ body {
     }
 
 
-    .signInMain {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    
-    }
-
-    .signInTitleDiv{
-        box-shadow: 0px -84px 121px 64px rgba(0,0,0,0.75);
-        background-image: linear-gradient(-180deg, #606B9B , #B191D4);
-        flex: 1;
-        position: relative;
-        text-align: center;
-  
-    }
-
-    .signInLoginDiv{
-        flex: .4;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-  
-    }
-
-    .signInContentTitle {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%) 
-    }
-
-    .signInTitle {
-        padding-left: 19%;
-        padding-right: 19%;
-        padding-bottom: 8%;
-        text-align: left;
-        font-family: Raleway, sans-serif;
-        color: white;
-        font-size: 12vw;
-        font-weight: 700;
-
-    }
-
-    .signInSubtitle {
-        color: #70C7A9;
-        font-family: 'Open Sans'; 
-        font-weight: 300;
-        font-size: 5.5vw;
-    }
-
-    .loginButton {
-        display: inline-flex;
-    
-        background: #70C7A9;
-        padding: 1%;
-        margin-left: 25%;
-        margin-right: 25%;
-        border: 0;
-        flex-direction: row;
-    }
-    .buttonImage {
-        padding: 1%;
-        max-height: 20%;
-        max-width: 20%;
-    }
-
-    .buttonText {
-        margin-top: 4.5%;
-        margin-left: 8%;
-        text-align: center;
-        font-family: Arial, Helvetica Neue , Helvetica, sans-serif;
-        color: white;
-        font-size: 3.5vw;
-    }
 
 }
 
 @media (min-width: 791px) {
     .main {
+        width: 100vw;
+        height: 100vh;
         display: flex;
         flex-direction: column;
         font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     }
 
     .header {
+        width: 80vw;
+        height: 10vh;
         display: flex;
         flex-direction: row;
-        padding-left: 5%;
-        padding-right: 5%;
+        padding-left: 10%;
         padding-top: 5%;
         padding-bottom: 5%;
     }
@@ -425,13 +286,14 @@ body {
     }
 
     .middle {
-        padding: 5%;
+        width: 100vw;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between;
     }
 
     .inputEng {
+        
         word-wrap: break-word;
         font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
         color: gray;
@@ -448,14 +310,14 @@ body {
     }
 
     div.textCard {
+        margin-left: 40px;
         font-size: 30px;
         background-color: #ffffff;
         border-style: solid;
         border-width: 2px;
         border-color: gray;
-        padding: 15% 12% 15% 12%;
-        margin-right: 5%;
-        margin-bottom: 5%;
+        height: 40vh;
+        width: 100vw;
         color: gray;
         display: flex;
         justify-content: center;
@@ -463,14 +325,18 @@ body {
     }
 
     .cardContainer {
+        margin-left: 10vw;
+        margin-right: 10vw;
+        width: 75vw;
+        height: 50vh;
         display: flex;
         flex-direction: row;
-        width: 100%;
         justify-content: center;
     }
 
     .saveContainer {
         margin-left: 80%;
+        margin-bottom: 10%;
     }
 
     .saveButton {
@@ -504,85 +370,11 @@ body {
         display: flex;
         justify-content: center;
         color: white;
-        width: 100%;
+        width: 100vw;        
     }
 
-    .signInMain {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    
-    }
+    /*ReviewCardMain CSS starts here*/
 
-    .signInTitleDiv{
-        box-shadow: -74px 0px 121px 64px rgba(0,0,0,0.75);
-        background-image: linear-gradient(-180deg, #606B9B , #B191D4);
-        flex: 1;
-        position: relative;
-        text-align: center;
-  
-    }
 
-    .signInLoginDiv{
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-  
-    }
-
-    .signInContentTitle {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%) 
-    }
-
-    .signInTitle {
-        padding-left: 19%;
-        padding-right: 19%;
-        padding-bottom: 8%;
-        text-align: left;
-        font-family: Raleway, sans-serif;
-        font-weight: 700;
-        color: white;
-        font-size: 5vw;
-        
-    }
-
-    .signInSubtitle {
-        color: #70C7A9;
-        font-family: 'Open Sans'; 
-        font-weight: 300;
-        font-size: 2.5vw;
-    }
-
-    .loginButton {
-        display: inline-flex;
-        background: #70C7A9;
-        padding: 1%;
-        margin-left: 25%;
-        margin-right: 25%;
-        border: 0;
-        flex-direction: row;
-    }
-    .buttonImage {
-        padding: 1%;
-        max-height: 20%;
-        max-width: 20%;
-    }
-
-    .buttonText {
-        margin-top: 4.5%;
-        margin-left: 8%;
-        text-align: center;
-        font-family: Arial, Helvetica Neue , Helvetica, sans-serif;
-        color: white;
-        font-size: 1.7vw;
-    }
 }
 

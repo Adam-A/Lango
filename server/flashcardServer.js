@@ -25,10 +25,10 @@ const db = new sqlite3.Database(dbFileName);  // object, not database.
 // Initialize table.
 // If the table already exists, causes an error.
 // Fix the error by removing or renaming Flashcards.db
-let cmdStr = 'CREATE TABLE flashcards (id TEXT, source TEXT, target TEXT, seen INT, correct INT)'
+let cmdStr = 'CREATE TABLE flashcards (id TEXT, source TEXT, target TEXT, seen INT, correct INT)';
 db.run(cmdStr,tableCreationCallback);
 
-cmdStr = 'CREATE TABLE profiles (id TEXT UNIQUE, username TEXT)'
+cmdStr = 'CREATE TABLE profiles (id TEXT UNIQUE, username TEXT)';
 db.run(cmdStr,tableCreationCallback);
 
 
@@ -97,13 +97,18 @@ function translateQueryHandler(req, res, next) {
     }
 }
 
-function storeQueryHandler(req,res, next) {
+function storeQueryHandler(req, res, next) {
+    // TODO: Delete these printouts later.
+    console.log("Inside storeQueryHandler, testing if username and ID got passed in.");
+    console.log("google user ID: " + req.user.id);
+    console.log("username: " + req.user.username);
+
     let url = req.url;
     let qObj = req.query;
     console.log(qObj);
     if (qObj.source != '' && qObj.target != '') {
 	//Setting default values (right now ID is 0, but we will change that later)
-	let sqliteQuery = `INSERT INTO flashcards VALUES ("0", "${qObj.source}", "${qObj.target}",0,0)`;
+	let sqliteQuery = `INSERT INTO flashcards VALUES ("${req.user.id}", "${qObj.source}", "${qObj.target}",0,0)`;
         db.run(sqliteQuery, function(err) {
             if (err) {
                 return console.log(err.message);
@@ -114,7 +119,7 @@ function storeQueryHandler(req,res, next) {
     } else {
         next();
     }
-    
+
 }
 
 function dumpDB() {
@@ -175,8 +180,13 @@ function fileNotFound(req, res) {
 // function called during login, the second time passport.authenticate
 // is called (in /auth/redirect/), once we actually have the profile data from Google.
 function gotProfile(accessToken, refreshToken, profile, done) {
-    //console.log("Google profile",profile);
-    
+    console.log("Inside gotProfile: Google profile id is ", profile.id);
+
+    // Idea: We declared the id column as UNIQUE. Therefore,
+    // if the user id already exists in the table, then the
+    // callback will return an error message and the user will not
+    // get re-inserted into the table. Else, insert into table,
+    // and output the table to the console.
     let sqliteQuery = `INSERT INTO profiles VALUES ("${profile.id}", "${profile.displayName}")`;
         db.run(sqliteQuery, function(err) {
             if (err) {
@@ -184,16 +194,10 @@ function gotProfile(accessToken, refreshToken, profile, done) {
             }
             dumpDB();
         });
-    // here is a good place to check if user is in DB,
-    // and to store him in DB if not already there.
+
     // Second arg to "done" will be passed into serializeUser,
     // should be key to get user out of database.
-
-    let dbRowID = profile.id;  // temporary! Should be the real unique
-    // key for db Row for this user in DB table.
-    // Note: cannot be zero, has to be something that evaluates to
-    // True.
-
+    let dbRowID = profile.id;
     done(null, dbRowID);
 }
 
@@ -201,7 +205,6 @@ function gotProfile(accessToken, refreshToken, profile, done) {
 // The second operand of "done" becomes the input to deserializeUser
 // on every subsequent HTTP request with this session's cookie.
 passport.serializeUser((dbRowID, done) => {
-    console.log("SerializeUser. Input is",dbRowID);
     done(null, dbRowID);
 });
 
@@ -211,25 +214,22 @@ passport.serializeUser((dbRowID, done) => {
 // Whatever we pass in the "done" callback becomes req.user
 // and can be used by subsequent middleware.
 passport.deserializeUser((dbRowID, done) => {
-    //console.log("deserializeUser. Input is:", dbRowID);
+    let sqliteQuery = `SELECT id, username FROM profiles WHERE id = "${dbRowID}"`;
+    db.get(sqliteQuery, function(err, row) {
+        let userData = {};
+        if (err) {
+            return console.log(err.message);
+        }
+        else {
+            console.log("Inside deserializeUser");
+            userData = {
+                id: row.id,
+                username: row.username
+            };
+        }
+        done(null, userData);
+    });
 
-
-
-   
-    db.get(`SELECT * FROM profiles WHERE id = "${dbRowID}"`, function(err,res)
-	{
-	    if (err) {
-		return console.log(err.message);
-	    }
-            //console.log("PRINTING USER DATA");
-	    //console.log(res.user + " " + res.id);
-	    
-	    let userData = {id: res.id, username : res.username}
-	   done(null, userData);
-    })
-    // here is a good place to look up user data in database using
-    // dbRowID. Put whatever you want into an object. It ends up
-    // as the property "user" of the "req" object.
 });
 
 
@@ -272,8 +272,6 @@ app.get('/auth/redirect',
     // will come back here to send back the response
     // ...with a cookie in it for the Browser!
 	function (req, res) {
-	    
-            console.log(req.user);
         console.log('Logged in and using cookies!');
         res.redirect('/user/lango.html');
     });

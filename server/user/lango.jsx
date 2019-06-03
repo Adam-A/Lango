@@ -33,11 +33,13 @@ class CreateCardMain extends React.Component {
       this.saveCard = this.saveCard.bind(this);
       }
 
-  render() {return (
+  render() {
+      let handleStartReviewClick = this.props.handleStartReviewClick;
+      return (
       <main className = "main">
           
         <div className = "header">
-        <button className = "startReviewButton" >Start Review</button>
+        <button className = "startReviewButton" onClick = {() => handleStartReviewClick()}>Start Review</button>
             <h1 className = "headerText">Lango!</h1>
         </div>
         <div className = "middle">
@@ -149,23 +151,53 @@ class CreateCardMain extends React.Component {
 
 class ReviewCardMain extends React.Component {
     render() {
+        let handleStartReviewClick = this.props.handleStartReviewClick;
         return (
-            <p>test: just loaded ReviewCardMain</p>
+            <div>
+                <button onClick = {() => handleStartReviewClick()}>Did it work?</button>
+            </div>
 
         );
     } // end of render
 } // end of class
 
-function ToggleCardView(props) {
-    if (true) {
-        return <CreateCardMain/>;
+class ToggleCardView extends React.Component {
+
+    constructor(props) {
+        super(props);
+        let handleStartReviewClick = this.handleStartReviewClick.bind(this);
+        // this.handleAddCardClick = this.handleAddCardClick().bind(this);
+        this.state = {isReviewing: true};
     }
-    else {
-        return <ReviewCardMain/>;
+
+    handleStartReviewClick() {
+        this.setState({isReviewing: !this.state.isReviewing});
     }
-}
+/*
+    handleAddCardClick() {
+        this.setState({isReviewing: false});
+    }
+*/
+
+    render() {
+        let handleStartReviewClick = this.handleStartReviewClick;
+        const isReviewing = this.state.isReviewing;
+        let currentView;
+        if (isReviewing) {
+            currentView = <ReviewCardMain handleStartReviewClick = {handleStartReviewClick.bind(this)}/>;
+        }
+        else {
+            currentView = <CreateCardMain handleStartReviewClick = {handleStartReviewClick.bind(this)} />;
+        }
+
+        return (
+            currentView
+        );
+    } // end of render
+} // end of class
+
 
 ReactDOM.render(
-    <ToggleCardView/>,
+    <ToggleCardView />,
     document.getElementById('root')
 );

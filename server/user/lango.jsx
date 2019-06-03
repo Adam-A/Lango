@@ -147,7 +147,25 @@ class CreateCardMain extends React.Component {
 
   } // end of class
 
+class ReviewCardMain extends React.Component {
+    render() {
+        return (
+            <p>test: just loaded ReviewCardMain</p>
+
+        );
+    } // end of render
+} // end of class
+
+function ToggleCardView(props) {
+    if (true) {
+        return <CreateCardMain/>;
+    }
+    else {
+        return <ReviewCardMain/>;
+    }
+}
+
 ReactDOM.render(
-    <CreateCardMain/>,
+    <ToggleCardView/>,
     document.getElementById('root')
 );

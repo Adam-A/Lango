@@ -205,4 +205,36 @@ var CreateCardMain = function (_React$Component) {
     return CreateCardMain;
 }(React.Component); // end of class
 
-ReactDOM.render(React.createElement(CreateCardMain, null), document.getElementById('root'));
+var ReviewCardMain = function (_React$Component2) {
+    _inherits(ReviewCardMain, _React$Component2);
+
+    function ReviewCardMain() {
+        _classCallCheck(this, ReviewCardMain);
+
+        return _possibleConstructorReturn(this, (ReviewCardMain.__proto__ || Object.getPrototypeOf(ReviewCardMain)).apply(this, arguments));
+    }
+
+    _createClass(ReviewCardMain, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "p",
+                null,
+                "test: just loaded ReviewCardMain"
+            );
+        } // end of render
+
+    }]);
+
+    return ReviewCardMain;
+}(React.Component); // end of class
+
+function ToggleCardView(props) {
+    if (true) {
+        return React.createElement(CreateCardMain, null);
+    } else {
+        return React.createElement(ReviewCardMain, null);
+    }
+}
+
+ReactDOM.render(React.createElement(ToggleCardView, null), document.getElementById('root'));

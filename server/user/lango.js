@@ -47,6 +47,20 @@ function Txt(props) {
     );
 }
 
+function TxtReview(props) {
+    if (props.phrase == undefined) {
+        return React.createElement(
+            "p",
+            null,
+            "Text missing"
+        );
+    } else return React.createElement(
+        "p",
+        { className: "translatedTextReview" },
+        props.phrase
+    );
+}
+
 function StartReviewButton() {
     return React.createElement(
         "button",
@@ -252,7 +266,7 @@ var ReviewCardMain = function (_React$Component2) {
                     { className: "header" },
                     React.createElement(
                         "button",
-                        { className: "startReviewButton", onClick: function onClick() {
+                        { className: "addButton", onClick: function onClick() {
                                 return handleStartReviewClick();
                             } },
                         "Add"
@@ -272,13 +286,13 @@ var ReviewCardMain = function (_React$Component2) {
                         React.createElement(
                             ReviewCard,
                             null,
-                            React.createElement(Txt, { phrase: this.state.opinion }),
+                            React.createElement(TxtReview, { phrase: this.state.opinion }),
                             React.createElement("img", { className: "flipImage", src: "assets/noun_Refresh_2310283.svg" })
                         ),
                         React.createElement(
                             InputCard,
                             null,
-                            React.createElement("textarea", { className: "inputEng", id: "inputEng", placeholder: "English" }),
+                            React.createElement("textarea", { className: "inputEngReview", id: "inputEng", placeholder: "English" }),
                             " "
                         )
                     ),

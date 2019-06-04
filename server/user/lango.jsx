@@ -28,6 +28,13 @@ function Txt(props) {
 }
 
 
+function TxtReview(props) {
+    if (props.phrase == undefined) {
+       return <p>Text missing</p>;
+   } else return <p className="translatedTextReview">{props.phrase}</p>;
+}
+
+
 
 function StartReviewButton() {
     return (
@@ -182,7 +189,7 @@ class ReviewCardMain extends React.Component {
                 <main className = "main">
           
           <div className = "header">
-          <button className = "startReviewButton" onClick = {() => handleStartReviewClick()}>Add</button>
+          <button className = "addButton" onClick = {() => handleStartReviewClick()}>Add</button>
               <h1 className = "headerText">Lango!</h1>
           </div>
           <div className = "middleReview">
@@ -191,12 +198,12 @@ class ReviewCardMain extends React.Component {
   
               <ReviewCard>
 
-                  <Txt phrase={this.state.opinion}/>
+                  <TxtReview phrase={this.state.opinion}/>
                   <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
               </ReviewCard>
 
               <InputCard>
-                  <textarea className = "inputEng" id="inputEng" placeholder = "English" /> {/*onKeyPress={this.checkReturn} */}
+                  <textarea className = "inputEngReview" id="inputEng" placeholder = "English" /> {/*onKeyPress={this.checkReturn} */}
               </InputCard>
               </div>
   

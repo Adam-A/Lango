@@ -123,11 +123,16 @@ function storeQueryHandler(req, res, next) {
 }
 
 function requestUsernameHandler(req, res, next) {
-    let userData = {
-        id : req.user.id,
-        username : req.user.username
-    };
-    res.json(userData)
+    db.all ( `SELECT * FROM flashcards WHERE id = "${req.user.id}"`, dataCallback);
+    function dataCallback( err, data ) {
+	if (err) {
+	    res.json({id : req.user.id, username : req.user.username, cards : []});
+	    return console.log(err.message);
+
+	}
+
+	res.json({id : req.user.id, username : req.user.username, cards : data});
+    }
 }
 
 function dumpDB() {

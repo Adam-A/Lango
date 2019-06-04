@@ -207,8 +207,8 @@ class ReviewCardMain extends React.Component {
               </InputCard>
               </div>
   
-              <div className="saveContainerReview">
-              <button className = "saveButtonReview" >Next</button>
+              <div className="nextContainerReview">
+              <button className = "nextButtonReview" onClick = {this.nextCard} >Next</button>
               </div>
           </div>
   
@@ -221,6 +221,10 @@ class ReviewCardMain extends React.Component {
 
         );
     } // end of render
+
+    nextCard() {
+        //next card work goes here
+    }
 } // end of class
 
 class ToggleCardView extends React.Component {

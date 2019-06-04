@@ -8,7 +8,7 @@ body {
     
     .header {
         margin-top: 5%;
-        height: 7vh;
+        height: 6vh;
         display: flex;
         flex-direction: row;
         margin-bottom: 5%;
@@ -140,7 +140,7 @@ body {
     .addButton {
         margin-left: 7vw;
         width: 21%;
-        font-size: 1em;
+        font-size: 1.2em;
         border-radius: 0.6em;
         background-color: #606B9B;
         color: white;
@@ -201,14 +201,15 @@ body {
 
     }
 
-    .saveContainerReview {
+    .nextContainerReview {
         margin-top: 3%;
-        margin-left: 40%;
+    
+       margin-right: 10vw;
         margin-bottom: 5%;
     }
 
 
-    .saveButtonReview {
+    .nextButtonReview {
         
         border-radius: 10px;
         float: right;
@@ -218,7 +219,7 @@ body {
         color: white;
         margin-top: 10%;
         margin-left: 30vw;
-        padding: .5em 1.5em;
+        padding: 3vw 3vh;
         text-align: center;
         font-size: 1.2em;
     }
@@ -277,12 +278,12 @@ body {
 
 
     .header {
-        margin-top: 3%;
+        margin-top: 5%;
         
         height: 6vh;
         display: flex;
         flex-direction: row;
-        margin-bottom: 30%;
+        margin-bottom: 25%;
 
     }
 
@@ -450,8 +451,8 @@ body {
     
         .cardContainerReview {
       
-            margin-left: 5%;
-            width: 90vw;
+            margin-left: 10%;
+            width: 80vw;
             height: 50vh;
             display: flex;
             flex-direction: column;
@@ -469,13 +470,13 @@ body {
     
         }
 
-        .saveContainerReview {
+        .nextContainerReview {
         
-            margin-left: 75vw;
+            margin-left: 65vw;
     
         }
 
-        .saveButtonReview {
+        .nextButtonReview {
         
             border-radius: 10px;
             background-color: #74C6AB; /* Green */
@@ -483,7 +484,7 @@ body {
             color: white;
             padding: 15px 55px;
             text-align: center;
-            font-size: 16px;
+            font-size: 1.2em;
     
     
         }
@@ -527,7 +528,7 @@ body {
             
             margin-right:17vw;
             margin-left: 7vw;
-            width: 10%;
+            width: 15%;
             font-size: 1.2em;
             border-radius: 0.6em;
             background-color: #606B9B;
@@ -725,7 +726,7 @@ body {
         justify-content: space-between;
     }
 
-    .saveContainerReview {
+    .nextContainerReview {
         margin-top: 3%;
         margin-bottom: 3%;
     }
@@ -751,7 +752,7 @@ body {
 
     }
 
-    .saveButtonReview {
+    .nextButtonReview {
         margin-left: 68%;
         border-radius: 10px;
         background-color: #74C6AB; /* Green */

@@ -298,10 +298,10 @@ var ReviewCardMain = function (_React$Component2) {
                     ),
                     React.createElement(
                         "div",
-                        { className: "saveContainerReview" },
+                        { className: "nextContainerReview" },
                         React.createElement(
                             "button",
-                            { className: "saveButtonReview" },
+                            { className: "nextButtonReview", onClick: this.nextCard },
                             "Next"
                         )
                     )
@@ -318,6 +318,11 @@ var ReviewCardMain = function (_React$Component2) {
             );
         } // end of render
 
+    }, {
+        key: "nextCard",
+        value: function nextCard() {
+            //next card work goes here
+        }
     }]);
 
     return ReviewCardMain;

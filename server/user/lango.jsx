@@ -1,24 +1,6 @@
 'use strict';
 // An element to go into the DOM
 
-
-function getCookie() {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      console.log(c)
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
 function Card(props) {
     return <div className="textCard">
     	   {props.children}
@@ -63,7 +45,6 @@ function StartReviewButton() {
 class CreateCardMain extends React.Component {
 
   constructor(props) {
-      getCookie()
       super(props);
       this.sourceText = "";
       this.targetText = "";
@@ -192,7 +173,6 @@ class ReviewCardMain extends React.Component {
 
 
   constructor(props) {
-    getCookie()
     super(props);
     this.sourceText = "";
     this.targetText = "";
@@ -243,7 +223,7 @@ class ReviewCardMain extends React.Component {
     } // end of render
 
     nextCard() {
-        
+        console.log(document.cookie)
         //next card work goes here
     }
 } // end of class
@@ -278,8 +258,6 @@ class ToggleCardView extends React.Component {
         }
 
         return (
-
-            
             currentView
         );
     } // end of render

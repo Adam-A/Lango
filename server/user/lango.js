@@ -397,7 +397,7 @@ function makeDataAjaxRequest(url) {
         console.log(object);
         //the returned JSON text on the page.
         if (object.username && object.id) {
-
+            this.setState({ opinion: object.cards[0] });
             displayUsernameFooter(object.username);
         } else {
             //error

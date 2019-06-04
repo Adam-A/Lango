@@ -122,6 +122,14 @@ function storeQueryHandler(req, res, next) {
 
 }
 
+function requestUsernameHandler(req, res, next) {
+    let userData = {
+        id : req.user.id,
+        username : req.user.username
+    };
+    res.json(userData)
+}
+
 function dumpDB() {
     db.all ( 'SELECT * FROM profiles', dataCallback);
     db.all ( 'SELECT * FROM flashcards', dataCallback);
@@ -283,7 +291,8 @@ app.get('/', initialHandler);
 
 // query handlers.
 app.get('/user/translate', translateQueryHandler );   // if not, is it a valid query?
-app.get('/user/store', storeQueryHandler ); 
+app.get('/user/store', storeQueryHandler );
+app.get('/user/request', requestUsernameHandler );
 
 app.use( fileNotFound );            // otherwise not found
 app.listen(port, function () { console.log('Listening on port ' + port); } );

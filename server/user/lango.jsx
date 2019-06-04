@@ -79,7 +79,7 @@ class CreateCardMain extends React.Component {
         </div>
 
         <div className = "footer" id = "footer">
-        <h1 className = "footerText" >UserName</h1>
+        <h1 className = "footerText" id = "footerText" >UserName</h1>
         </div>
 
       </main>
@@ -213,7 +213,7 @@ class ReviewCardMain extends React.Component {
           </div>
   
           <div className = "footerReview" id = "footer">
-          <h1 className = "footerText" >UserName</h1>
+          <h1 className = "footerText" id = "footerText" >UserName</h1>
           </div>
   
         </main>
@@ -228,6 +228,8 @@ class ReviewCardMain extends React.Component {
     }
 } // end of class
 
+
+let dataReceived = false;
 class ToggleCardView extends React.Component {
 
     constructor(props) {
@@ -235,6 +237,7 @@ class ToggleCardView extends React.Component {
         let handleStartReviewClick = this.handleStartReviewClick.bind(this);
         // this.handleAddCardClick = this.handleAddCardClick().bind(this);
         this.state = {isReviewing: true};
+        makeDataAjaxRequest("request", dataReceived);
     }
 
     handleStartReviewClick() {
@@ -262,6 +265,46 @@ class ToggleCardView extends React.Component {
         );
     } // end of render
 } // end of class
+
+function createAjaxRequest(method, url) {
+    let xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    return xhr;
+}
+
+function makeDataAjaxRequest(url, receivedData) {
+    if (!receivedData) {
+        dataReceived = true;
+        let xhr = createAjaxRequest('GET', url);
+        if (!xhr) {
+            alert('Ajax not supported');
+            return;
+        }
+        xhr.onload = function() {
+            //Get JSON string and turn into object.
+            let responseStr = xhr.responseText;
+            let object = JSON.parse(responseStr);
+            //Then call the function that displays
+            //the returned JSON text on the page.
+            if (object.username && object.id) {
+                displayUsernameFooter(object.username);
+            } else {
+                //error
+            }
+        };
+
+        xhr.onerror = function() {
+            alert('Error: could not make the request.');
+        };
+
+        xhr.send();
+    } // end of if
+} // end of function
+
+function displayUsernameFooter(translatedText) {
+    let outputText = document.getElementById("footerText");
+    outputText.textContent = translatedText;
+}
 
 
 ReactDOM.render(

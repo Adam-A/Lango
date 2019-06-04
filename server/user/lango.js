@@ -140,7 +140,7 @@ var CreateCardMain = function (_React$Component) {
                     { className: "footer", id: "footer" },
                     React.createElement(
                         "h1",
-                        { className: "footerText" },
+                        { className: "footerText", id: "footerText" },
                         "UserName"
                     )
                 )
@@ -311,7 +311,7 @@ var ReviewCardMain = function (_React$Component2) {
                     { className: "footerReview", id: "footer" },
                     React.createElement(
                         "h1",
-                        { className: "footerText" },
+                        { className: "footerText", id: "footerText" },
                         "UserName"
                     )
                 )
@@ -329,6 +329,9 @@ var ReviewCardMain = function (_React$Component2) {
     return ReviewCardMain;
 }(React.Component); // end of class
 
+
+var dataReceived = false;
+
 var ToggleCardView = function (_React$Component3) {
     _inherits(ToggleCardView, _React$Component3);
 
@@ -340,6 +343,7 @@ var ToggleCardView = function (_React$Component3) {
         var handleStartReviewClick = _this3.handleStartReviewClick.bind(_this3);
         // this.handleAddCardClick = this.handleAddCardClick().bind(this);
         _this3.state = { isReviewing: true };
+        makeDataAjaxRequest("request", dataReceived);
         return _this3;
     }
 
@@ -374,5 +378,44 @@ var ToggleCardView = function (_React$Component3) {
     return ToggleCardView;
 }(React.Component); // end of class
 
+function createAjaxRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    return xhr;
+}
+
+function makeDataAjaxRequest(url, receivedData) {
+    if (!receivedData) {
+        dataReceived = true;
+        var xhr = createAjaxRequest('GET', url);
+        if (!xhr) {
+            alert('Ajax not supported');
+            return;
+        }
+        xhr.onload = function () {
+            //Get JSON string and turn into object.
+            var responseStr = xhr.responseText;
+            var object = JSON.parse(responseStr);
+            //Then call the function that displays
+            //the returned JSON text on the page.
+            if (object.username && object.id) {
+                displayUsernameFooter(object.username);
+            } else {
+                //error
+            }
+        };
+
+        xhr.onerror = function () {
+            alert('Error: could not make the request.');
+        };
+
+        xhr.send();
+    } // end of if
+} // end of function
+
+function displayUsernameFooter(translatedText) {
+    var outputText = document.getElementById("footerText");
+    outputText.textContent = translatedText;
+}
 
 ReactDOM.render(React.createElement(ToggleCardView, null), document.getElementById('root'));

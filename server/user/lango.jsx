@@ -285,8 +285,10 @@ function makeDataAjaxRequest(url) {
             let responseStr = xhr.responseText;
             let object = JSON.parse(responseStr);
             //Then call the function that displays
+            console.log(object);
             //the returned JSON text on the page.
             if (object.username && object.id) {
+                
                 displayUsernameFooter(object.username);
             } else {
                 //error

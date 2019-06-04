@@ -5,8 +5,21 @@ function Card(props) {
     return <div className="textCard">
     	   {props.children}
 	</div>;
-	}
-	
+    }
+    
+
+function ReviewCard(props) {
+        return <div className="textCardReview">
+               {props.children}
+        </div>;
+        }
+    
+function InputCard(props) {
+        return <div className="inputCardReview">
+                {props.children}
+            </div>;
+        }
+        
 
 function Txt(props) {
 	 if (props.phrase == undefined) {
@@ -150,12 +163,54 @@ class CreateCardMain extends React.Component {
   } // end of class
 
 class ReviewCardMain extends React.Component {
+
+
+  constructor(props) {
+    super(props);
+    this.sourceText = "";
+    this.targetText = "";
+    this.state = { opinion: "Korean"}
+    //this.checkReturn = this.checkReturn.bind(this);
+    //this.saveCard = this.saveCard.bind(this);
+    }
+
     render() {
         let handleStartReviewClick = this.props.handleStartReviewClick;
         return (
-            <div>
-                <button onClick = {() => handleStartReviewClick()}>Did it work?</button>
-            </div>
+            
+        
+                <main className = "main">
+          
+          <div className = "header">
+          <button className = "startReviewButton" onClick = {() => handleStartReviewClick()}>Add</button>
+              <h1 className = "headerText">Lango!</h1>
+          </div>
+          <div className = "middleReview">
+              <div className="cardContainerReview">
+             
+  
+              <ReviewCard>
+
+                  <Txt phrase={this.state.opinion}/>
+                  <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
+              </ReviewCard>
+
+              <InputCard>
+                  <textarea className = "inputEng" id="inputEng" placeholder = "English" /> {/*onKeyPress={this.checkReturn} */}
+              </InputCard>
+              </div>
+  
+              <div className="saveContainerReview">
+              <button className = "saveButtonReview" >Next</button>
+              </div>
+          </div>
+  
+          <div className = "footerReview" id = "footer">
+          <h1 className = "footerText" >UserName</h1>
+          </div>
+  
+        </main>
+      
 
         );
     } // end of render

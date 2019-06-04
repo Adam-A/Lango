@@ -17,6 +17,22 @@ function Card(props) {
     );
 }
 
+function ReviewCard(props) {
+    return React.createElement(
+        "div",
+        { className: "textCardReview" },
+        props.children
+    );
+}
+
+function InputCard(props) {
+    return React.createElement(
+        "div",
+        { className: "inputCardReview" },
+        props.children
+    );
+}
+
 function Txt(props) {
     if (props.phrase == undefined) {
         return React.createElement(
@@ -211,10 +227,17 @@ var CreateCardMain = function (_React$Component) {
 var ReviewCardMain = function (_React$Component2) {
     _inherits(ReviewCardMain, _React$Component2);
 
-    function ReviewCardMain() {
+    function ReviewCardMain(props) {
         _classCallCheck(this, ReviewCardMain);
 
-        return _possibleConstructorReturn(this, (ReviewCardMain.__proto__ || Object.getPrototypeOf(ReviewCardMain)).apply(this, arguments));
+        var _this2 = _possibleConstructorReturn(this, (ReviewCardMain.__proto__ || Object.getPrototypeOf(ReviewCardMain)).call(this, props));
+
+        _this2.sourceText = "";
+        _this2.targetText = "";
+        _this2.state = { opinion: "Korean"
+            //this.checkReturn = this.checkReturn.bind(this);
+            //this.saveCard = this.saveCard.bind(this);
+        };return _this2;
     }
 
     _createClass(ReviewCardMain, [{
@@ -222,14 +245,61 @@ var ReviewCardMain = function (_React$Component2) {
         value: function render() {
             var handleStartReviewClick = this.props.handleStartReviewClick;
             return React.createElement(
-                "div",
-                null,
+                "main",
+                { className: "main" },
                 React.createElement(
-                    "button",
-                    { onClick: function onClick() {
-                            return handleStartReviewClick();
-                        } },
-                    "Did it work?"
+                    "div",
+                    { className: "header" },
+                    React.createElement(
+                        "button",
+                        { className: "startReviewButton", onClick: function onClick() {
+                                return handleStartReviewClick();
+                            } },
+                        "Add"
+                    ),
+                    React.createElement(
+                        "h1",
+                        { className: "headerText" },
+                        "Lango!"
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "middleReview" },
+                    React.createElement(
+                        "div",
+                        { className: "cardContainerReview" },
+                        React.createElement(
+                            ReviewCard,
+                            null,
+                            React.createElement(Txt, { phrase: this.state.opinion }),
+                            React.createElement("img", { className: "flipImage", src: "assets/noun_Refresh_2310283.svg" })
+                        ),
+                        React.createElement(
+                            InputCard,
+                            null,
+                            React.createElement("textarea", { className: "inputEng", id: "inputEng", placeholder: "English" }),
+                            " "
+                        )
+                    ),
+                    React.createElement(
+                        "div",
+                        { className: "saveContainerReview" },
+                        React.createElement(
+                            "button",
+                            { className: "saveButtonReview" },
+                            "Next"
+                        )
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "footerReview", id: "footer" },
+                    React.createElement(
+                        "h1",
+                        { className: "footerText" },
+                        "UserName"
+                    )
                 )
             );
         } // end of render

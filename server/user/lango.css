@@ -23,6 +23,9 @@ body {
     }
 
     .main {
+
+
+       
         width: 100vw;
         height: 100vh;
         font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
@@ -121,9 +124,117 @@ body {
         font-size: 1.2em;
         color: white;
     }
+
+        /*ReviewCardMain CSS starts here*/
+
+    .middleReview {
+        margin-top: 20%;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+    }
+
+
+    .textCardReview {
+        position: relative;
+        margin-bottom: 2%;
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: 30px;
+        background-color: #ffffff;
+        border-style: solid;
+        border-width: 2px;
+        border-color: gray;
+        height: 80vh;
+
+        color: gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 10%;
+    }
+
+
+    .inputCardReview {
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: 30px;
+        background-color: #ffffff;
+        border-style: solid;
+        border-width: 2px;
+        border-color: gray;
+        height: 40vh;
+        color: gray;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+    }
+    
+
+    .cardContainerReview {
+
+        width: 100vw;
+        height: 45vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .inputContainerReview {
+        border-width: 2px;
+        border-color: gray;
+        text-align: left;
+        display: flex;
+        justify-content: left;
+
+    }
+
+    .saveContainerReview {
+        margin-top: 3%;
+        margin-left: 40%;
+        margin-bottom: 5%;
+    }
+
+
+    .saveButtonReview {
+        
+        border-radius: 10px;
+        float: right;
+        word-wrap: break-word;
+        background-color: #74C6AB; 
+        border: none;
+        color: white;
+        margin-top: 10%;
+        margin-left: 30vw;
+        padding: .5em 1.5em;
+        text-align: center;
+        font-size: 1.2em;
+    }
+    .flipImage {
+        position: absolute;
+        height: 10vh;
+        width: 10vw;
+        top: -10px;
+        right: 5px;
+    }
+
+    .footerReview {
+        width: 100vw;
+        font-size: 15px;
+        padding-top: 1.25vh;
+        padding-bottom: 1.25vh;
+        background: #5F6C99;
+        display: flex;
+        justify-content: center;
+        color: white;
+    }
 }
 
 @media (min-width: 481px) and (max-width: 790px) {
+
+   
     .main {
         height: 100vh;
         width: 100vw;
@@ -208,9 +319,11 @@ body {
 
     .saveContainer {
         margin-left: 77%;
-      
+   
 
     }
+
+    
 
     .saveButton {
         border-radius: 10px;
@@ -245,6 +358,111 @@ body {
         justify-content: center;
         color: white;
     }
+
+        /*ReviewCardMain CSS starts here*/
+
+        .middleReview {
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+    
+        }
+    
+        .textCardReview {
+            margin-bottom: 5%;
+            position: relative;
+            font-size: 30px;
+            background-color: #ffffff;
+            border-style: solid;
+            border-width: 2px;
+            border-color: gray;
+            height: 40vh;
+            color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 20%;
+        }
+
+        .flipImage {
+      
+            position: absolute;
+            height: 10vh;
+            width: 10vw;
+            top: -10px;
+            right: 5px;
+        }
+    
+    
+        .inputCardReview {
+         
+            margin-bottom: 5%;
+            font-size: 30px;
+            background-color: #ffffff;
+            border-style: solid;
+            border-width: 2px;
+            border-color: gray;
+            height: 20vh;
+            color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .cardContainerReview {
+      
+            margin-left: 5%;
+            width: 90vw;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    
+        .inputContainerReview {
+    
+            border-width: 2px;
+            border-color: gray;
+            width: 10vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+    
+        }
+
+        .saveContainerReview {
+        
+            margin-left: 75vw;
+    
+        }
+
+        .saveButtonReview {
+        
+            border-radius: 10px;
+            background-color: #74C6AB; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 55px;
+            text-align: center;
+            font-size: 16px;
+    
+    
+        }
+    
+    
+        .footerReview {
+            width: 100vw;
+            height: 3vh;
+            font-size: 25px;
+            padding-top: 1vh;
+            padding-bottom: 1vh;
+            margin-top: 20%;
+            background: #5F6C99;
+            display: flex;
+            justify-content: center;
+            color: white;
+        }
 
 
 
@@ -374,6 +592,108 @@ body {
     }
 
     /*ReviewCardMain CSS starts here*/
+
+    .middleReview {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+    }
+
+    .textCardReview {
+        position: relative;
+        margin-bottom: 2%;
+        margin-left: 30%;
+        font-size: 30px;
+        background-color: #ffffff;
+        border-style: solid;
+        border-width: 2px;
+        border-color: gray;
+        height: 40vh;
+        color: gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 20%;
+    }
+
+    .flipImage {
+      
+        position: absolute;
+        height: 10vh;
+        width: 10vw;
+        top: -0vh;
+        right: -1.5vw;
+    }
+
+    .inputCardReview {
+     
+        margin-left: 30%;
+        font-size: 30px;
+        background-color: #ffffff;
+        border-style: solid;
+        border-width: 2px;
+        border-color: gray;
+        height: 40vh;
+        color: gray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cardContainerReview {
+  
+        margin-left: 1vw;
+        margin-right: 1vw;
+        width: 75vw;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .saveContainerReview {
+        margin-top: 3%;
+        margin-left: 68%;
+        margin-bottom: 3%;
+    }
+
+    .footerReview {
+        font-size: 25px;
+        padding-top: 2%;
+        padding-bottom: 2%;
+        background: #5F6C99;
+        display: flex;
+        justify-content: center;
+        color: white;
+        width: 100vw; 
+    }
+
+    .inputContainerReview {
+  
+        border-width: 2px;
+        border-color: gray;
+        width: 10vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+    }
+
+    .saveButtonReview {
+        
+        border-radius: 10px;
+        background-color: #74C6AB; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 55px;
+        text-align: center;
+        font-size: 16px;
+
+
+    }
+
 
 
 }

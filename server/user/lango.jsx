@@ -229,18 +229,18 @@ class ReviewCardMain extends React.Component {
 } // end of class
 
 
-let dataReceived = false;
 class ToggleCardView extends React.Component {
 
     constructor(props) {
         super(props);
-        let handleStartReviewClick = this.handleStartReviewClick.bind(this);
+        makeDataAjaxRequest("request");
         // this.handleAddCardClick = this.handleAddCardClick().bind(this);
         this.state = {isReviewing: true};
-        makeDataAjaxRequest("request", dataReceived);
+        
     }
 
     handleStartReviewClick() {
+
         this.setState({isReviewing: !this.state.isReviewing});
     }
 /*
@@ -272,9 +272,7 @@ function createAjaxRequest(method, url) {
     return xhr;
 }
 
-function makeDataAjaxRequest(url, receivedData) {
-    if (!receivedData) {
-        dataReceived = true;
+function makeDataAjaxRequest(url) {
         let xhr = createAjaxRequest('GET', url);
         if (!xhr) {
             alert('Ajax not supported');
@@ -298,7 +296,7 @@ function makeDataAjaxRequest(url, receivedData) {
         };
 
         xhr.send();
-    } // end of if
+
 } // end of function
 
 function displayUsernameFooter(translatedText) {

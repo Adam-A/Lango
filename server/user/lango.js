@@ -330,8 +330,6 @@ var ReviewCardMain = function (_React$Component2) {
 }(React.Component); // end of class
 
 
-var dataReceived = false;
-
 var ToggleCardView = function (_React$Component3) {
     _inherits(ToggleCardView, _React$Component3);
 
@@ -340,16 +338,17 @@ var ToggleCardView = function (_React$Component3) {
 
         var _this3 = _possibleConstructorReturn(this, (ToggleCardView.__proto__ || Object.getPrototypeOf(ToggleCardView)).call(this, props));
 
-        var handleStartReviewClick = _this3.handleStartReviewClick.bind(_this3);
+        makeDataAjaxRequest("request");
         // this.handleAddCardClick = this.handleAddCardClick().bind(this);
         _this3.state = { isReviewing: true };
-        makeDataAjaxRequest("request", dataReceived);
+
         return _this3;
     }
 
     _createClass(ToggleCardView, [{
         key: "handleStartReviewClick",
         value: function handleStartReviewClick() {
+
             this.setState({ isReviewing: !this.state.isReviewing });
         }
         /*
@@ -384,33 +383,30 @@ function createAjaxRequest(method, url) {
     return xhr;
 }
 
-function makeDataAjaxRequest(url, receivedData) {
-    if (!receivedData) {
-        dataReceived = true;
-        var xhr = createAjaxRequest('GET', url);
-        if (!xhr) {
-            alert('Ajax not supported');
-            return;
+function makeDataAjaxRequest(url) {
+    var xhr = createAjaxRequest('GET', url);
+    if (!xhr) {
+        alert('Ajax not supported');
+        return;
+    }
+    xhr.onload = function () {
+        //Get JSON string and turn into object.
+        var responseStr = xhr.responseText;
+        var object = JSON.parse(responseStr);
+        //Then call the function that displays
+        //the returned JSON text on the page.
+        if (object.username && object.id) {
+            displayUsernameFooter(object.username);
+        } else {
+            //error
         }
-        xhr.onload = function () {
-            //Get JSON string and turn into object.
-            var responseStr = xhr.responseText;
-            var object = JSON.parse(responseStr);
-            //Then call the function that displays
-            //the returned JSON text on the page.
-            if (object.username && object.id) {
-                displayUsernameFooter(object.username);
-            } else {
-                //error
-            }
-        };
+    };
 
-        xhr.onerror = function () {
-            alert('Error: could not make the request.');
-        };
+    xhr.onerror = function () {
+        alert('Error: could not make the request.');
+    };
 
-        xhr.send();
-    } // end of if
+    xhr.send();
 } // end of function
 
 function displayUsernameFooter(translatedText) {

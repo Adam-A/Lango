@@ -233,14 +233,14 @@ class ToggleCardView extends React.Component {
 
     constructor(props) {
         super(props);
-        makeDataAjaxRequest("request");
+    
         // this.handleAddCardClick = this.handleAddCardClick().bind(this);
         this.state = {isReviewing: true};
         
     }
 
     handleStartReviewClick() {
-
+     
         this.setState({isReviewing: !this.state.isReviewing});
     }
 /*
@@ -250,6 +250,7 @@ class ToggleCardView extends React.Component {
 */
 
     render() {
+        makeDataAjaxRequest("request");
         let handleStartReviewClick = this.handleStartReviewClick;
         const isReviewing = this.state.isReviewing;
         let currentView;
@@ -261,6 +262,7 @@ class ToggleCardView extends React.Component {
         }
 
         return (
+            
             currentView
         );
     } // end of render

@@ -336,10 +336,9 @@ var ToggleCardView = function (_React$Component3) {
     function ToggleCardView(props) {
         _classCallCheck(this, ToggleCardView);
 
+        // this.handleAddCardClick = this.handleAddCardClick().bind(this);
         var _this3 = _possibleConstructorReturn(this, (ToggleCardView.__proto__ || Object.getPrototypeOf(ToggleCardView)).call(this, props));
 
-        makeDataAjaxRequest("request");
-        // this.handleAddCardClick = this.handleAddCardClick().bind(this);
         _this3.state = { isReviewing: true };
 
         return _this3;
@@ -360,6 +359,7 @@ var ToggleCardView = function (_React$Component3) {
     }, {
         key: "render",
         value: function render() {
+            makeDataAjaxRequest("request");
             var handleStartReviewClick = this.handleStartReviewClick;
             var isReviewing = this.state.isReviewing;
             var currentView = void 0;

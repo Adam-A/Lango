@@ -154,7 +154,7 @@ var CreateCardMain = function (_React$Component) {
         key: "saveCard",
         value: function saveCard() {
             if (this.sourceText && this.targetText) {
-                var url = "store?source=" + this.sourceText + "&target=" + this.targetText;
+                var url = "store?source=" + this.sourceText.toLowerCase() + "&target=" + this.targetText;
                 this.makeStoreAjaxRequest(url);
             } else {
                 document.getElementById("inputEng").placeholder = "Can't store empty inputs!";
@@ -167,7 +167,7 @@ var CreateCardMain = function (_React$Component) {
             if (event.charCode == 13) {
                 this.sourceText = document.getElementById("inputEng").value;
                 document.getElementById("inputEng").value = '';
-                var url = "translate?source=" + this.sourceText;
+                var url = "translate?source=" + this.sourceText.toLowerCase();
                 this.makeTranslationAjaxRequest(url);
             }
         }

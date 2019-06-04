@@ -223,7 +223,7 @@ class ReviewCardMain extends React.Component {
     } // end of render
 
     nextCard() {
-        console.log(document.cookie)
+
         //next card work goes here
     }
 } // end of class

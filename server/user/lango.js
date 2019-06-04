@@ -321,7 +321,7 @@ var ReviewCardMain = function (_React$Component2) {
     }, {
         key: "nextCard",
         value: function nextCard() {
-            console.log(document.cookie);
+
             //next card work goes here
         }
     }]);

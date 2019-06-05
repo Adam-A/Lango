@@ -343,7 +343,7 @@ var ToggleCardView = function (_React$Component3) {
 
         _this3.state = {
             isReviewing: true,
-            cardList: []
+            cardList: [{ target: "test" }]
         };
 
         return _this3;
@@ -368,14 +368,14 @@ var ToggleCardView = function (_React$Component3) {
             var handleStartReviewClick = this.handleStartReviewClick;
             var isReviewing = this.state.isReviewing;
             var currentView = void 0;
-            var props = {
-                cardList: this.cardList,
+            var objectInfo = {
+                cards: this.cardList,
                 handleStartReviewClick: handleStartReviewClick.bind(this)
             };
             if (isReviewing) {
-                currentView = React.createElement(ReviewCardMain, { props: props });
+                currentView = React.createElement(ReviewCardMain, { objectInfo: objectInfo });
             } else {
-                currentView = React.createElement(CreateCardMain, { props: props });
+                currentView = React.createElement(CreateCardMain, { objectInfo: objectInfo });
             }
 
             return currentView;

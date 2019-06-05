@@ -239,7 +239,7 @@ class ToggleCardView extends React.Component {
         // this.handleAddCardClick = this.handleAddCardClick().bind(this);
         this.state = {
             isReviewing: true,
-            cardList: []
+            cardList: [{target: "test"}]
         };
         
     }
@@ -259,15 +259,15 @@ class ToggleCardView extends React.Component {
         let handleStartReviewClick = this.handleStartReviewClick;
         const isReviewing = this.state.isReviewing;
         let currentView;
-        let props = {
-            cardList : this.cardList,
+        let objectInfo = {
+            cards : this.cardList,
             handleStartReviewClick : handleStartReviewClick.bind(this)
         };
         if (isReviewing) {
-            currentView = <ReviewCardMain props = {props} />;
+            currentView = <ReviewCardMain objectInfo = {objectInfo} />;
         }
         else {
-            currentView = <CreateCardMain props = {props} />;
+            currentView = <CreateCardMain objectInfo = {objectInfo} />;
         }
 
         return (

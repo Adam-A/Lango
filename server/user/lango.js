@@ -367,7 +367,7 @@ var ToggleCardView = function (_React$Component3) {
         value: function render() {
             makeDataAjaxRequest("request");
 
-            return this.getState(currentView);
+            return currentView;
         } // end of render
 
     }]);

@@ -259,8 +259,7 @@ class ToggleCardView extends React.Component {
         makeDataAjaxRequest("request");
 
         return (
-            
-            this.getState(currentView)
+            currentView
         );
     } // end of render
 } // end of class

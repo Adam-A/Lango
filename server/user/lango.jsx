@@ -183,6 +183,7 @@ class ReviewCardMain extends React.Component {
 
     render() {
         let handleStartReviewClick = this.props.handleStartReviewClick;
+        this.setState = ({opinion: this.props.cardList[0].target});
         return (
             
         
@@ -235,7 +236,10 @@ class ToggleCardView extends React.Component {
         super(props);
     
         // this.handleAddCardClick = this.handleAddCardClick().bind(this);
-        this.state = {isReviewing: true};
+        this.state = {
+            isReviewing: true,
+            cardList: []
+        };
         
     }
 
@@ -254,11 +258,15 @@ class ToggleCardView extends React.Component {
         let handleStartReviewClick = this.handleStartReviewClick;
         const isReviewing = this.state.isReviewing;
         let currentView;
+        let props = {
+            cardList : this.cardList,
+            handleStartReviewClick : handleStartReviewClick.bind(this)
+        };
         if (isReviewing) {
-            currentView = <ReviewCardMain handleStartReviewClick = {handleStartReviewClick.bind(this)}/>;
+            currentView = <ReviewCardMain props = {props} />;
         }
         else {
-            currentView = <CreateCardMain handleStartReviewClick = {handleStartReviewClick.bind(this)} />;
+            currentView = <CreateCardMain props = {props} />;
         }
 
         return (
@@ -288,7 +296,7 @@ function makeDataAjaxRequest(url) {
             console.log(object);
             //the returned JSON text on the page.
             if (object.username && object.id) {
-                this.setState({opinion: object.cards[0]});
+                this.setState({cardList: object.cards});
                 displayUsernameFooter(object.username);
             } else {
                 //error

@@ -258,6 +258,7 @@ var ReviewCardMain = function (_React$Component2) {
         key: "render",
         value: function render() {
             var handleStartReviewClick = this.props.handleStartReviewClick;
+            this.setState = { opinion: this.props.cardList[0].target };
             return React.createElement(
                 "main",
                 { className: "main" },
@@ -339,7 +340,10 @@ var ToggleCardView = function (_React$Component3) {
         // this.handleAddCardClick = this.handleAddCardClick().bind(this);
         var _this3 = _possibleConstructorReturn(this, (ToggleCardView.__proto__ || Object.getPrototypeOf(ToggleCardView)).call(this, props));
 
-        _this3.state = { isReviewing: true };
+        _this3.state = {
+            isReviewing: true,
+            cardList: []
+        };
 
         return _this3;
     }
@@ -363,10 +367,14 @@ var ToggleCardView = function (_React$Component3) {
             var handleStartReviewClick = this.handleStartReviewClick;
             var isReviewing = this.state.isReviewing;
             var currentView = void 0;
+            var props = {
+                cardList: this.cardList,
+                handleStartReviewClick: handleStartReviewClick.bind(this)
+            };
             if (isReviewing) {
-                currentView = React.createElement(ReviewCardMain, { handleStartReviewClick: handleStartReviewClick.bind(this) });
+                currentView = React.createElement(ReviewCardMain, { props: props });
             } else {
-                currentView = React.createElement(CreateCardMain, { handleStartReviewClick: handleStartReviewClick.bind(this) });
+                currentView = React.createElement(CreateCardMain, { props: props });
             }
 
             return currentView;
@@ -397,7 +405,7 @@ function makeDataAjaxRequest(url) {
         console.log(object);
         //the returned JSON text on the page.
         if (object.username && object.id) {
-            this.setState({ opinion: object.cards[0] });
+            this.setState({ cardList: object.cards });
             displayUsernameFooter(object.username);
         } else {
             //error

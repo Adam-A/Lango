@@ -257,10 +257,6 @@ class ToggleCardView extends React.Component {
 
     render() {
         makeDataAjaxRequest("request");
-
-        return (
-            this.currentView
-        );
     } // end of render
 } // end of class
 
@@ -295,6 +291,7 @@ function makeDataAjaxRequest(url) {
                     cards : this.cardList,
                     handleStartReviewClick : handleStartReviewClick.bind(this)
                 };
+
                 if (isReviewing) {
                     console.log("Inside togglecardview: testing for objectInfo: ", objectInfo.cards);
                     this.setState({currentView :  <ReviewCardMain objectInfo = {objectInfo} />});
@@ -302,6 +299,10 @@ function makeDataAjaxRequest(url) {
                 else {
                     this.setState({currentView : <CreateCardMain objectInfo = {objectInfo} />});
                 }
+
+                return (
+                    this.currentView
+                );
 
             } else {
                 //error

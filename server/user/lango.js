@@ -88,7 +88,7 @@ var CreateCardMain = function (_React$Component) {
     _createClass(CreateCardMain, [{
         key: "render",
         value: function render() {
-            var handleStartReviewClick = this.props.handleStartReviewClick;
+            var handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
             return React.createElement(
                 "main",
                 { className: "main" },
@@ -145,7 +145,7 @@ var CreateCardMain = function (_React$Component) {
                     )
                 )
             );
-        } // end of render function 
+        } // end of render function
 
         // onKeyPress function for the textarea element
         // When the charCode is 13, the user has hit the return key
@@ -248,7 +248,9 @@ var ReviewCardMain = function (_React$Component2) {
 
         _this2.sourceText = "";
         _this2.targetText = "";
-        _this2.state = { opinion: "Korean"
+        _this2.state = {
+            opinion: _this2.props.objectInfo.cards[_this2.state.cardIndex].target,
+            cardIndex: 0
             //this.checkReturn = this.checkReturn.bind(this);
             //this.saveCard = this.saveCard.bind(this);
         };return _this2;
@@ -257,9 +259,8 @@ var ReviewCardMain = function (_React$Component2) {
     _createClass(ReviewCardMain, [{
         key: "render",
         value: function render() {
-            var handleStartReviewClick = this.props.handleStartReviewClick;
-            console.log("Testing props: ", this.props);
-            this.setState({ opinion: this.props.cards[0].target });
+            var handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
+            console.log("Testing props: ", this.props.objectInfo.cards[0].target);
             return React.createElement(
                 "main",
                 { className: "main" },
@@ -332,6 +333,8 @@ var ReviewCardMain = function (_React$Component2) {
 }(React.Component); // end of class
 
 
+var latestCard = false;
+
 var ToggleCardView = function (_React$Component3) {
     _inherits(ToggleCardView, _React$Component3);
 
@@ -343,8 +346,8 @@ var ToggleCardView = function (_React$Component3) {
 
         _this3.state = {
             isReviewing: true,
-            currentView: React.createElement(CreateCardMain, null),
-            cardList: [{ target: "test" }]
+            cardList: null
+            // cardList: [{target: "You should not be seeing this!"}]
         };
 
         return _this3;
@@ -353,21 +356,85 @@ var ToggleCardView = function (_React$Component3) {
     _createClass(ToggleCardView, [{
         key: "handleStartReviewClick",
         value: function handleStartReviewClick() {
-
             this.setState({ isReviewing: !this.state.isReviewing });
         }
+    }, {
+        key: "createAjaxRequestToggle",
+        value: function createAjaxRequestToggle(method, url) {
+            var xhr = new XMLHttpRequest();
+            xhr.open(method, url, true);
+            return xhr;
+        }
+    }, {
+        key: "makeDataAjaxRequestToggle",
+        value: function makeDataAjaxRequestToggle(url) {
+            var xhr = this.createAjaxRequestToggle('GET', url);
+            if (!xhr) {
+                alert('Ajax not supported');
+                return;
+            }
+            xhr.onload = function () {
+                //Get JSON string and turn into object.
+                var responseStr = xhr.responseText;
+                var object = JSON.parse(responseStr);
+                //Then call the function that displays
+                console.log(object);
+                //the returned JSON text on the page.
+                if (object.username && object.id) {
+                    console.log("Is cardList undefined? Let's see: ", object.cards);
+                    if (!latestCard) {
+                        latestCard = true;
+                        this.setState({ cardList: object.cards });
+                    }
+                    displayUsernameFooter(object.username);
+                } else {
+                    //error
+                }
+            }.bind(this);
+
+            xhr.onerror = function () {
+                alert('Error: could not make the request.');
+            };
+
+            xhr.send();
+        } // end of function
+
         /*
             handleAddCardClick() {
                 this.setState({isReviewing: false});
             }
         */
 
+        // When the AJAX request for user data finishes,
+        // this will run and update the cardList state.
+
     }, {
         key: "render",
         value: function render() {
-            makeDataAjaxRequest("request");
+            var handleStartReviewClick = this.handleStartReviewClick;
+            var isReviewing = this.state.isReviewing;
+            var currentView = void 0;
+            var objectInfo = {
+                cards: this.state.cardList,
+                handleStartReviewClick: handleStartReviewClick.bind(this)
+            };
 
-            return this.currentView;
+            if (this.state.cardList) {
+                if (isReviewing) {
+                    console.log("Inside togglecardview: testing for objectInfo: ", objectInfo.cards);
+                    currentView = React.createElement(ReviewCardMain, { objectInfo: objectInfo });
+                } else {
+                    currentView = React.createElement(CreateCardMain, { objectInfo: objectInfo });
+                }
+                return currentView;
+            } else {
+                this.makeDataAjaxRequestToggle("request");
+                return React.createElement(
+                    "p",
+                    null,
+                    "Waiting..."
+                );
+            }
         } // end of render
 
     }]);
@@ -391,27 +458,16 @@ function makeDataAjaxRequest(url) {
         //Get JSON string and turn into object.
         var responseStr = xhr.responseText;
         var object = JSON.parse(responseStr);
+        // latestCard = object.cards;
         //Then call the function that displays
-        console.log(object);
         //the returned JSON text on the page.
         if (object.username && object.id) {
-            console.log("Is cardList undefined? Let's see: ", object.cards);
-            this.setState({ cardList: object.cards });
-            displayUsernameFooter(object.username);
-
-            var handleStartReviewClick = this.handleStartReviewClick;
-            var isReviewing = this.state.isReviewing;
-            var currentView = void 0;
-            var objectInfo = {
-                cards: this.cardList,
-                handleStartReviewClick: handleStartReviewClick.bind(this)
-            };
-            if (isReviewing) {
-                console.log("Inside togglecardview: testing for objectInfo: ", objectInfo.cards);
-                this.setState({ currentView: React.createElement(ReviewCardMain, { objectInfo: objectInfo }) });
-            } else {
-                this.setState({ currentView: React.createElement(CreateCardMain, { objectInfo: objectInfo }) });
-            }
+            console.log("Let's see if cardList is undef: ", object.cards);
+            // this.setState({cardList: object.cards});
+            displayUsernameFooter(object.username, function () {
+                // this.setState({cardList: object.cards});
+                console.log("Last line of ajax callback");
+            });
         } else {
             //error
         }

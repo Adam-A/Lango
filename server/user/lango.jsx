@@ -184,7 +184,7 @@ class ReviewCardMain extends React.Component {
     render() {
         let handleStartReviewClick = this.props.handleStartReviewClick;
         console.log("Testing props: ", this.props);
-        this.setState({opinion: this.props.cardList[0].target});
+        this.setState({opinion: this.props.cards[0].target});
         return (
             
         
@@ -264,6 +264,7 @@ class ToggleCardView extends React.Component {
             handleStartReviewClick : handleStartReviewClick.bind(this)
         };
         if (isReviewing) {
+            console.log("Inside togglecardview: testing for objectInfo: ", objectInfo.cards);
             currentView = <ReviewCardMain objectInfo = {objectInfo} />;
         }
         else {

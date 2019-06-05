@@ -259,7 +259,7 @@ var ReviewCardMain = function (_React$Component2) {
         value: function render() {
             var handleStartReviewClick = this.props.handleStartReviewClick;
             console.log("Testing props: ", this.props);
-            this.setState({ opinion: this.props.cardList[0].target });
+            this.setState({ opinion: this.props.cards[0].target });
             return React.createElement(
                 "main",
                 { className: "main" },
@@ -373,6 +373,7 @@ var ToggleCardView = function (_React$Component3) {
                 handleStartReviewClick: handleStartReviewClick.bind(this)
             };
             if (isReviewing) {
+                console.log("Inside togglecardview: testing for objectInfo: ", objectInfo.cards);
                 currentView = React.createElement(ReviewCardMain, { objectInfo: objectInfo });
             } else {
                 currentView = React.createElement(CreateCardMain, { objectInfo: objectInfo });

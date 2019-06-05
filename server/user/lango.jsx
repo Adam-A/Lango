@@ -182,8 +182,8 @@ class ReviewCardMain extends React.Component {
     }
 
     render() {
-        let handleStartReviewClick = this.props.handleStartReviewClick;
-        this.setState = ({opinion: this.props.cardList[0].target});
+        let handleStartReviewClick = this.props.props.handleStartReviewClick;
+        this.setState = ({opinion: this.props.props.cardList[0].target});
         return (
             
         

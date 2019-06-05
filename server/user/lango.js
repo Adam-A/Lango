@@ -257,8 +257,8 @@ var ReviewCardMain = function (_React$Component2) {
     _createClass(ReviewCardMain, [{
         key: "render",
         value: function render() {
-            var handleStartReviewClick = this.props.handleStartReviewClick;
-            this.setState = { opinion: this.props.cardList[0].target };
+            var handleStartReviewClick = this.props.props.handleStartReviewClick;
+            this.setState = { opinion: this.props.props.cardList[0].target };
             return React.createElement(
                 "main",
                 { className: "main" },

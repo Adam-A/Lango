@@ -406,6 +406,7 @@ function makeDataAjaxRequest(url) {
         console.log(object);
         //the returned JSON text on the page.
         if (object.username && object.id) {
+            console.log("Is cardList undefined? Let's see: ", object.cards);
             this.setState({ cardList: object.cards });
             displayUsernameFooter(object.username);
         } else {

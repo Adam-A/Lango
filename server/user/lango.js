@@ -343,7 +343,7 @@ var ToggleCardView = function (_React$Component3) {
 
         _this3.state = {
             isReviewing: true,
-            currentView: null,
+            currentView: React.createElement(CreateCardMain, null),
             cardList: [{ target: "test" }]
         };
 
@@ -366,6 +366,8 @@ var ToggleCardView = function (_React$Component3) {
         key: "render",
         value: function render() {
             makeDataAjaxRequest("request");
+
+            return this.currentView;
         } // end of render
 
     }]);
@@ -404,15 +406,12 @@ function makeDataAjaxRequest(url) {
                 cards: this.cardList,
                 handleStartReviewClick: handleStartReviewClick.bind(this)
             };
-
             if (isReviewing) {
                 console.log("Inside togglecardview: testing for objectInfo: ", objectInfo.cards);
                 this.setState({ currentView: React.createElement(ReviewCardMain, { objectInfo: objectInfo }) });
             } else {
                 this.setState({ currentView: React.createElement(CreateCardMain, { objectInfo: objectInfo }) });
             }
-
-            return this.currentView;
         } else {
             //error
         }

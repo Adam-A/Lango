@@ -343,6 +343,7 @@ var ToggleCardView = function (_React$Component3) {
 
         _this3.state = {
             isReviewing: true,
+            currentView: null,
             cardList: [{ target: "test" }]
         };
 
@@ -365,21 +366,8 @@ var ToggleCardView = function (_React$Component3) {
         key: "render",
         value: function render() {
             makeDataAjaxRequest("request");
-            var handleStartReviewClick = this.handleStartReviewClick;
-            var isReviewing = this.state.isReviewing;
-            var currentView = void 0;
-            var objectInfo = {
-                cards: this.cardList,
-                handleStartReviewClick: handleStartReviewClick.bind(this)
-            };
-            if (isReviewing) {
-                console.log("Inside togglecardview: testing for objectInfo: ", objectInfo.cards);
-                currentView = React.createElement(ReviewCardMain, { objectInfo: objectInfo });
-            } else {
-                currentView = React.createElement(CreateCardMain, { objectInfo: objectInfo });
-            }
 
-            return currentView;
+            return this.getState(currentView);
         } // end of render
 
     }]);
@@ -410,6 +398,20 @@ function makeDataAjaxRequest(url) {
             console.log("Is cardList undefined? Let's see: ", object.cards);
             this.setState({ cardList: object.cards });
             displayUsernameFooter(object.username);
+
+            var handleStartReviewClick = this.handleStartReviewClick;
+            var isReviewing = this.state.isReviewing;
+            var _currentView = void 0;
+            var objectInfo = {
+                cards: this.cardList,
+                handleStartReviewClick: handleStartReviewClick.bind(this)
+            };
+            if (isReviewing) {
+                console.log("Inside togglecardview: testing for objectInfo: ", objectInfo.cards);
+                this.setState({ currentView: React.createElement(ReviewCardMain, { objectInfo: objectInfo }) });
+            } else {
+                this.setState({ currentView: React.createElement(CreateCardMain, { objectInfo: objectInfo }) });
+            }
         } else {
             //error
         }

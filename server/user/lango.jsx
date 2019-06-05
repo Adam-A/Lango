@@ -239,6 +239,7 @@ class ToggleCardView extends React.Component {
         // this.handleAddCardClick = this.handleAddCardClick().bind(this);
         this.state = {
             isReviewing: true,
+            currentView: null,
             cardList: [{target: "test"}]
         };
         
@@ -256,24 +257,10 @@ class ToggleCardView extends React.Component {
 
     render() {
         makeDataAjaxRequest("request");
-        let handleStartReviewClick = this.handleStartReviewClick;
-        const isReviewing = this.state.isReviewing;
-        let currentView;
-        let objectInfo = {
-            cards : this.cardList,
-            handleStartReviewClick : handleStartReviewClick.bind(this)
-        };
-        if (isReviewing) {
-            console.log("Inside togglecardview: testing for objectInfo: ", objectInfo.cards);
-            currentView = <ReviewCardMain objectInfo = {objectInfo} />;
-        }
-        else {
-            currentView = <CreateCardMain objectInfo = {objectInfo} />;
-        }
 
         return (
             
-            currentView
+            this.getState(currentView)
         );
     } // end of render
 } // end of class
@@ -301,6 +288,22 @@ function makeDataAjaxRequest(url) {
                 console.log("Is cardList undefined? Let's see: ", object.cards);
                 this.setState({cardList: object.cards});
                 displayUsernameFooter(object.username);
+
+                let handleStartReviewClick = this.handleStartReviewClick;
+                const isReviewing = this.state.isReviewing;
+                let currentView;
+                let objectInfo = {
+                    cards : this.cardList,
+                    handleStartReviewClick : handleStartReviewClick.bind(this)
+                };
+                if (isReviewing) {
+                    console.log("Inside togglecardview: testing for objectInfo: ", objectInfo.cards);
+                    this.setState({currentView :  <ReviewCardMain objectInfo = {objectInfo} />});
+                }
+                else {
+                    this.setState({currentView : <CreateCardMain objectInfo = {objectInfo} />});
+                }
+
             } else {
                 //error
             }

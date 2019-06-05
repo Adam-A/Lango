@@ -367,7 +367,7 @@ var ToggleCardView = function (_React$Component3) {
         value: function render() {
             makeDataAjaxRequest("request");
 
-            return currentView;
+            return this.currentView;
         } // end of render
 
     }]);
@@ -401,7 +401,7 @@ function makeDataAjaxRequest(url) {
 
             var handleStartReviewClick = this.handleStartReviewClick;
             var isReviewing = this.state.isReviewing;
-            var _currentView = void 0;
+            var currentView = void 0;
             var objectInfo = {
                 cards: this.cardList,
                 handleStartReviewClick: handleStartReviewClick.bind(this)

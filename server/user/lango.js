@@ -257,9 +257,9 @@ var ReviewCardMain = function (_React$Component2) {
     _createClass(ReviewCardMain, [{
         key: "render",
         value: function render() {
-            var handleStartReviewClick = this.props.props.handleStartReviewClick;
+            var handleStartReviewClick = this.props.handleStartReviewClick;
             console.log("Testing props: ", this.props);
-            this.setState({ opinion: this.props.props.cardList[0].target });
+            this.setState({ opinion: this.props.cardList[0].target });
             return React.createElement(
                 "main",
                 { className: "main" },
@@ -411,7 +411,7 @@ function makeDataAjaxRequest(url) {
         } else {
             //error
         }
-    };
+    }.bind(this);
 
     xhr.onerror = function () {
         alert('Error: could not make the request.');

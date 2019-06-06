@@ -326,6 +326,9 @@ var ReviewCardMain = function (_React$Component2) {
     }, {
         key: "render",
         value: function render() {
+            document.querySelector('.card').addEventListener('click', function () {
+                card.classList.toggle('is-flipped');
+            });
             var handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
 
             if (this.props.objectInfo.cards[0]) {
@@ -357,10 +360,22 @@ var ReviewCardMain = function (_React$Component2) {
                         "div",
                         { className: "cardContainerReview" },
                         React.createElement(
-                            ReviewCard,
-                            null,
-                            React.createElement(TxtReview, { phrase: this.state.opinion }),
-                            React.createElement("img", { className: "flipImage", src: "assets/noun_Refresh_2310283.svg" })
+                            "div",
+                            { "class": "scene scene--card" },
+                            React.createElement(
+                                "div",
+                                { "class": "card" },
+                                React.createElement(
+                                    "div",
+                                    { "class": "card__face card__face--front" },
+                                    "front"
+                                ),
+                                React.createElement(
+                                    "div",
+                                    { "class": "card__face card__face--back" },
+                                    "back"
+                                )
+                            )
                         ),
                         React.createElement(
                             InputCard,

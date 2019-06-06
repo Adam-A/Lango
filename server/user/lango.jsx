@@ -202,6 +202,9 @@ class ReviewCardMain extends React.Component {
   }
 
     render() {
+        document.querySelector('.card').addEventListener( 'click', function() {
+          card.classList.toggle('is-flipped');
+        });
         let handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
 
         if (this.props.objectInfo.cards[0]) {
@@ -220,11 +223,12 @@ class ReviewCardMain extends React.Component {
               <div className="cardContainerReview">
 
 
-              <ReviewCard>
-
-                  <TxtReview phrase={this.state.opinion}/>
-                  <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
-              </ReviewCard>
+              <div class="scene scene--card">
+                <div class="card">
+                    <div class="card__face card__face--front">front</div>
+                <div class="card__face card__face--back">back</div>
+                     </div>
+                </div>
 
               <InputCard>
                   <textarea className = "inputEngReview" id="inputEngReview" placeholder = "English" onKeyPress={this.checkCorrect}/>

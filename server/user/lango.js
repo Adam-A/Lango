@@ -144,7 +144,6 @@ var ReviewCard = function (_React$Component3) {
             return React.createElement(
                 'div',
                 { className: 'textCardReview' },
-                React.createElement('img', { className: 'flipImage', src: 'assets/noun_Refresh_2310283.svg' }),
                 React.createElement(
                     'div',
                     { className: 'card-body', id: 'cardBody', onKeyPress: this.flip, onClick: this.flip },

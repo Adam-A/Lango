@@ -227,12 +227,12 @@ class ReviewCardMain extends React.Component {
           <div className = "middleReview">
               <div className="cardContainerReview">
 
-
+              
               <div class="scene scene--card">
-                <ReviewCard class="card">
+                <div class="card">
                     <div class="card__face card__face--front">front</div>
                 <div class="card__face card__face--back">back</div>
-                     </ReviewCard>
+                     </div>
                 </div>
 
               <InputCard>

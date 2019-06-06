@@ -365,7 +365,7 @@ class ReviewCardMain extends React.Component {
 
                     wrongAnswer.classList.add('wrongAnswerHidden');
                     wrongAnswer.classList.remove('wrongAnswer');
-
+                  
                     card.classList.toggle('card-body-is-flipped');
                     image.classList.toggle('flipImageIsFlipped');
                     //got it correct, increment db

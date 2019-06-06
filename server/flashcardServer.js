@@ -3,8 +3,7 @@
 // Boilerplate server setup.
 const express = require('express');
 const http = require('http');
-//51490
-const port = 56514;
+const port = 51490;
 
 // Login/authentication setup.
 const passport = require('passport');

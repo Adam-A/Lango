@@ -147,7 +147,7 @@ var ReviewCard = function (_React$Component3) {
                 React.createElement('img', { className: 'flipImage', src: 'assets/noun_Refresh_2310283.svg' }),
                 React.createElement(
                     'div',
-                    { className: 'card-body', id: 'cardBody', onClick: this.flip },
+                    { className: 'card-body', id: 'cardBody', onKeyPress: this.flip, onClick: this.flip },
                     React.createElement(CardBack, { text: answer }),
                     React.createElement(CardFront, { text: this.props.phrase.translated })
                 )

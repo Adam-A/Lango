@@ -688,6 +688,10 @@ body {
         justify-content: center;
         align-items: center;
         padding-bottom: 20%;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+        cursor: pointer;
+        position: relative;
     }
 
     .flipImage {

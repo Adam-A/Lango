@@ -326,7 +326,9 @@ var ReviewCardMain = function (_React$Component2) {
     }, {
         key: "render",
         value: function render() {
-            document.querySelector('.card').addEventListener('click', function () {
+            var card = document.querySelector('.card');
+
+            card.addEventListener('click', function () {
                 card.classList.toggle('is-flipped');
             });
             var handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;

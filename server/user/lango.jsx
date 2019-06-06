@@ -202,7 +202,9 @@ class ReviewCardMain extends React.Component {
   }
 
     render() {
-        document.querySelector('.card').addEventListener( 'click', function() {
+        let card = document.querySelector('.card')
+        
+        card.addEventListener( 'click', function() {
           card.classList.toggle('is-flipped');
         });
         let handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;

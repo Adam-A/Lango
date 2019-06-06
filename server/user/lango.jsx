@@ -16,7 +16,7 @@ function ReviewCard(props) {
 
 
 function ReviewCardFlippable(props) {
-            return <div className="textCardReview">
+            return <div className=".card">
                    {props.children}
             </div>;
             }
@@ -201,7 +201,7 @@ class ReviewCardMain extends React.Component {
       // Call this only when virtual DOM has loaded the footerText id
       // with the textContent. Otherwise the below function tries assigning
       // the username retreived from database to a null value and breaks everything.
-      let card = document.querySelector('.textCardReview');
+      let card = document.querySelector('.card');
       card.addEventListener( 'click', function() {
         card.classList.toggle('is-flipped');
       });
@@ -232,15 +232,14 @@ class ReviewCardMain extends React.Component {
               <div className="cardContainerReview">
 
 
-              <div className="scene scene--textCardReview">
+              <div className="scene scene--card">
                 <ReviewCardFlippable>
                     <div className="card__face card__face--front">front</div>
                 <div className="card__face card__face--back">back</div>
                      </ReviewCardFlippable>
                 </div>
 
-              
-
+          
               <InputCard>
                   <textarea className = "inputEngReview" id="inputEngReview" placeholder = "English" onKeyPress={this.checkCorrect}/>
               </InputCard>

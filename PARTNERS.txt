@@ -1,3 +1,6 @@
 Adam Ali - 912316756
 Cameron Lee - 912940818
 
+To login, please head to http://server162.site:51490/login.html
+
+Our server .js file is "flashcardServer.js"

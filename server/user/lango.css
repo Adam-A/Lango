@@ -688,10 +688,6 @@ body {
         justify-content: center;
         align-items: center;
         padding-bottom: 20%;
-        transition: transform 1s;
-        transform-style: preserve-3d;
-        cursor: pointer;
-        position: relative;
     }
 
     .flipImage {
@@ -807,7 +803,14 @@ body {
         perspective: 600px;
       }
       
-   
+      .card {
+        width: 100%;
+        height: 100%;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+        cursor: pointer;
+        position: relative;
+      }
       
       .card.is-flipped {
         transform: rotateY(180deg);

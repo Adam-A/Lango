@@ -363,18 +363,18 @@ var ReviewCardMain = function (_React$Component2) {
                         { className: "cardContainerReview" },
                         React.createElement(
                             "div",
-                            { "class": "scene scene--card" },
+                            { className: "scene scene--card" },
                             React.createElement(
                                 "div",
-                                { "class": "card" },
+                                { className: "card" },
                                 React.createElement(
                                     "div",
-                                    { "class": "card__face card__face--front" },
+                                    { className: "card__face card__face--front" },
                                     "front"
                                 ),
                                 React.createElement(
                                     "div",
-                                    { "class": "card__face card__face--back" },
+                                    { className: "card__face card__face--back" },
                                     "back"
                                 )
                             )

@@ -367,13 +367,11 @@ var ReviewCardMain = function (_React$Component2) {
                             { "class": "scene scene--card" },
                             React.createElement(
                                 ReviewCard,
-                                null,
+                                { "class": "card" },
                                 React.createElement(
                                     "div",
                                     { "class": "card__face card__face--front" },
-                                    "front",
-                                    React.createElement(TxtReview, { phrase: this.state.opinion }),
-                                    React.createElement("img", { className: "flipImage", src: "assets/noun_Refresh_2310283.svg" })
+                                    "front"
                                 ),
                                 React.createElement(
                                     "div",

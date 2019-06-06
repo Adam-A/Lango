@@ -366,12 +366,14 @@ var ReviewCardMain = function (_React$Component2) {
                             "div",
                             { "class": "scene scene--card" },
                             React.createElement(
-                                "div",
-                                { "class": "card" },
+                                ReviewCard,
+                                null,
                                 React.createElement(
                                     "div",
                                     { "class": "card__face card__face--front" },
-                                    "front"
+                                    "front",
+                                    React.createElement(TxtReview, { phrase: this.state.opinion }),
+                                    React.createElement("img", { className: "flipImage", src: "assets/noun_Refresh_2310283.svg" })
                                 ),
                                 React.createElement(
                                     "div",
@@ -379,12 +381,6 @@ var ReviewCardMain = function (_React$Component2) {
                                     "back"
                                 )
                             )
-                        ),
-                        React.createElement(
-                            ReviewCard,
-                            null,
-                            React.createElement(TxtReview, { phrase: this.state.opinion }),
-                            React.createElement("img", { className: "flipImage", src: "assets/noun_Refresh_2310283.svg" })
                         ),
                         React.createElement(
                             InputCard,

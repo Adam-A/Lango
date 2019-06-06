@@ -227,16 +227,21 @@ class ReviewCardMain extends React.Component {
 
 
               <div class="scene scene--card">
-                <div class="card">
-                    <div class="card__face card__face--front">front</div>
-                <div class="card__face card__face--back">back</div>
-                     </div>
-                </div>
-
               <ReviewCard>
+              <div class="card__face card__face--front">front
                   <TxtReview phrase={this.state.opinion}/>
                   <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
-              </ReviewCard>
+
+                  </div>
+
+                  <div class="card__face card__face--back">back</div>
+                 </ReviewCard>
+                   
+                
+           
+                </div>
+
+           
 
               <InputCard>
                   <textarea className = "inputEngReview" id="inputEngReview" placeholder = "English" onKeyPress={this.checkCorrect}/>

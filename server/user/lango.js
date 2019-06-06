@@ -86,6 +86,14 @@ var CreateCardMain = function (_React$Component) {
     }
 
     _createClass(CreateCardMain, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            // Call this only when virtual DOM has loaded the footerText id
+            // with the textContent. Otherwise the below function tries assigning
+            // the username retreived from database to a null value and breaks everything.
+            displayUsernameFooter(this.props.objectInfo.username);
+        }
+    }, {
         key: "render",
         value: function render() {
             var handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
@@ -249,7 +257,7 @@ var ReviewCardMain = function (_React$Component2) {
         _this2.sourceText = "";
         _this2.targetText = "";
         _this2.state = {
-            opinion: _this2.props.objectInfo.cards[_this2.state.cardIndex].target,
+            opinion: _this2.props.objectInfo.cards[0].target,
             cardIndex: 0
             //this.checkReturn = this.checkReturn.bind(this);
             //this.saveCard = this.saveCard.bind(this);
@@ -257,6 +265,14 @@ var ReviewCardMain = function (_React$Component2) {
     }
 
     _createClass(ReviewCardMain, [{
+        key: "componentDidMount",
+        value: function componentDidMount() {
+            // Call this only when virtual DOM has loaded the footerText id
+            // with the textContent. Otherwise the below function tries assigning
+            // the username retreived from database to a null value and breaks everything.
+            displayUsernameFooter(this.props.objectInfo.username);
+        }
+    }, {
         key: "render",
         value: function render() {
             var handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
@@ -346,6 +362,7 @@ var ToggleCardView = function (_React$Component3) {
 
         _this3.state = {
             isReviewing: true,
+            username: "placeholder",
             cardList: null
             // cardList: [{target: "You should not be seeing this!"}]
         };
@@ -384,9 +401,11 @@ var ToggleCardView = function (_React$Component3) {
                     console.log("Is cardList undefined? Let's see: ", object.cards);
                     if (!latestCard) {
                         latestCard = true;
-                        this.setState({ cardList: object.cards });
+                        this.setState({
+                            cardList: object.cards,
+                            username: object.username
+                        });
                     }
-                    displayUsernameFooter(object.username);
                 } else {
                     //error
                 }
@@ -416,12 +435,13 @@ var ToggleCardView = function (_React$Component3) {
             var currentView = void 0;
             var objectInfo = {
                 cards: this.state.cardList,
-                handleStartReviewClick: handleStartReviewClick.bind(this)
+                handleStartReviewClick: handleStartReviewClick.bind(this),
+                username: this.state.username
             };
-
             if (this.state.cardList) {
                 if (isReviewing) {
                     console.log("Inside togglecardview: testing for objectInfo: ", objectInfo.cards);
+                    // displayUsernameFooter(this.state.username);
                     currentView = React.createElement(ReviewCardMain, { objectInfo: objectInfo });
                 } else {
                     currentView = React.createElement(CreateCardMain, { objectInfo: objectInfo });

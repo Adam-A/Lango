@@ -77,7 +77,6 @@ class ReviewCard extends React.Component {
         };
         return (
             <div className='textCardReview'>
-                {/*<p className="translatedTextReview">{this.props.phrase}</p>*/}
                 <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
                 <div className='card-body' id='cardBody' onKeyPress={this.flip} onClick={this.flip}>
                     <CardBack text={answer}/>

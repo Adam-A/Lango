@@ -226,10 +226,10 @@ class ReviewCardMain extends React.Component {
               <div className="cardContainerReview">
 
 
-              <div class="scene scene--card">
-                <div class="card">
-                    <div class="card__face card__face--front">front</div>
-                <div class="card__face card__face--back">back</div>
+              <div className="scene scene--card">
+                <div className="card">
+                    <div className="card__face card__face--front">front</div>
+                <div className="card__face card__face--back">back</div>
                      </div>
                 </div>
 

@@ -11,6 +11,7 @@ class CardFront extends React.Component {
     render(props) {
         return(
             <div className='card-side side-front'>
+               <img className = "flipImage" id = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
                 <p className='translatedTextReview'>{this.props.text}</p>
             </div>
         )
@@ -77,10 +78,10 @@ class ReviewCard extends React.Component {
         };
         return (
             <div className='textCardReview'>
-                <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
+             
                 <div className='card-body' id='cardBody' onKeyPress={this.flip} onClick={this.flip}>
                     <CardBack text={answer}/>
-
+            
                     <CardFront text={this.props.phrase.translated}/>
                 </div>
             </div>

@@ -202,6 +202,10 @@ class ReviewCardMain extends React.Component {
       // with the textContent. Otherwise the below function tries assigning
       // the username retreived from database to a null value and breaks everything.
 
+      let card = document.querySelector('.flippable');
+      card.addEventListener( 'click', function() {
+        card.classList.toggle('is-flipped');
+      });
       displayUsernameFooter(this.props.objectInfo.username);
       this.setState({
           cardIndex: 0,
@@ -212,10 +216,6 @@ class ReviewCardMain extends React.Component {
     render() {
         
 
-        let card = document.querySelector('.flippable');
-        card.addEventListener( 'click', function() {
-          card.classList.toggle('is-flipped');
-        });
         let handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
 
         if (this.props.objectInfo.cards[0]) {

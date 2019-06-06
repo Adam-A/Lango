@@ -11,24 +11,157 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function Card(props) {
     return React.createElement(
-        "div",
-        { className: "textCard" },
+        'div',
+        { className: 'textCard' },
         props.children
     );
 }
 
-function ReviewCard(props) {
-    return React.createElement(
-        "div",
-        { className: "textCardReview" },
-        props.children
-    );
-}
+var CardFront = function (_React$Component) {
+    _inherits(CardFront, _React$Component);
+
+    function CardFront() {
+        _classCallCheck(this, CardFront);
+
+        return _possibleConstructorReturn(this, (CardFront.__proto__ || Object.getPrototypeOf(CardFront)).apply(this, arguments));
+    }
+
+    _createClass(CardFront, [{
+        key: 'render',
+        value: function render(props) {
+            return React.createElement(
+                'div',
+                { className: 'card-side side-front' },
+                React.createElement(
+                    'p',
+                    { className: 'translatedTextReview' },
+                    this.props.text
+                )
+            );
+        }
+    }]);
+
+    return CardFront;
+}(React.Component);
+
+// React component for the back side of the card
+
+
+var rightAnswer = void 0;
+var wrongAnswer = void 0;
+
+var CardBack = function (_React$Component2) {
+    _inherits(CardBack, _React$Component2);
+
+    function CardBack() {
+        _classCallCheck(this, CardBack);
+
+        return _possibleConstructorReturn(this, (CardBack.__proto__ || Object.getPrototypeOf(CardBack)).apply(this, arguments));
+    }
+
+    _createClass(CardBack, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            rightAnswer = document.querySelector('.rightAnswerHidden');
+            wrongAnswer = document.querySelector('.wrongAnswer');
+        }
+    }, {
+        key: 'displayAnswer',
+        value: function displayAnswer(props) {
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'div',
+                    { className: 'rightAnswerHidden' },
+                    React.createElement(
+                        'p',
+                        { className: 'rightAnswerText' },
+                        this.props.text.right
+                    )
+                ),
+                React.createElement(
+                    'p',
+                    { className: 'wrongAnswer' },
+                    this.props.text.wrong
+                )
+            );
+        }
+    }, {
+        key: 'render',
+        value: function render(props) {
+            var displayAnswer = this.displayAnswer();
+            return React.createElement(
+                'div',
+                { className: 'card-side side-back' },
+                displayAnswer
+            );
+        }
+    }]);
+
+    return CardBack;
+}(React.Component);
+
+var card = void 0;
+var image = void 0;
+
+var ReviewCard = function (_React$Component3) {
+    _inherits(ReviewCard, _React$Component3);
+
+    /*        return <div className="textCardReview">
+                   {props.children}
+            </div>;*/
+    function ReviewCard(props) {
+        _classCallCheck(this, ReviewCard);
+
+        var _this3 = _possibleConstructorReturn(this, (ReviewCard.__proto__ || Object.getPrototypeOf(ReviewCard)).call(this, props));
+
+        _this3.flip = function () {
+            console.log("test");
+            if (!card) {
+                console.log('null?');
+            }
+            card.classList.toggle('card-body-is-flipped');
+            image.classList.toggle('flipImageIsFlipped');
+        };
+
+        return _this3;
+    }
+
+    _createClass(ReviewCard, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            card = document.querySelector('.card-body');
+            image = document.querySelector('.flipImage');
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var answer = {
+                right: this.props.phrase.right,
+                wrong: this.props.phrase.wrong
+            };
+            return React.createElement(
+                'div',
+                { className: 'textCardReview' },
+                React.createElement('img', { className: 'flipImage', src: 'assets/noun_Refresh_2310283.svg' }),
+                React.createElement(
+                    'div',
+                    { className: 'card-body', id: 'cardBody', onKeyPress: this.flip, onClick: this.flip },
+                    React.createElement(CardBack, { text: answer }),
+                    React.createElement(CardFront, { text: this.props.phrase.translated })
+                )
+            );
+        }
+    }]);
+
+    return ReviewCard;
+}(React.Component);
 
 function InputCard(props) {
     return React.createElement(
-        "div",
-        { className: "inputCardReview" },
+        'div',
+        { className: 'inputCardReview' },
         props.children
     );
 }
@@ -36,13 +169,13 @@ function InputCard(props) {
 function Txt(props) {
     if (props.phrase == undefined) {
         return React.createElement(
-            "p",
+            'p',
             null,
-            "Text missing"
+            'Text missing'
         );
     } else return React.createElement(
-        "p",
-        { className: "translatedText" },
+        'p',
+        { className: 'translatedText' },
         props.phrase
     );
 }
@@ -50,43 +183,43 @@ function Txt(props) {
 function TxtReview(props) {
     if (props.phrase == undefined) {
         return React.createElement(
-            "p",
+            'p',
             null,
-            "Text missing"
+            'Text missing'
         );
     } else return React.createElement(
-        "p",
-        { className: "translatedTextReview" },
+        'p',
+        { className: 'translatedTextReview' },
         props.phrase
     );
 }
 
 function StartReviewButton() {
     return React.createElement(
-        "button",
+        'button',
         null,
-        "Start Review"
+        'Start Review'
     );
 }
 
-var CreateCardMain = function (_React$Component) {
-    _inherits(CreateCardMain, _React$Component);
+var CreateCardMain = function (_React$Component4) {
+    _inherits(CreateCardMain, _React$Component4);
 
     function CreateCardMain(props) {
         _classCallCheck(this, CreateCardMain);
 
-        var _this = _possibleConstructorReturn(this, (CreateCardMain.__proto__ || Object.getPrototypeOf(CreateCardMain)).call(this, props));
+        var _this4 = _possibleConstructorReturn(this, (CreateCardMain.__proto__ || Object.getPrototypeOf(CreateCardMain)).call(this, props));
 
-        _this.sourceText = "";
-        _this.targetText = "";
-        _this.state = { opinion: "Korean" };
-        _this.checkReturn = _this.checkReturn.bind(_this);
-        _this.saveCard = _this.saveCard.bind(_this);
-        return _this;
+        _this4.sourceText = "";
+        _this4.targetText = "";
+        _this4.state = { opinion: "Korean" };
+        _this4.checkReturn = _this4.checkReturn.bind(_this4);
+        _this4.saveCard = _this4.saveCard.bind(_this4);
+        return _this4;
     }
 
     _createClass(CreateCardMain, [{
-        key: "componentDidMount",
+        key: 'componentDidMount',
         value: function componentDidMount() {
             // Call this only when virtual DOM has loaded the footerText id
             // with the textContent. Otherwise the below function tries assigning
@@ -94,38 +227,38 @@ var CreateCardMain = function (_React$Component) {
             displayUsernameFooter(this.props.objectInfo.username);
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             var handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
             return React.createElement(
-                "main",
-                { className: "main" },
+                'main',
+                { className: 'main' },
                 React.createElement(
-                    "div",
-                    { className: "header" },
+                    'div',
+                    { className: 'header' },
                     React.createElement(
-                        "button",
-                        { className: "startReviewButton", onClick: function onClick() {
+                        'button',
+                        { className: 'startReviewButton', onClick: function onClick() {
                                 return handleStartReviewClick();
                             } },
-                        "Start Review"
+                        'Start Review'
                     ),
                     React.createElement(
-                        "h1",
-                        { className: "headerText" },
-                        "Lango!"
+                        'h1',
+                        { className: 'headerText' },
+                        'Lango!'
                     )
                 ),
                 React.createElement(
-                    "div",
-                    { className: "middle" },
+                    'div',
+                    { className: 'middle' },
                     React.createElement(
-                        "div",
-                        { className: "cardContainer" },
+                        'div',
+                        { className: 'cardContainer' },
                         React.createElement(
                             Card,
                             null,
-                            React.createElement("textarea", { className: "inputEng", id: "inputEng", placeholder: "English", onKeyPress: this.checkReturn })
+                            React.createElement('textarea', { className: 'inputEng', id: 'inputEng', placeholder: 'English', onKeyPress: this.checkReturn })
                         ),
                         React.createElement(
                             Card,
@@ -134,22 +267,22 @@ var CreateCardMain = function (_React$Component) {
                         )
                     ),
                     React.createElement(
-                        "div",
-                        { className: "saveContainer" },
+                        'div',
+                        { className: 'saveContainer' },
                         React.createElement(
-                            "button",
-                            { className: "saveButton", onClick: this.saveCard },
-                            "Save"
+                            'button',
+                            { className: 'saveButton', onClick: this.saveCard },
+                            'Save'
                         )
                     )
                 ),
                 React.createElement(
-                    "div",
-                    { className: "footer", id: "footer" },
+                    'div',
+                    { className: 'footer', id: 'footer' },
                     React.createElement(
-                        "h1",
-                        { className: "footerText", id: "footerText" },
-                        "UserName"
+                        'h1',
+                        { className: 'footerText', id: 'footerText' },
+                        'UserName'
                     )
                 )
             );
@@ -159,10 +292,10 @@ var CreateCardMain = function (_React$Component) {
         // When the charCode is 13, the user has hit the return key
 
     }, {
-        key: "saveCard",
+        key: 'saveCard',
         value: function saveCard() {
             if (this.sourceText && this.targetText) {
-                var url = "store?source=" + this.sourceText.toLowerCase() + "&target=" + this.targetText;
+                var url = 'store?source=' + this.sourceText.toLowerCase() + '&target=' + this.targetText;
                 this.makeStoreAjaxRequest(url);
             } else {
                 document.getElementById("inputEng").placeholder = "Can't store empty inputs!";
@@ -170,7 +303,7 @@ var CreateCardMain = function (_React$Component) {
             }
         }
     }, {
-        key: "checkReturn",
+        key: 'checkReturn',
         value: function checkReturn(event) {
             if (event.charCode == 13) {
                 this.sourceText = document.getElementById("inputEng").value;
@@ -180,14 +313,14 @@ var CreateCardMain = function (_React$Component) {
             }
         }
     }, {
-        key: "createAjaxRequest",
+        key: 'createAjaxRequest',
         value: function createAjaxRequest(method, url) {
             var xhr = new XMLHttpRequest();
             xhr.open(method, url, true);
             return xhr;
         }
     }, {
-        key: "makeTranslationAjaxRequest",
+        key: 'makeTranslationAjaxRequest',
         value: function makeTranslationAjaxRequest(url) {
             var xhr = this.createAjaxRequest('GET', url);
             if (!xhr) {
@@ -216,7 +349,7 @@ var CreateCardMain = function (_React$Component) {
             xhr.send();
         }
     }, {
-        key: "makeStoreAjaxRequest",
+        key: 'makeStoreAjaxRequest',
         value: function makeStoreAjaxRequest(url) {
             var xhr = this.createAjaxRequest('GET', url);
             if (!xhr) {
@@ -246,73 +379,91 @@ var CreateCardMain = function (_React$Component) {
     return CreateCardMain;
 }(React.Component); // end of class
 
-var ReviewCardMain = function (_React$Component2) {
-    _inherits(ReviewCardMain, _React$Component2);
+var ReviewCardMain = function (_React$Component5) {
+    _inherits(ReviewCardMain, _React$Component5);
 
     function ReviewCardMain(props) {
         _classCallCheck(this, ReviewCardMain);
 
-        var _this2 = _possibleConstructorReturn(this, (ReviewCardMain.__proto__ || Object.getPrototypeOf(ReviewCardMain)).call(this, props));
+        var _this5 = _possibleConstructorReturn(this, (ReviewCardMain.__proto__ || Object.getPrototypeOf(ReviewCardMain)).call(this, props));
 
-        _this2.nextCard = function () {
-            if (_this2.props.objectInfo.cards.length == 0) {
+        _this5.nextCard = function () {
+            rightAnswer.classList.add('rightAnswerHidden');
+            rightAnswer.classList.remove('rightAnswer');
+
+            wrongAnswer.classList.add('wrongAnswer');
+            wrongAnswer.classList.remove('wrongAnswerHidden');
+            if (_this5.props.objectInfo.cards.length == 0) {
                 alert("Add cards first before reviewing!");
             } else {
-                if (_this2.state.cardIndex == _this2.props.objectInfo.cards.length - 1) {
-                    _this2.setState({
+                if (_this5.state.cardIndex == _this5.props.objectInfo.cards.length - 1) {
+                    _this5.setState({
                         cardIndex: 0,
-                        opinion: _this2.props.objectInfo.cards[0].target
+                        opinion: _this5.props.objectInfo.cards[0].target
                     });
                 } else {
-                    _this2.setState({
-                        cardIndex: _this2.state.cardIndex + 1,
-                        opinion: _this2.props.objectInfo.cards[_this2.state.cardIndex + 1].target
+                    _this5.setState({
+                        cardIndex: _this5.state.cardIndex + 1,
+                        opinion: _this5.props.objectInfo.cards[_this5.state.cardIndex + 1].target
                     });
                 }
             }
         };
 
-        _this2.checkCorrect = function () {
+        _this5.checkCorrect = function () {
             if (event.charCode == 13) {
                 var currentText = document.getElementById("inputEngReview").value.trim().toLowerCase();
                 document.getElementById("inputEngReview").value = '';
-                if (_this2.props.objectInfo.cards.length == 0) {
+                if (_this5.props.objectInfo.cards.length == 0) {
                     alert("Add cards first before reviewing!");
                 } else {
 
-                    var originalSource = _this2.props.objectInfo.cards[_this2.state.cardIndex].source;
+                    var originalSource = _this5.props.objectInfo.cards[_this5.state.cardIndex].source;
                     if (currentText === originalSource) {
                         console.log("Correct!");
                         console.log("The source text was " + originalSource);
                         console.log("and the input text was " + currentText);
+                        rightAnswer.classList.add('rightAnswer');
+                        rightAnswer.classList.remove('rightAnswerHidden');
+
+                        wrongAnswer.classList.add('wrongAnswerHidden');
+                        wrongAnswer.classList.remove('wrongAnswer');
                         //got it correct, increment db
                     } else {
                         console.log("Wrong!");
                         console.log("The source text was " + originalSource);
                         console.log("and the input text was " + currentText);
+                        rightAnswer.classList.add('rightAnswerHidden');
+                        rightAnswer.classList.remove('rightAnswer');
+
+                        wrongAnswer.classList.add('wrongAnswer');
+                        wrongAnswer.classList.remove('wrongAnswerHidden');
                         //wrong
                     }
                 }
+                // Play the CSS flip animation.
+                card.classList.toggle('card-body-is-flipped');
+                image.classList.toggle('flipImageIsFlipped');
                 // let url = "translate?source=" + this.sourceText.toLowerCase();
                 // this.makeTranslationAjaxRequest(url)
             }
         };
 
-        _this2.sourceText = "";
-        _this2.targetText = "";
-        _this2.state = {
+        _this5.sourceText = "";
+        _this5.targetText = "";
+        _this5.state = {
             cardIndex: 0,
-            opinion: _this2.props.objectInfo.cards[0] ? _this2.props.objectInfo.cards[0].target : "Korean"
+            opinion: _this5.props.objectInfo.cards[0] ? _this5.props.objectInfo.cards[0].target : "Korean"
             //this.checkReturn = this.checkReturn.bind(this);
             //this.saveCard = this.saveCard.bind(this);
-        };return _this2;
+        };return _this5;
     }
 
     // test
 
 
     _createClass(ReviewCardMain, [{
-        key: "componentDidMount",
+        key: 'componentDidMount',
         value: function componentDidMount() {
             // Call this only when virtual DOM has loaded the footerText id
             // with the textContent. Otherwise the below function tries assigning
@@ -324,67 +475,67 @@ var ReviewCardMain = function (_React$Component2) {
             });
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             var handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
+            var answer = {
+                translated: this.state.opinion,
+                right: "CORRECT!",
+                wrong: this.props.objectInfo.cards[this.state.cardIndex].source
+            };
 
             if (this.props.objectInfo.cards[0]) {
                 console.log("Testing props: ", this.props.objectInfo.cards[0].target);
             }
             return React.createElement(
-                "main",
-                { className: "main" },
+                'main',
+                { className: 'main' },
                 React.createElement(
-                    "div",
-                    { className: "header" },
+                    'div',
+                    { className: 'header' },
                     React.createElement(
-                        "button",
-                        { className: "addButton", onClick: function onClick() {
+                        'button',
+                        { className: 'addButton', onClick: function onClick() {
                                 return handleStartReviewClick();
                             } },
-                        "Add"
+                        'Add'
                     ),
                     React.createElement(
-                        "h1",
-                        { className: "headerText" },
-                        "Lango!"
+                        'h1',
+                        { className: 'headerText' },
+                        'Lango!'
                     )
                 ),
                 React.createElement(
-                    "div",
-                    { className: "middleReview" },
+                    'div',
+                    { className: 'middleReview' },
                     React.createElement(
-                        "div",
-                        { className: "cardContainerReview" },
-                        React.createElement(
-                            ReviewCard,
-                            null,
-                            React.createElement(TxtReview, { phrase: this.state.opinion }),
-                            React.createElement("img", { className: "flipImage", src: "assets/noun_Refresh_2310283.svg" })
-                        ),
+                        'div',
+                        { className: 'cardContainerReview' },
+                        React.createElement(ReviewCard, { phrase: answer }),
                         React.createElement(
                             InputCard,
                             null,
-                            React.createElement("textarea", { className: "inputEngReview", id: "inputEngReview", placeholder: "English", onKeyPress: this.checkCorrect })
+                            React.createElement('textarea', { className: 'inputEngReview', id: 'inputEngReview', placeholder: 'English', onKeyPress: this.checkCorrect })
                         )
                     ),
                     React.createElement(
-                        "div",
-                        { className: "nextContainerReview" },
+                        'div',
+                        { className: 'nextContainerReview' },
                         React.createElement(
-                            "button",
-                            { className: "nextButtonReview", onClick: this.nextCard },
-                            "Next"
+                            'button',
+                            { className: 'nextButtonReview', onClick: this.nextCard },
+                            'Next'
                         )
                     )
                 ),
                 React.createElement(
-                    "div",
-                    { className: "footerReview", id: "footer" },
+                    'div',
+                    { className: 'footerReview', id: 'footer' },
                     React.createElement(
-                        "h1",
-                        { className: "footerText", id: "footerText" },
-                        "UserName"
+                        'h1',
+                        { className: 'footerText', id: 'footerText' },
+                        'UserName'
                     )
                 )
             );
@@ -400,27 +551,27 @@ var ReviewCardMain = function (_React$Component2) {
 
 var latestCard = false;
 
-var ToggleCardView = function (_React$Component3) {
-    _inherits(ToggleCardView, _React$Component3);
+var ToggleCardView = function (_React$Component6) {
+    _inherits(ToggleCardView, _React$Component6);
 
     function ToggleCardView(props) {
         _classCallCheck(this, ToggleCardView);
 
         // this.handleAddCardClick = this.handleAddCardClick().bind(this);
-        var _this3 = _possibleConstructorReturn(this, (ToggleCardView.__proto__ || Object.getPrototypeOf(ToggleCardView)).call(this, props));
+        var _this6 = _possibleConstructorReturn(this, (ToggleCardView.__proto__ || Object.getPrototypeOf(ToggleCardView)).call(this, props));
 
-        _this3.state = {
+        _this6.state = {
             isReviewing: true,
             username: "placeholder",
             cardList: null
             // cardList: [{target: "You should not be seeing this!"}]
         };
 
-        return _this3;
+        return _this6;
     }
 
     _createClass(ToggleCardView, [{
-        key: "handleStartReviewClick",
+        key: 'handleStartReviewClick',
         value: function handleStartReviewClick() {
             latestCard = false;
             this.setState({
@@ -430,14 +581,14 @@ var ToggleCardView = function (_React$Component3) {
             });
         }
     }, {
-        key: "createAjaxRequestToggle",
+        key: 'createAjaxRequestToggle',
         value: function createAjaxRequestToggle(method, url) {
             var xhr = new XMLHttpRequest();
             xhr.open(method, url, true);
             return xhr;
         }
     }, {
-        key: "makeDataAjaxRequestToggle",
+        key: 'makeDataAjaxRequestToggle',
         value: function makeDataAjaxRequestToggle(url) {
             var xhr = this.createAjaxRequestToggle('GET', url);
             if (!xhr) {
@@ -484,7 +635,7 @@ var ToggleCardView = function (_React$Component3) {
         // TODO: check if user has 0 cards
 
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             var handleStartReviewClick = this.handleStartReviewClick;
             var isReviewing = this.state.isReviewing;
@@ -507,9 +658,9 @@ var ToggleCardView = function (_React$Component3) {
             } else {
                 this.makeDataAjaxRequestToggle("request");
                 return React.createElement(
-                    "p",
+                    'p',
                     null,
-                    "Waiting..."
+                    'Waiting...'
                 );
             }
         } // end of render

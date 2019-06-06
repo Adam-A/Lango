@@ -164,6 +164,7 @@ body {
         justify-content: center;
         align-items: center;
         padding-bottom: 10%;
+        perspective: 600px;
     }
 
 
@@ -534,10 +535,98 @@ body {
             background-color: #606B9B;
             color: white;
         }
-    
 
 
+    .rightAnswer {
+        word-wrap: break-word;
+        margin-right: 10vw;
+        margin-left: 10vw;
+        margin-bottom: -30%;
+        margin-top: 10vw;
+        padding: 7vh;
 
+        background: #D6FFB2;
+        border-color: #65B81E;
+        border-style: solid;
+        border-width: 2px;
+    }
+
+    .rightAnswerText {
+        text-align: center;
+        color: #51AF00;
+    }
+
+    .rightAnswerHidden {
+        display: none;
+    }
+
+    .wrongAnswer {
+        word-wrap: break-word;
+        margin-right: 10vw;
+        margin-left: 10vw;
+        margin-bottom: -30%;
+
+        text-align: center;
+        padding-top: 18vh;
+    }
+
+    .wrongAnswerHidden {
+        display: none;
+    }
+
+    /* BELOW IS Review card flip*/
+
+    .card-side-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    /*- Card container -*/
+
+
+    /*- Card body -*/
+    .card-body {
+        border-style: solid;
+        border-width: 2px;
+        border-color: gray;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        margin-top: 14.5%;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+        z-index: -1;
+    }
+
+    .card-body-is-flipped {
+        transform: rotateY(180deg);
+    }
+
+    /*- Flipping the card -*/
+
+    .side-front {
+        background: #ffffff;
+    }
+
+    /*- Card sides -*/
+    .card-side {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        backface-visibility: hidden;
+    }
+
+
+    /*- Back side -*/
+    .side-back {
+        background: #ffffff;
+        transform: rotateY( 180deg );
+    }
 }
 
 @media (min-width: 791px) {
@@ -674,29 +763,32 @@ body {
     }
 
     .textCardReview {
-        position: relative;
         margin-bottom: 2%;
         margin-left: 30%;
         font-size: 30px;
         background-color: #ffffff;
-        border-style: solid;
-        border-width: 2px;
-        border-color: gray;
-        height: 40vh;
+
+        height: 200%;
         color: gray;
         display: flex;
         justify-content: center;
         align-items: center;
         padding-bottom: 20%;
+        perspective: 600px;
     }
 
     .flipImage {
-      
         position: absolute;
         height: 10vh;
         width: 10vw;
         top: -0vh;
         right: -1.5vw;
+
+        transition: transform 1s;
+        transform-style: preserve-3d;
+    }
+    .flipImageIsFlipped {
+        transform: rotateY(180deg);
     }
 
 
@@ -772,11 +864,11 @@ body {
         border-radius: 0.6em;
         background-color: #606B9B;
         color: white;
-   
+
     }
 
     .inputEngReview {
-        
+
         word-wrap: break-word;
         font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
         color: black;
@@ -784,7 +876,7 @@ body {
         margin-right:62%;
 
         display: flex;
-        
+
     }
 
     .translatedTextReview {
@@ -792,10 +884,101 @@ body {
         margin-right: 10vw;
         margin-left: 10vw;
         margin-bottom: -30%;
-        
+
+        text-align: center;
+        padding-top: 18vh;
+    }
+
+    .rightAnswer {
+        word-wrap: break-word;
+        margin-right: 10vw;
+        margin-left: 10vw;
+        margin-bottom: -30%;
+        margin-top: 10vw;
+        padding: 7vh;
+
+        background: #D6FFB2;
+        border-color: #65B81E;
+        border-style: solid;
+        border-width: 2px;
+    }
+
+    .rightAnswerText {
+        text-align: center;
+        color: #51AF00;
+    }
+
+    .rightAnswerHidden {
+        display: none;
+    }
+
+    .wrongAnswer {
+        word-wrap: break-word;
+        margin-right: 10vw;
+        margin-left: 10vw;
+        margin-bottom: -30%;
+
+        text-align: center;
+        padding-top: 18vh;
+    }
+
+    .wrongAnswerHidden {
+        display: none;
+    }
+
+    /* BELOW IS Review card flip*/
+
+    .card-side-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    /*- Card container -*/
+
+
+    /*- Card body -*/
+    .card-body {
+        border-style: solid;
+        border-width: 2px;
+        border-color: gray;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        margin-top: 14.5%;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+        z-index: -1;
+    }
+
+    .card-body-is-flipped {
+        transform: rotateY(180deg);
+    }
+
+    /*- Flipping the card -*/
+
+    .side-front {
+        background: #ffffff;
+    }
+
+    /*- Card sides -*/
+    .card-side {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        backface-visibility: hidden;
     }
 
 
+    /*- Back side -*/
+    .side-back {
+        background: #ffffff;
+        transform: rotateY( 180deg );
+    }
 
 }
 

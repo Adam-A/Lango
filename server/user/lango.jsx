@@ -5,20 +5,96 @@ function Card(props) {
     return <div className="textCard">
     	   {props.children}
 	</div>;
+}
+
+class CardFront extends React.Component {
+    render(props) {
+        return(
+            <div className='card-side side-front'>
+                <p className='translatedTextReview'>{this.props.text}</p>
+            </div>
+        )
+    }
+}
+
+// React component for the back side of the card
+let rightAnswer;
+let wrongAnswer;
+class CardBack extends React.Component {
+
+    componentDidMount() {
+        rightAnswer = document.querySelector('.rightAnswerHidden');
+        wrongAnswer = document.querySelector('.wrongAnswer');
+    }
+    displayAnswer(props) {
+        return(
+            <div>
+                <div className='rightAnswerHidden'>
+                    <p className='rightAnswerText'>{this.props.text.right}</p>
+                </div>
+                <p className='wrongAnswer'>{this.props.text.wrong}</p>
+            </div>
+        );
     }
 
+    render(props) {
+        let displayAnswer = this.displayAnswer();
+        return(
+            <div className='card-side side-back'>
+                {displayAnswer}
+            </div>
+        )
+    }
+}
 
-function ReviewCard(props) {
-        return <div className="textCardReview">
+let card;
+let image;
+class ReviewCard extends React.Component {
+/*        return <div className="textCardReview">
                {props.children}
-        </div>;
+        </div>;*/
+    constructor(props) {
+        super(props)
+    }
+
+    componentDidMount() {
+        card = document.querySelector('.card-body');
+        image = document.querySelector('.flipImage');
+    }
+
+    flip = () => {
+        console.log("test");
+        if (!card) {
+            console.log('null?')
         }
+            card.classList.toggle('card-body-is-flipped');
+            image.classList.toggle('flipImageIsFlipped');
+    };
+    render() {
+        let answer = {
+            right: this.props.phrase.right,
+            wrong: this.props.phrase.wrong
+        };
+        return (
+            <div className='textCardReview'>
+                {/*<p className="translatedTextReview">{this.props.phrase}</p>*/}
+                <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
+                <div className='card-body' id='cardBody' onKeyPress={this.flip} onClick={this.flip}>
+                    <CardBack text={answer}/>
+
+                    <CardFront text={this.props.phrase.translated}/>
+                </div>
+            </div>
+        )
+    }
+
+}
 
 function InputCard(props) {
         return <div className="inputCardReview">
                 {props.children}
             </div>;
-        }
+}
 
 
 function Txt(props) {
@@ -203,6 +279,11 @@ class ReviewCardMain extends React.Component {
 
     render() {
         let handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
+        let answer = {
+            translated: this.state.opinion,
+            right: "CORRECT!",
+            wrong: this.props.objectInfo.cards[this.state.cardIndex].source
+        };
 
         if (this.props.objectInfo.cards[0]) {
             console.log("Testing props: ", this.props.objectInfo.cards[0].target);
@@ -219,12 +300,7 @@ class ReviewCardMain extends React.Component {
           <div className = "middleReview">
               <div className="cardContainerReview">
 
-
-              <ReviewCard>
-
-                  <TxtReview phrase={this.state.opinion}/>
-                  <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
-              </ReviewCard>
+              <ReviewCard phrase={answer}/>
 
               <InputCard>
                   <textarea className = "inputEngReview" id="inputEngReview" placeholder = "English" onKeyPress={this.checkCorrect}/>
@@ -247,6 +323,11 @@ class ReviewCardMain extends React.Component {
     } // end of render
 
     nextCard = () => {
+        rightAnswer.classList.add('rightAnswerHidden');
+        rightAnswer.classList.remove('rightAnswer');
+
+        wrongAnswer.classList.add('wrongAnswer');
+        wrongAnswer.classList.remove('wrongAnswerHidden');
         if (this.props.objectInfo.cards.length == 0) {
             alert("Add cards first before reviewing!");
         }
@@ -279,14 +360,27 @@ class ReviewCardMain extends React.Component {
                     console.log("Correct!");
                     console.log("The source text was " + originalSource);
                     console.log("and the input text was " + currentText);
+                    rightAnswer.classList.add('rightAnswer');
+                    rightAnswer.classList.remove('rightAnswerHidden');
+
+                    wrongAnswer.classList.add('wrongAnswerHidden');
+                    wrongAnswer.classList.remove('wrongAnswer');
                     //got it correct, increment db
                 } else {
                     console.log("Wrong!");
                     console.log("The source text was " + originalSource);
                     console.log("and the input text was " + currentText);
+                    rightAnswer.classList.add('rightAnswerHidden');
+                    rightAnswer.classList.remove('rightAnswer');
+
+                    wrongAnswer.classList.add('wrongAnswer');
+                    wrongAnswer.classList.remove('wrongAnswerHidden');
                     //wrong
                 }
             }
+            // Play the CSS flip animation.
+            card.classList.toggle('card-body-is-flipped');
+            image.classList.toggle('flipImageIsFlipped');
             // let url = "translate?source=" + this.sourceText.toLowerCase();
             // this.makeTranslationAjaxRequest(url)
         }

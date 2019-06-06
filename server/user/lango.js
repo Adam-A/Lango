@@ -371,7 +371,7 @@ var ReviewCardMain = function (_React$Component2) {
                         { className: "cardContainerReview" },
                         React.createElement(
                             "div",
-                            { className: "scene scene--card" },
+                            { className: "scene scene--textCardReview" },
                             React.createElement(
                                 ReviewCardFlippable,
                                 null,

@@ -232,7 +232,7 @@ class ReviewCardMain extends React.Component {
               <div className="cardContainerReview">
 
 
-              <div className="scene scene--card">
+              <div className="scene scene--textCardReview">
                 <ReviewCardFlippable>
                     <div className="card__face card__face--front">front</div>
                 <div className="card__face card__face--back">back</div>

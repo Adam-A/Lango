@@ -9,7 +9,7 @@ function Card(props) {
 
 
 function ReviewCard(props) {
-        return <div className="card">
+        return <div className="textCardReview">
                {props.children}
         </div>;
         }
@@ -195,6 +195,7 @@ class ReviewCardMain extends React.Component {
       // with the textContent. Otherwise the below function tries assigning
       // the username retreived from database to a null value and breaks everything.
       let card = document.querySelector('.card');
+    
       card.addEventListener( 'click', function() {
         card.classList.toggle('is-flipped');
       });
@@ -226,7 +227,7 @@ class ReviewCardMain extends React.Component {
 
 
               <div class="scene scene--card">
-                <div class="card">
+                <div class="textCardReview">
                     <div class="card__face card__face--front">front</div>
                 <div class="card__face card__face--back">back</div>
                      </div>

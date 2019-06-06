@@ -20,7 +20,7 @@ function Card(props) {
 function ReviewCard(props) {
     return React.createElement(
         "div",
-        { className: "card" },
+        { className: "textCardReview" },
         props.children
     );
 }
@@ -318,6 +318,7 @@ var ReviewCardMain = function (_React$Component2) {
             // with the textContent. Otherwise the below function tries assigning
             // the username retreived from database to a null value and breaks everything.
             var card = document.querySelector('.card');
+
             card.addEventListener('click', function () {
                 card.classList.toggle('is-flipped');
             });
@@ -366,7 +367,7 @@ var ReviewCardMain = function (_React$Component2) {
                             { "class": "scene scene--card" },
                             React.createElement(
                                 "div",
-                                { "class": "card" },
+                                { "class": "textCardReview" },
                                 React.createElement(
                                     "div",
                                     { "class": "card__face card__face--front" },

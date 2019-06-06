@@ -317,7 +317,7 @@ var ReviewCardMain = function (_React$Component2) {
             // Call this only when virtual DOM has loaded the footerText id
             // with the textContent. Otherwise the below function tries assigning
             // the username retreived from database to a null value and breaks everything.
-            var card = document.querySelector('.card');
+            var card = document.querySelector('.textCardReview');
 
             card.addEventListener('click', function () {
                 card.classList.toggle('is-flipped');
@@ -367,7 +367,7 @@ var ReviewCardMain = function (_React$Component2) {
                             { "class": "scene scene--card" },
                             React.createElement(
                                 ReviewCard,
-                                { "class": "card" },
+                                null,
                                 React.createElement(
                                     "div",
                                     { "class": "card__face card__face--front" },

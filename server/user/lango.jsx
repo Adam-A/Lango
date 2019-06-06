@@ -184,8 +184,9 @@ class ReviewCardMain extends React.Component {
     this.sourceText = "";
     this.targetText = "";
     this.state = {
-        opinion: this.props.objectInfo.cards[0].target,
-        cardIndex: 0
+
+        cardIndex: 0,
+        opinion: this.props.objectInfo.cards[0].target
     }
     //this.checkReturn = this.checkReturn.bind(this);
     //this.saveCard = this.saveCard.bind(this);
@@ -240,7 +241,18 @@ class ReviewCardMain extends React.Component {
         );
     } // end of render
 
-    nextCard() {
+    nextCard = () => {
+      if (this.state.cardIndex == this.props.objectInfo.cards.length - 1) {
+          this.setState({
+              cardIndex: 0,
+              opinion: this.props.objectInfo.cards[0].target
+          });
+      } else {
+          this.setState({
+              cardIndex: this.state.cardIndex + 1,
+              opinion: this.props.objectInfo.cards[this.state.cardIndex+1].target,
+          });
+      }
 
         //next card work goes here
     }

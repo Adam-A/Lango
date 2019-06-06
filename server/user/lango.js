@@ -254,11 +254,28 @@ var ReviewCardMain = function (_React$Component2) {
 
         var _this2 = _possibleConstructorReturn(this, (ReviewCardMain.__proto__ || Object.getPrototypeOf(ReviewCardMain)).call(this, props));
 
+        _this2.nextCard = function () {
+            if (_this2.state.cardIndex == _this2.props.objectInfo.cards.length - 1) {
+                _this2.setState({
+                    cardIndex: 0,
+                    opinion: _this2.props.objectInfo.cards[0].target
+                });
+            } else {
+                _this2.setState({
+                    cardIndex: _this2.state.cardIndex + 1,
+                    opinion: _this2.props.objectInfo.cards[_this2.state.cardIndex + 1].target
+                });
+            }
+
+            //next card work goes here
+        };
+
         _this2.sourceText = "";
         _this2.targetText = "";
         _this2.state = {
-            opinion: _this2.props.objectInfo.cards[0].target,
-            cardIndex: 0
+
+            cardIndex: 0,
+            opinion: _this2.props.objectInfo.cards[0].target
             //this.checkReturn = this.checkReturn.bind(this);
             //this.saveCard = this.saveCard.bind(this);
         };return _this2;
@@ -337,12 +354,6 @@ var ReviewCardMain = function (_React$Component2) {
             );
         } // end of render
 
-    }, {
-        key: "nextCard",
-        value: function nextCard() {
-
-            //next card work goes here
-        }
     }]);
 
     return ReviewCardMain;

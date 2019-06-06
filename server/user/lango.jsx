@@ -14,6 +14,13 @@ function ReviewCard(props) {
         </div>;
         }
 
+
+function ReviewCardFlippable(props) {
+            return <div className=".card">
+                   {props.children}
+            </div>;
+            }
+
 function InputCard(props) {
         return <div className="inputCardReview">
                 {props.children}
@@ -226,10 +233,10 @@ class ReviewCardMain extends React.Component {
 
 
               <div className="scene scene--card">
-                <div className="card">
+                <ReviewCard>
                     <div className="card__face card__face--front">front</div>
                 <div className="card__face card__face--back">back</div>
-                     </div>
+                     </ReviewCard>
                 </div>
 
               <ReviewCard>

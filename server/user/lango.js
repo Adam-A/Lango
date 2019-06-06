@@ -25,6 +25,14 @@ function ReviewCard(props) {
     );
 }
 
+function ReviewCardFlippable(props) {
+    return React.createElement(
+        "div",
+        { className: ".card" },
+        props.children
+    );
+}
+
 function InputCard(props) {
     return React.createElement(
         "div",
@@ -365,8 +373,8 @@ var ReviewCardMain = function (_React$Component2) {
                             "div",
                             { className: "scene scene--card" },
                             React.createElement(
-                                "div",
-                                { className: "card" },
+                                ReviewCard,
+                                null,
                                 React.createElement(
                                     "div",
                                     { className: "card__face card__face--front" },

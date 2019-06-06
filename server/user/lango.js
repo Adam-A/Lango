@@ -147,9 +147,9 @@ var ReviewCard = function (_React$Component3) {
                 React.createElement('img', { className: 'flipImage', src: 'assets/noun_Refresh_2310283.svg' }),
                 React.createElement(
                     'div',
-                    { className: 'card-body', id: 'cardBody' },
-                    React.createElement(CardBack, { text: answer, onClick: this.flip }),
-                    React.createElement(CardFront, { text: this.props.phrase.translated, onClick: this.flip })
+                    { className: 'card-body', id: 'cardBody', onKeyPress: this.flip, onClick: this.flip },
+                    React.createElement(CardBack, { text: answer }),
+                    React.createElement(CardFront, { text: this.props.phrase.translated })
                 )
             );
         }
@@ -428,6 +428,9 @@ var ReviewCardMain = function (_React$Component5) {
 
                         wrongAnswer.classList.add('wrongAnswerHidden');
                         wrongAnswer.classList.remove('wrongAnswer');
+
+                        card.classList.toggle('card-body-is-flipped');
+                        image.classList.toggle('flipImageIsFlipped');
                         //got it correct, increment db
                     } else {
                         console.log("Wrong!");
@@ -442,8 +445,7 @@ var ReviewCardMain = function (_React$Component5) {
                     }
                 }
                 // Play the CSS flip animation.
-                card.classList.toggle('card-body-is-flipped');
-                image.classList.toggle('flipImageIsFlipped');
+
                 // let url = "translate?source=" + this.sourceText.toLowerCase();
                 // this.makeTranslationAjaxRequest(url)
             }

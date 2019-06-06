@@ -78,10 +78,10 @@ class ReviewCard extends React.Component {
         return (
             <div className='textCardReview'>
                 <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
-                <div className='card-body' id='cardBody' >
-                    <CardBack text={answer} onClick={this.flip}/>
+                <div className='card-body' id='cardBody' onKeyPress={this.flip} onClick={this.flip}>
+                    <CardBack text={answer}/>
 
-                    <CardFront text={this.props.phrase.translated} onClick={this.flip}/>
+                    <CardFront text={this.props.phrase.translated}/>
                 </div>
             </div>
         )
@@ -364,6 +364,9 @@ class ReviewCardMain extends React.Component {
 
                     wrongAnswer.classList.add('wrongAnswerHidden');
                     wrongAnswer.classList.remove('wrongAnswer');
+
+                    card.classList.toggle('card-body-is-flipped');
+                    image.classList.toggle('flipImageIsFlipped');
                     //got it correct, increment db
                 } else {
                     console.log("Wrong!");
@@ -378,8 +381,7 @@ class ReviewCardMain extends React.Component {
                 }
             }
             // Play the CSS flip animation.
-            card.classList.toggle('card-body-is-flipped');
-            image.classList.toggle('flipImageIsFlipped');
+         
             // let url = "translate?source=" + this.sourceText.toLowerCase();
             // this.makeTranslationAjaxRequest(url)
         }

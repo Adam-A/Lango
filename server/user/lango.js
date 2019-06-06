@@ -20,7 +20,7 @@ function Card(props) {
 function ReviewCard(props) {
     return React.createElement(
         "div",
-        { className: "textCardReview" },
+        { className: "scene scene--card" },
         props.children
     );
 }
@@ -363,21 +363,17 @@ var ReviewCardMain = function (_React$Component2) {
                         "div",
                         { className: "cardContainerReview" },
                         React.createElement(
-                            "div",
-                            { className: "scene scene--card" },
+                            ReviewCard,
+                            null,
                             React.createElement(
-                                ReviewCard,
-                                null,
-                                React.createElement(
-                                    "div",
-                                    { className: "card__face card__face--front" },
-                                    "front"
-                                ),
-                                React.createElement(
-                                    "div",
-                                    { className: "card__face card__face--back" },
-                                    "back"
-                                )
+                                "div",
+                                { className: "card__face card__face--front" },
+                                "front"
+                            ),
+                            React.createElement(
+                                "div",
+                                { className: "card__face card__face--back" },
+                                "back"
                             )
                         ),
                         React.createElement(

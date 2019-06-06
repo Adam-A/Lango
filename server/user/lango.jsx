@@ -9,7 +9,7 @@ function Card(props) {
 
 
 function ReviewCard(props) {
-        return <div className="textCardReview">
+        return <div className="scene scene--card">
                {props.children}
         </div>;
         }
@@ -226,12 +226,12 @@ class ReviewCardMain extends React.Component {
               <div className="cardContainerReview">
 
 
-              <div className="scene scene--card">
+              
                 <ReviewCard>
                     <div className="card__face card__face--front">front</div>
                 <div className="card__face card__face--back">back</div>
                      </ReviewCard>
-                </div>
+              
 
               
 

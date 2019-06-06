@@ -144,11 +144,12 @@ var ReviewCard = function (_React$Component3) {
             return React.createElement(
                 'div',
                 { className: 'textCardReview' },
+                React.createElement('img', { className: 'flipImage', src: 'assets/noun_Refresh_2310283.svg' }),
                 React.createElement(
                     'div',
-                    { className: 'card-body', id: 'cardBody', onKeyPress: this.flip, onClick: this.flip },
-                    React.createElement(CardBack, { text: answer }),
-                    React.createElement(CardFront, { text: this.props.phrase.translated })
+                    { className: 'card-body', id: 'cardBody' },
+                    React.createElement(CardBack, { text: answer, onClick: this.flip }),
+                    React.createElement(CardFront, { text: this.props.phrase.translated, onClick: this.flip })
                 )
             );
         }

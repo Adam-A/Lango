@@ -77,11 +77,11 @@ class ReviewCard extends React.Component {
         };
         return (
             <div className='textCardReview'>
-                
-                <div className='card-body' id='cardBody' onKeyPress={this.flip} onClick={this.flip}>
-                    <CardBack text={answer} <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg">/>
+                <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
+                <div className='card-body' id='cardBody' >
+                    <CardBack text={answer} onClick={this.flip}/>
 
-                    <CardFront text={this.props.phrase.translated}/>
+                    <CardFront text={this.props.phrase.translated} onClick={this.flip}/>
                 </div>
             </div>
         )

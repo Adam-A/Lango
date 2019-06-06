@@ -9,7 +9,7 @@ function Card(props) {
 
 
 function ReviewCard(props) {
-        return <div className="textCardReview">
+        return <div className="card">
                {props.children}
         </div>;
         }

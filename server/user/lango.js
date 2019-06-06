@@ -20,7 +20,7 @@ function Card(props) {
 function ReviewCard(props) {
     return React.createElement(
         "div",
-        { className: "textCardReview" },
+        { className: "card" },
         props.children
     );
 }

@@ -195,7 +195,6 @@ class ReviewCardMain extends React.Component {
       // with the textContent. Otherwise the below function tries assigning
       // the username retreived from database to a null value and breaks everything.
       let card = document.querySelector('.card');
-    
       card.addEventListener( 'click', function() {
         card.classList.toggle('is-flipped');
       });
@@ -226,10 +225,10 @@ class ReviewCardMain extends React.Component {
               <div className="cardContainerReview">
 
 
-              <div className="scene scene--card">
-                <div className="card">
-                    <div className="card__face card__face--front">front</div>
-                <div className="card__face card__face--back">back</div>
+              <div class="scene scene--card">
+                <div class="card">
+                    <div class="card__face card__face--front">front</div>
+                <div class="card__face card__face--back">back</div>
                      </div>
                 </div>
 

@@ -194,6 +194,12 @@ class ReviewCardMain extends React.Component {
       // Call this only when virtual DOM has loaded the footerText id
       // with the textContent. Otherwise the below function tries assigning
       // the username retreived from database to a null value and breaks everything.
+
+          
+      let card = document.querySelector('.card')
+      card.addEventListener( 'click', function() {
+        card.classList.toggle('is-flipped');
+      });
       displayUsernameFooter(this.props.objectInfo.username);
       this.setState({
           cardIndex: 0,
@@ -202,11 +208,8 @@ class ReviewCardMain extends React.Component {
   }
 
     render() {
-        let card = document.querySelector('.card')
-        
-        card.addEventListener( 'click', function() {
-          card.classList.toggle('is-flipped');
-        });
+
+    
         let handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
 
         if (this.props.objectInfo.cards[0]) {

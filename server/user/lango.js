@@ -317,8 +317,6 @@ var ReviewCardMain = function (_React$Component2) {
             // Call this only when virtual DOM has loaded the footerText id
             // with the textContent. Otherwise the below function tries assigning
             // the username retreived from database to a null value and breaks everything.
-
-
             var card = document.querySelector('.card');
             card.addEventListener('click', function () {
                 card.classList.toggle('is-flipped');
@@ -380,6 +378,12 @@ var ReviewCardMain = function (_React$Component2) {
                                     "back"
                                 )
                             )
+                        ),
+                        React.createElement(
+                            ReviewCard,
+                            null,
+                            React.createElement(TxtReview, { phrase: this.state.opinion }),
+                            React.createElement("img", { className: "flipImage", src: "assets/noun_Refresh_2310283.svg" })
                         ),
                         React.createElement(
                             InputCard,

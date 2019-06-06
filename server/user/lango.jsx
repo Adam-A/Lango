@@ -109,10 +109,10 @@ class CreateCardMain extends React.Component {
 	 if (event.charCode == 13) {
         this.sourceText = document.getElementById("inputEng").value;
         document.getElementById("inputEng").value = '';
-        let url = "translate?source=" + this.sourceText.toLowerCase();
+        let url = "translate?source=" + this.sourceText.trim().toLowerCase();
         this.makeTranslationAjaxRequest(url)
 
-	    }
+        }
 	 }
       createAjaxRequest(method, url) {
         let xhr = new XMLHttpRequest();
@@ -177,31 +177,36 @@ class CreateCardMain extends React.Component {
   } // end of class
 
 class ReviewCardMain extends React.Component {
-
-
   constructor(props) {
     super(props);
     this.sourceText = "";
     this.targetText = "";
     this.state = {
-
         cardIndex: 0,
-        opinion: this.props.objectInfo.cards[0].target
+        opinion: (this.props.objectInfo.cards[0]) ? this.props.objectInfo.cards[0].target : "Korean"
     }
     //this.checkReturn = this.checkReturn.bind(this);
     //this.saveCard = this.saveCard.bind(this);
   }
 
+  // test
   componentDidMount() {
       // Call this only when virtual DOM has loaded the footerText id
       // with the textContent. Otherwise the below function tries assigning
       // the username retreived from database to a null value and breaks everything.
       displayUsernameFooter(this.props.objectInfo.username);
+      this.setState({
+          cardIndex: 0,
+          opinion: (this.props.objectInfo.cards[0]) ? this.props.objectInfo.cards[0].target : "Korean"
+      });
   }
 
     render() {
         let handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
-        console.log("Testing props: ", this.props.objectInfo.cards[0].target);
+
+        if (this.props.objectInfo.cards[0]) {
+            console.log("Testing props: ", this.props.objectInfo.cards[0].target);
+        }
         return (
 
 
@@ -222,7 +227,7 @@ class ReviewCardMain extends React.Component {
               </ReviewCard>
 
               <InputCard>
-                  <textarea className = "inputEngReview" id="inputEng" placeholder = "English" /> {/*onKeyPress={this.checkReturn} */}
+                  <textarea className = "inputEngReview" id="inputEngReview" placeholder = "English" onKeyPress={this.checkCorrect}/>
               </InputCard>
               </div>
 
@@ -242,20 +247,51 @@ class ReviewCardMain extends React.Component {
     } // end of render
 
     nextCard = () => {
-      if (this.state.cardIndex == this.props.objectInfo.cards.length - 1) {
-          this.setState({
-              cardIndex: 0,
-              opinion: this.props.objectInfo.cards[0].target
-          });
-      } else {
-          this.setState({
-              cardIndex: this.state.cardIndex + 1,
-              opinion: this.props.objectInfo.cards[this.state.cardIndex+1].target,
-          });
-      }
+        if (this.props.objectInfo.cards.length == 0) {
+            alert("Add cards first before reviewing!");
+        }
+        else {
+            if (this.state.cardIndex == this.props.objectInfo.cards.length - 1) {
+                this.setState({
+                    cardIndex: 0,
+                    opinion: this.props.objectInfo.cards[0].target
+                });
+            } else {
+                this.setState({
+                    cardIndex: this.state.cardIndex + 1,
+                    opinion: this.props.objectInfo.cards[this.state.cardIndex + 1].target,
+                });
+            }
+        }
+    }; // end of function
 
-        //next card work goes here
+    checkCorrect = () => {
+        if (event.charCode == 13) {
+            let currentText = document.getElementById("inputEngReview").value.trim().toLowerCase();
+            document.getElementById("inputEngReview").value = '';
+            if (this.props.objectInfo.cards.length == 0) {
+                alert("Add cards first before reviewing!");
+            } else {
+
+
+                let originalSource = this.props.objectInfo.cards[this.state.cardIndex].source;
+                if (currentText === originalSource) {
+                    console.log("Correct!");
+                    console.log("The source text was " + originalSource);
+                    console.log("and the input text was " + currentText);
+                    //got it correct, increment db
+                } else {
+                    console.log("Wrong!");
+                    console.log("The source text was " + originalSource);
+                    console.log("and the input text was " + currentText);
+                    //wrong
+                }
+            }
+            // let url = "translate?source=" + this.sourceText.toLowerCase();
+            // this.makeTranslationAjaxRequest(url)
+        }
     }
+
 } // end of class
 
 
@@ -277,7 +313,12 @@ class ToggleCardView extends React.Component {
     }
 
     handleStartReviewClick() {
-        this.setState({isReviewing: !this.state.isReviewing});
+        latestCard = false;
+        this.setState({
+            isReviewing: !this.state.isReviewing,
+            cardList: null
+
+        });
     }
 
     createAjaxRequestToggle(method, url) {
@@ -330,6 +371,7 @@ class ToggleCardView extends React.Component {
     // When the AJAX request for user data finishes,
     // this will run and update the cardList state.
 
+    // TODO: check if user has 0 cards
     render() {
         let handleStartReviewClick = this.handleStartReviewClick;
         const isReviewing = this.state.isReviewing;
@@ -347,6 +389,7 @@ class ToggleCardView extends React.Component {
             } else {
                 currentView = <CreateCardMain objectInfo={objectInfo}/>;
             }
+
             return (
                 currentView
             );
@@ -354,6 +397,7 @@ class ToggleCardView extends React.Component {
         else {
             this.makeDataAjaxRequestToggle("request");
             return <p>Waiting...</p>
+
         }
     } // end of render
 } // end of class

@@ -175,7 +175,7 @@ var CreateCardMain = function (_React$Component) {
             if (event.charCode == 13) {
                 this.sourceText = document.getElementById("inputEng").value;
                 document.getElementById("inputEng").value = '';
-                var url = "translate?source=" + this.sourceText.toLowerCase();
+                var url = "translate?source=" + this.sourceText.trim().toLowerCase();
                 this.makeTranslationAjaxRequest(url);
             }
         }
@@ -255,31 +255,61 @@ var ReviewCardMain = function (_React$Component2) {
         var _this2 = _possibleConstructorReturn(this, (ReviewCardMain.__proto__ || Object.getPrototypeOf(ReviewCardMain)).call(this, props));
 
         _this2.nextCard = function () {
-            if (_this2.state.cardIndex == _this2.props.objectInfo.cards.length - 1) {
-                _this2.setState({
-                    cardIndex: 0,
-                    opinion: _this2.props.objectInfo.cards[0].target
-                });
+            if (_this2.props.objectInfo.cards.length == 0) {
+                alert("Add cards first before reviewing!");
             } else {
-                _this2.setState({
-                    cardIndex: _this2.state.cardIndex + 1,
-                    opinion: _this2.props.objectInfo.cards[_this2.state.cardIndex + 1].target
-                });
+                if (_this2.state.cardIndex == _this2.props.objectInfo.cards.length - 1) {
+                    _this2.setState({
+                        cardIndex: 0,
+                        opinion: _this2.props.objectInfo.cards[0].target
+                    });
+                } else {
+                    _this2.setState({
+                        cardIndex: _this2.state.cardIndex + 1,
+                        opinion: _this2.props.objectInfo.cards[_this2.state.cardIndex + 1].target
+                    });
+                }
             }
+        };
 
-            //next card work goes here
+        _this2.checkCorrect = function () {
+            if (event.charCode == 13) {
+                var currentText = document.getElementById("inputEngReview").value.trim().toLowerCase();
+                document.getElementById("inputEngReview").value = '';
+                if (_this2.props.objectInfo.cards.length == 0) {
+                    alert("Add cards first before reviewing!");
+                } else {
+
+                    var originalSource = _this2.props.objectInfo.cards[_this2.state.cardIndex].source;
+                    if (currentText === originalSource) {
+                        console.log("Correct!");
+                        console.log("The source text was " + originalSource);
+                        console.log("and the input text was " + currentText);
+                        //got it correct, increment db
+                    } else {
+                        console.log("Wrong!");
+                        console.log("The source text was " + originalSource);
+                        console.log("and the input text was " + currentText);
+                        //wrong
+                    }
+                }
+                // let url = "translate?source=" + this.sourceText.toLowerCase();
+                // this.makeTranslationAjaxRequest(url)
+            }
         };
 
         _this2.sourceText = "";
         _this2.targetText = "";
         _this2.state = {
-
             cardIndex: 0,
-            opinion: _this2.props.objectInfo.cards[0].target
+            opinion: _this2.props.objectInfo.cards[0] ? _this2.props.objectInfo.cards[0].target : "Korean"
             //this.checkReturn = this.checkReturn.bind(this);
             //this.saveCard = this.saveCard.bind(this);
         };return _this2;
     }
+
+    // test
+
 
     _createClass(ReviewCardMain, [{
         key: "componentDidMount",
@@ -288,12 +318,19 @@ var ReviewCardMain = function (_React$Component2) {
             // with the textContent. Otherwise the below function tries assigning
             // the username retreived from database to a null value and breaks everything.
             displayUsernameFooter(this.props.objectInfo.username);
+            this.setState({
+                cardIndex: 0,
+                opinion: this.props.objectInfo.cards[0] ? this.props.objectInfo.cards[0].target : "Korean"
+            });
         }
     }, {
         key: "render",
         value: function render() {
             var handleStartReviewClick = this.props.objectInfo.handleStartReviewClick;
-            console.log("Testing props: ", this.props.objectInfo.cards[0].target);
+
+            if (this.props.objectInfo.cards[0]) {
+                console.log("Testing props: ", this.props.objectInfo.cards[0].target);
+            }
             return React.createElement(
                 "main",
                 { className: "main" },
@@ -328,8 +365,7 @@ var ReviewCardMain = function (_React$Component2) {
                         React.createElement(
                             InputCard,
                             null,
-                            React.createElement("textarea", { className: "inputEngReview", id: "inputEng", placeholder: "English" }),
-                            " "
+                            React.createElement("textarea", { className: "inputEngReview", id: "inputEngReview", placeholder: "English", onKeyPress: this.checkCorrect })
                         )
                     ),
                     React.createElement(
@@ -353,6 +389,8 @@ var ReviewCardMain = function (_React$Component2) {
                 )
             );
         } // end of render
+
+        // end of function
 
     }]);
 
@@ -384,7 +422,12 @@ var ToggleCardView = function (_React$Component3) {
     _createClass(ToggleCardView, [{
         key: "handleStartReviewClick",
         value: function handleStartReviewClick() {
-            this.setState({ isReviewing: !this.state.isReviewing });
+            latestCard = false;
+            this.setState({
+                isReviewing: !this.state.isReviewing,
+                cardList: null
+
+            });
         }
     }, {
         key: "createAjaxRequestToggle",
@@ -438,6 +481,8 @@ var ToggleCardView = function (_React$Component3) {
         // When the AJAX request for user data finishes,
         // this will run and update the cardList state.
 
+        // TODO: check if user has 0 cards
+
     }, {
         key: "render",
         value: function render() {
@@ -457,6 +502,7 @@ var ToggleCardView = function (_React$Component3) {
                 } else {
                     currentView = React.createElement(CreateCardMain, { objectInfo: objectInfo });
                 }
+
                 return currentView;
             } else {
                 this.makeDataAjaxRequestToggle("request");

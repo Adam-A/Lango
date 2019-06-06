@@ -367,12 +367,12 @@ var ReviewCardMain = function (_React$Component2) {
                             null,
                             React.createElement(
                                 "div",
-                                { "class": "card__face card__face--front" },
+                                { className: "card__face card__face--front" },
                                 "front"
                             ),
                             React.createElement(
                                 "div",
-                                { "class": "card__face card__face--back" },
+                                { className: "card__face card__face--back" },
                                 "back"
                             )
                         ),

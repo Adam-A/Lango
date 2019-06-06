@@ -228,8 +228,8 @@ class ReviewCardMain extends React.Component {
 
   
                 <ReviewCard>
-                    <div class="card__face card__face--front">front</div>
-                <div class="card__face card__face--back">back</div>
+                    <div className="card__face card__face--front">front</div>
+                <div className="card__face card__face--back">back</div>
                      </ReviewCard>
                
 

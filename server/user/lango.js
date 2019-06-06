@@ -20,7 +20,7 @@ function Card(props) {
 function ReviewCard(props) {
     return React.createElement(
         "div",
-        { className: "scene scene--card" },
+        { className: "textCardReview" },
         props.children
     );
 }
@@ -317,11 +317,6 @@ var ReviewCardMain = function (_React$Component2) {
             // Call this only when virtual DOM has loaded the footerText id
             // with the textContent. Otherwise the below function tries assigning
             // the username retreived from database to a null value and breaks everything.
-            var card = document.querySelector('.textCardReview');
-
-            card.addEventListener('click', function () {
-                card.classList.toggle('is-flipped');
-            });
             displayUsernameFooter(this.props.objectInfo.username);
             this.setState({
                 cardIndex: 0,
@@ -365,16 +360,8 @@ var ReviewCardMain = function (_React$Component2) {
                         React.createElement(
                             ReviewCard,
                             null,
-                            React.createElement(
-                                "div",
-                                { className: "card__face card__face--front" },
-                                "front"
-                            ),
-                            React.createElement(
-                                "div",
-                                { className: "card__face card__face--back" },
-                                "back"
-                            )
+                            React.createElement(TxtReview, { phrase: this.state.opinion }),
+                            React.createElement("img", { className: "flipImage", src: "assets/noun_Refresh_2310283.svg" })
                         ),
                         React.createElement(
                             InputCard,

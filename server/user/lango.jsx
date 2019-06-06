@@ -9,7 +9,7 @@ function Card(props) {
 
 
 function ReviewCard(props) {
-        return <div className="scene scene--card">
+        return <div className="textCardReview">
                {props.children}
         </div>;
         }
@@ -194,11 +194,6 @@ class ReviewCardMain extends React.Component {
       // Call this only when virtual DOM has loaded the footerText id
       // with the textContent. Otherwise the below function tries assigning
       // the username retreived from database to a null value and breaks everything.
-      let card = document.querySelector('.textCardReview');
-    
-      card.addEventListener( 'click', function() {
-        card.classList.toggle('is-flipped');
-      });
       displayUsernameFooter(this.props.objectInfo.username);
       this.setState({
           cardIndex: 0,
@@ -225,15 +220,18 @@ class ReviewCardMain extends React.Component {
           <div className = "middleReview">
               <div className="cardContainerReview">
 
-
-              
-                <ReviewCard>
-                    <div className="card__face card__face--front">front</div>
-                <div className="card__face card__face--back">back</div>
-                     </ReviewCard>
-              
-
-              
+            {/* 
+              <div class="scene scene--card">
+                <div class="card">
+                    <div class="card__face card__face--front">front</div>
+                <div class="card__face card__face--back">back</div>
+                     </div>
+                </div>
+                */} 
+              <ReviewCard>
+                  <TxtReview phrase={this.state.opinion}/>
+                  <img className = "flipImage" src = "assets/noun_Refresh_2310283.svg"></img>
+              </ReviewCard>
 
               <InputCard>
                   <textarea className = "inputEngReview" id="inputEngReview" placeholder = "English" onKeyPress={this.checkCorrect}/>

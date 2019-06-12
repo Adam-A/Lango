@@ -483,7 +483,8 @@ var ReviewCardMain = function (_React$Component5) {
             var answer = {
                 translated: this.state.opinion,
                 right: "CORRECT!",
-                wrong: this.props.objectInfo.cards[this.state.cardIndex].source
+                wrong: this.props.objectInfo.cards.length == 0 ? "Add new cards first." : this.props.objectInfo.cards[this.state.cardIndex].source
+
             };
 
             if (this.props.objectInfo.cards[0]) {

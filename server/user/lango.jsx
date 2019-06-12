@@ -282,9 +282,7 @@ class ReviewCardMain extends React.Component {
         let answer = {
             translated: this.state.opinion,
             right: "CORRECT!",
-            wrong: (this.props.objectInfo.cards.length != 0)
-                    ? this.props.objectInfo.cards[this.state.cardIndex].source
-                    : "Add new cards before reviewing."
+            wrong: this.props.objectInfo.cards[this.state.cardIndex].source
         };
 
         if (this.props.objectInfo.cards[0]) {
